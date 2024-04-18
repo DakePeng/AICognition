@@ -1,4 +1,6 @@
 # AICognition
 ## Prerequisites
 install the following packages
-BeautifulSoup4
+
+
+pip install BeautifulSoup4, newspaper3k
