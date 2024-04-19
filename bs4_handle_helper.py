@@ -21,6 +21,37 @@ def printSoupToFile(soup):
     with open("out.txt", "w") as file:
         print(soup.prettify(), file = file)
         
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+def getParsedHTMLWithInfiniteScroll(url, buttonXPath): 
+    driver = webdriver.Chrome()
+    driver.get(url)
+    def click_load_more():
+        try:
+            load_more_button = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, buttonXPath))
+            )
+            load_more_button.click()
+        except:
+            print("No more content to load or button not found")
+            return False
+        return True
+    # Click the "Load More" button repeatedly until no more content is loaded
+    while True:
+        if not click_load_more(): break
+    # Once all content is loaded, extract data with BeautifulSoup
+    soup = BeautifulSoup(driver.page_source, "html.parser")
+    # Finally, close the browser
+    driver.quit()
+    return soup
+
+
 if __name__ == "__main__":
-    soup = getParsedHTML("https://blog.google/technology/ai/")
+    soup = getParsedHTMLWithInfiniteScroll("https://ai.meta.com/blog", """//*[@id="facebook"]/body/div/div/div[2]/div/div[8]/div/div[4]/button""")
     printSoupToFile(soup)
+    

@@ -59,8 +59,18 @@ def scrapeMicrosoftNews():
     postList = scrapeArticleList(links)
     fail, all = print_list_to_csv(type, postList)
     print("Successfully scraped " + str (all - fail) + " out of " + str(all) + " posts ")
-    
-def consolidateCSV(outputFileName):
+
+def scrapeMetaBlog():
+    type = "Meta_Blog"
+    print("Scraping Meta Blog Posts")
+    links = scrapeMetaBlogLinks()
+    print("links obtained")
+    postList = scrapeArticleList(links)
+    fail, all = print_list_to_csv(type, postList)
+    print("Successfully scraped " + str (all - fail) + " out of " + str(all) + " posts ")
+
+ 
+def consolidateCSV(outputFileName, delete = False):
     folder_path = "Temp/"
     csv_files = [file for file in os.listdir(folder_path) if file.endswith('.csv')]
     merged_data = pd.DataFrame()
@@ -68,7 +78,7 @@ def consolidateCSV(outputFileName):
         file_path = os.path.join(folder_path, file)
         df = pd.read_csv(file_path)
         merged_data = merged_data._append(df, ignore_index=True)
-        os.remove(file_path)
+        if delete: os.remove(file_path)
     output_file_path = outputFileName
     merged_data.to_csv(output_file_path, index=False)
     
@@ -79,11 +89,11 @@ def createTempFolder():
     os.makedirs(folder_path)
 
 if __name__ == "__main__":
-
-    createTempFolder()
-    scrapeAnthropicNews()
-    scrapeOpenAIBlog()
-    scrapeOpenAIResearch()
-    scrapeAnthropicBlog()
-    scrapeMicrosoftNews()
+    # createTempFolder()
+    # scrapeAnthropicNews()
+    # scrapeOpenAIBlog()
+    # scrapeOpenAIResearch()
+    # scrapeAnthropicBlog()
+    # scrapeMicrosoftNews()
+    # scrapeMetaBlog()
 

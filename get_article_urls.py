@@ -79,3 +79,21 @@ def scrapeMicrosoftNewsLinks():
                 link = [urljoin(url, link.get('href')), None]
                 allLinks.append(link)
     return allLinks
+
+def scrapeMetaBlogLinks():
+    base = 'https://ai.meta.com/blog'
+    xPath = """/html/body/div/div/div[2]/div/div[8]/div/div[4]/button"""
+    allLinks = []
+    url = base
+    soup = getParsedHTMLWithInfiniteScroll(url, xPath)
+    if soup == None: return allLinks
+    postClasses = soup.find_all(class_ = "_amtj")
+    for postClass in postClasses:
+        postLinks = postClass.find_all('a')
+        for link in postLinks:
+            link = [urljoin(url, link.get('href')), None]
+            allLinks.append(link)
+    return allLinks
+
+with open("Meta_Blog_Links.txt", "w") as file:
+    print(scrapeMetaBlogLinks(), file = file)

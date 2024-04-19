@@ -11,6 +11,7 @@ def scrapeArticle(url):
 def scrapeArticleList(allLinks):
     result = []
     for [url, researchLink] in allLinks:
+        print(len(result))
         try: 
             article = scrapeArticle(url)
         except:
@@ -22,6 +23,6 @@ def emptyArticle():
     return Article("")
 
 if __name__ == "__main__":
-    url = "https://news.microsoft.com/source/latam/features/ai/cemex-technical-xpert-copilot/?lang=en"
-    #print(scrapeArticle(url).text)
-    print(emptyArticle().text)
+    url = "https://ai.meta.com/blog/purple-llama-open-trust-safety-generative-ai/"
+    print(scrapeArticle(url).text)
+    #print(emptyArticle().text)
