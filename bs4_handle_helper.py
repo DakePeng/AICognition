@@ -33,7 +33,7 @@ def getParsedHTMLWithInfiniteScroll(url, buttonXPath):
     driver.get(url)
     def click_load_more():
         try:
-            load_more_button = WebDriverWait(driver, 10).until(
+            load_more_button = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, buttonXPath))
             )
             load_more_button.click()

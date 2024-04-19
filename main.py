@@ -95,5 +95,5 @@ if __name__ == "__main__":
     # scrapeOpenAIResearch()
     # scrapeAnthropicBlog()
     # scrapeMicrosoftNews()
-    # scrapeMetaBlog()
-
+    #scrapeMetaBlog()
+    consolidateCSV("result.csv")

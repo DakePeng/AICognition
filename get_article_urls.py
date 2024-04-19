@@ -94,6 +94,3 @@ def scrapeMetaBlogLinks():
             link = [urljoin(url, link.get('href')), None]
             allLinks.append(link)
     return allLinks
-
-with open("Meta_Blog_Links.txt", "w") as file:
-    print(scrapeMetaBlogLinks(), file = file)
