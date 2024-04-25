@@ -73,6 +73,13 @@ def scrapeTheVergeLinks():
     postLinkClass = "after:absolute after:inset-0 group-hover:shadow-underline-blurple dark:group-hover:shadow-underline-franklin"
     return scrapeLinks(base, totalPageNum, groupingClass, postLinkClass)
 
+def scrapeMozillaBlogLinks():
+    base = "https://blog.mozilla.org/en/category/mozilla/ai/page/"
+    totalPageNum = 3
+    groupingClass = "ft-c-post-list__wrap--three-column"
+    postLinkClass = "mzp-c-card-block-link"
+    return scrapeLinks(base, totalPageNum, groupingClass, postLinkClass)
+
 def createLinksFolder():
     folder_path = os.path.join(os.getcwd(), "Links")
     if os.path.exists(folder_path):
@@ -97,4 +104,5 @@ if __name__ == "__main__":
     # printLinksToFile(scrapeGoogleAIBlogs(),type = "Google_Blog")
     # printLinksToFile(scrapeGoogleGemini(),type = "Google_Gemini")
     # printLinksToFile(scrapeGoogleResearchLinks(),type = "Google_Research")
-    printLinksToFile(scrapeTheVergeLinks(),type = "The_Verge_AI")
+    # printLinksToFile(scrapeTheVergeLinks(),type = "The_Verge_AI")
+    printLinksToFile(scrapeMozillaBlogLinks(),type = "Mozilla_Blog")
