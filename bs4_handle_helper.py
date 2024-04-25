@@ -7,7 +7,7 @@ headers = {
 def checkResponse(response):
     return response.status_code == 200;
 
-def getParsedHTML(url, header = True):
+def getSoup(url, header = True):
     response = requests.get(url, headers = headers)
     response.encoding = response.apparent_encoding
     # Check if the request was successful (status code 200)
@@ -27,23 +27,32 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-def getParsedHTMLWithInfiniteScroll(url, buttonXPath): 
+import time 
+def getSoupWithInfiniteScroll(url, buttonXPath): 
     driver = webdriver.Chrome()
     driver.get(url)
+    startTime = time.time()
     def click_load_more():
         try:
-            load_more_button = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.XPATH, buttonXPath))
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            button = WebDriverWait(driver, 20).until(
+                 EC.element_to_be_clickable((By.XPATH, buttonXPath))
             )
-            load_more_button.click()
+            button.click()
+            time.sleep(0.3)
         except:
             print("No more content to load or button not found")
             return False
         return True
+
     # Click the "Load More" button repeatedly until no more content is loaded
     while True:
         if not click_load_more(): break
+        timer = time.time() - startTime
+        if timer > 60: 
+            print("session timed out")
+            break
+    
     # Once all content is loaded, extract data with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, "html.parser")
     # Finally, close the browser
@@ -52,6 +61,7 @@ def getParsedHTMLWithInfiniteScroll(url, buttonXPath):
 
 
 if __name__ == "__main__":
-    soup = getParsedHTMLWithInfiniteScroll("https://ai.meta.com/blog", """//*[@id="facebook"]/body/div/div/div[2]/div/div[8]/div/div[4]/button""")
+    #soup = getParsedHTMLWithInfiniteScroll("https://ai.meta.com/blog", """//*[@id="facebook"]/body/div/div/div[2]/div/div[8]/div/div[4]/button""")
+    soup = getSoup()
     printSoupToFile(soup)
     

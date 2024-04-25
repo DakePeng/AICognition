@@ -88,6 +88,7 @@ def createTempFolder():
         shutil.rmtree(folder_path)
     os.makedirs(folder_path)
 
+
 if __name__ == "__main__":
     # createTempFolder()
     # scrapeAnthropicNews()
@@ -95,5 +96,5 @@ if __name__ == "__main__":
     # scrapeOpenAIResearch()
     # scrapeAnthropicBlog()
     # scrapeMicrosoftNews()
-    #scrapeMetaBlog()
+    # scrapeMetaBlog()
     consolidateCSV("result.csv")
