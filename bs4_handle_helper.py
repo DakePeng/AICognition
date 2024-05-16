@@ -28,6 +28,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time 
+
+def getSoupWithWebDriver(url):
+    driver = webdriver.Chrome()
+    driver.get(url)
+    time.sleep(1)
+    soup = BeautifulSoup(driver.page_source, "html.parser")
+    driver.quit()
+    return soup
+
 def getSoupWithInfiniteScroll(url, buttonXPath): 
     driver = webdriver.Chrome()
     driver.get(url)
@@ -62,6 +71,6 @@ def getSoupWithInfiniteScroll(url, buttonXPath):
 
 if __name__ == "__main__":
     #soup = getParsedHTMLWithInfiniteScroll("https://ai.meta.com/blog", """//*[@id="facebook"]/body/div/div/div[2]/div/div[8]/div/div[4]/button""")
-    soup = getSoup()
+    soup = getSoupWithWebDriver("https://openai.com/blog?page=4")
     printSoupToFile(soup)
     

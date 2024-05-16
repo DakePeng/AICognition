@@ -23,6 +23,5 @@ def emptyArticle():
     return Article("")
 
 if __name__ == "__main__":
-    url = "https://ai.meta.com/blog/purple-llama-open-trust-safety-generative-ai/"
+    url = "https://openai.com/research/weak-to-strong-generalization"
     print(scrapeArticle(url).text)
-    #print(emptyArticle().text)

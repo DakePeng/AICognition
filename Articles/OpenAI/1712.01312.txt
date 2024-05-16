@@ -1,0 +1,1376 @@
+8
+1
+0
+2
+
+n
+u
+J
+
+2
+2
+
+]
+L
+M
+
+.
+t
+a
+t
+s
+[
+
+2
+v
+2
+1
+3
+1
+0
+.
+2
+1
+7
+1
+:
+v
+i
+X
+r
+a
+
+Published as a conference paper at ICLR 2018
+
+LEARNING SPARSE NEURAL NETWORKS
+THROUGH L0 REGULARIZATION
+
+Christos Louizos∗
+University of Amsterdam
+TNO, Intelligent Imaging
+c.louizos@uva.nl
+
+Max Welling
+University of Amsterdam
+CIFAR
+m.welling@uva.nl
+
+Diederik P. Kingma
+OpenAI
+dpkingma@openai.com
+
+ABSTRACT
+
+We propose a practical method for L0 norm regularization for neural networks:
+pruning the network during training by encouraging weights to become exactly
+zero. Such regularization is interesting since (1) it can greatly speed up training
+and inference, and (2) it can improve generalization. AIC and BIC, well-known
+model selection criteria, are special cases of L0 regularization. However, since
+the L0 norm of weights is non-differentiable, we cannot incorporate it directly
+as a regularization term in the objective function. We propose a solution through
+the inclusion of a collection of non-negative stochastic gates, which collectively
+determine which weights to set to zero. We show that, somewhat surprisingly,
+for certain distributions over the gates, the expected L0 regularized objective is
+differentiable with respect to the distribution parameters. We further propose the
+hard concrete distribution for the gates, which is obtained by “stretching” a binary
+concrete distribution and then transforming its samples with a hard-sigmoid. The
+parameters of the distribution over the gates can then be jointly optimized with the
+original network parameters. As a result our method allows for straightforward and
+efﬁcient learning of model structures with stochastic gradient descent and allows
+for conditional computation in a principled way. We perform various experiments
+to demonstrate the effectiveness of the resulting approach and regularizer.
+
+1
+
+INTRODUCTION
+
+Deep neural networks are ﬂexible function approximators that have been very successful in a
+broad range of tasks. They can easily scale to millions of parameters while allowing for tractable
+optimization with mini-batch stochastic gradient descent (SGD), graphical processing units (GPUs)
+and parallel computation. Nevertheless they do have drawbacks. Firstly, it has been shown in
+recent works (Han et al., 2015; Ullrich et al., 2017; Molchanov et al., 2017) that they are greatly
+overparametrized as they can be pruned signiﬁcantly without any loss in accuracy; this exhibits
+unnecessary computation and resources. Secondly, they can easily overﬁt and even memorize random
+patterns in the data (Zhang et al., 2016), if not properly regularized. This overﬁtting can lead to poor
+generalization in practice.
+
+A way to address both of these issues is by employing model compression and sparsiﬁcation tech-
+niques. By sparsifying the model, we can avoid unnecessary computation and resources, since
+irrelevant degrees of freedom are pruned away and do not need to be computed. Furthermore, we
+reduce its complexity, thus penalizing memorization and alleviating overﬁtting.
+
+A conceptually attractive approach is the L0 norm regularization of (blocks of) parameters; this
+explicitly penalizes parameters for being different than zero with no further restrictions. However,
+the combinatorial nature of this problem makes for an intractable optimization for large models.
+
+In this paper we propose a general framework for surrogate L0 regularized objectives. It is realized
+by smoothing the expected L0 regularized objective with continuous distributions in a way that can
+maintain the exact zeros in the parameters while still allowing for efﬁcient gradient based optimization.
+This is achieved by transforming continuous random variables (r.v.s) with a hard nonlinearity, the
+
+∗Work done while interning at OpenAI.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+Published as a conference paper at ICLR 2018
+
+Figure 1: Lp norm penalties for a parameter θ according to different values of p. It is easily observed
+that both weight decay and Lasso, p = 2 and p = 1 respectively, impose shrinkage for large values of
+θ. By gradually allowing p < 1 we observe that the shrinkage is reduced and at the limit of p = 0 we
+observe that the penalty is a constant for θ (cid:54)= 0.
+
+hard-sigmoid. We further propose and employ a novel distribution obtained by this procedure; the
+hard concrete. It is obtained by “stretching” a binary concrete random variable (Maddison et al.,
+2016; Jang et al., 2016) and then passing its samples through a hard-sigmoid. We demonstrate the
+effectiveness of this simple procedure in various experiments.
+
+2 MINIMIZING THE L0 NORM OF PARAMETRIC MODELS
+
+One way to sparsify parametric models, such as deep neural networks, with the least assumptions
+about the parameters is the following; let D be a dataset consisting of N i.i.d. input output pairs
+{(x1, y1), . . . , (xN , yN )} and consider a regularized empirical risk minimization procedure with an
+L0 regularization on the parameters θ of a hypothesis (e.g. a neural network) h(·; θ)1:
+
+R(θ) =
+
+1
+N
+
+(cid:18) N
+(cid:88)
+
+i=1
+
+L(cid:0)h(xi; θ), yi
+
+(cid:1)
+
+(cid:19)
+
++ λ(cid:107)θ(cid:107)0,
+
+(cid:107)θ(cid:107)0 =
+
+|θ|
+(cid:88)
+
+j=1
+
+I[θj (cid:54)= 0],
+
+(1)
+
+θ∗ = arg min
+
+{R(θ)},
+
+θ
+
+where |θ| is the dimensionality of the parameters, λ is a weighting factor for the regularization and
+L(·) corresponds to a loss function, e.g. cross-entropy loss for classiﬁcation or mean-squared error for
+regression. The L0 norm penalizes the number of non-zero entries of the parameter vector and thus
+encourages sparsity in the ﬁnal estimates θ∗. The Akaike Information Criterion (AIC) (Akaike, 1998)
+and the Bayesian Information Criterion (BIC) (Schwarz et al., 1978), well-known model selection
+criteria, correspond to speciﬁc choices of λ. Notice that the L0 norm induces no shrinkage on the
+actual values of the parameters θ; this is in contrast to e.g. L1 regularization and the Lasso (Tibshirani,
+1996), where the sparsity is due to shrinking the actual values of θ. We provide a visualization of this
+effect in Figure 1.
+
+Unfortunately, optimization under this penalty is computationally intractable due to the non-
+differentiability and combinatorial nature of 2|θ| possible states of the parameter vector θ. How can
+we relax the discrete nature of the L0 penalty such that we allow for efﬁcient continuous optimization
+of Eq. 1, while allowing for exact zeros in the parameters? This section will present the necessary
+details of our approach.
+
+1This assumption is just for ease of explanation; our proposed framework can be applied to any objective
+
+function involving parameters.
+
+2
+
+Published as a conference paper at ICLR 2018
+
+2.1 A GENERAL RECIPE FOR EFFICIENTLY MINIMIZING L0 NORMS
+
+Consider the L0 norm under a simple re-parametrization of θ:
+
+θj = ˜θjzj,
+
+zj ∈ {0, 1},
+
+˜θj (cid:54)= 0,
+
+(cid:107)θ(cid:107)0 =
+
+|θ|
+(cid:88)
+
+j=1
+
+zj,
+
+(2)
+
+where the zj correspond to binary “gates” that denote whether a parameter is present and the L0
+norm corresponds to the amount of gates being “on”. By letting q(zj|πj) = Bern(πj) be a Bernoulli
+distribution over each gate zj we can reformulate the minimization of Eq. 1 as penalizing the number
+of parameters being used, on average, as follows:
+
+R(˜θ, π) = Eq(z|π)
+
+(cid:20) 1
+N
+
+(cid:18) N
+(cid:88)
+
+L(cid:0)h(xi; ˜θ (cid:12) z), yi
+
+(cid:1)
+
+∗
+
+˜θ
+
+, π∗ = arg min
+
+i=1
+{R(˜θ, π)},
+
+(cid:19)(cid:21)
+
++ λ
+
+|θ|
+(cid:88)
+
+j=1
+
+πj,
+
+(3)
+
+˜θ,π
+
+where (cid:12) corresponds to the elementwise product. The objective described in Eq. 3 is in fact a special
+case of a variational bound over the parameters involving spike and slab (Mitchell & Beauchamp,
+1988) priors and approximate posteriors; we refer interested readers to appendix A.
+
+Now the second term of the r.h.s. of Eq. 3 is straightforward to minimize however the ﬁrst term
+is problematic for π due to the discrete nature of z, which does not allow for efﬁcient gradient
+based optimization. While in principle a gradient estimator such as the REINFORCE (Williams,
+1992) could be employed, it suffers from high variance and control variates (Mnih & Gregor, 2014;
+Mnih & Rezende, 2016; Tucker et al., 2017), that require auxiliary models or multiple evaluations
+of the network, have to be employed. Two simpler alternatives would be to use either the straight-
+through (Bengio et al., 2013) estimator as done at Srinivas et al. (2017) or the concrete distribution
+as e.g. at Gal et al. (2017). Unfortunately both of these approach have drawbacks; the ﬁrst one
+provides biased gradients due to ignoring the Heaviside function in the likelihood during the gradient
+evaluation whereas the second one does not allow for the gates (and hence parameters) to be exactly
+zero during optimization, thus precluding the beneﬁts of conditional computation (Bengio et al.,
+2013).
+
+Fortunately, there is a simple alternative way to smooth the objective such that we allow for efﬁcient
+gradient based optimization of the expected L0 norm along with zeros in the parameters θ. Let s be a
+continuous random variable with a distribution q(s) that has parameters φ. We can now let the gates
+z be given by a hard-sigmoid rectiﬁcation of s2, as follows:
+
+s ∼ q(s|φ)
+z = min(1, max(0, s)).
+
+(4)
+(5)
+
+This would then allow the gate to be exactly zero and, due to the underlying continuous random
+variable s, we can still compute the probability of the gate being non-zero (active). This is easily
+obtained by the cumulative distribution function (CDF) Q(·) of s:
+
+q(z (cid:54)= 0|φ) = 1 − Q(s ≤ 0|φ),
+
+(6)
+
+i.e. it is the probability of the s variable being positive. We can thus smooth the binary Bernoulli
+gates z appearing in Eq. 3 by employing continuous distributions in the aforementioned way:
+
+R(˜θ, φ) = Eq(s|φ)
+
+(cid:20) 1
+N
+
+(cid:18) N
+(cid:88)
+
+i=1
+
+L(cid:0)h(xi; ˜θ (cid:12) g(s)), yi
+
+(cid:1)
+
+(cid:19)(cid:21)
+
++ λ
+
+|θ|
+(cid:88)
+
+j=1
+
+(cid:0)1 − Q(sj ≤ 0|φj)(cid:1),
+
+(7)
+
+∗
+
+˜θ
+
+, φ∗ = arg min
+
+{R(˜θ, φ)},
+
+g(·) = min(1, max(0, ·)).
+
+˜θ,φ
+
+Notice that this is a close surrogate to the original objective function in Eq. 3, as we similarly have a
+cost that explicitly penalizes the probability of a gate being different from zero. Now for continuous
+
+2We chose to employ a hard-sigmoid instead of a rectiﬁer, g(·) = max(0, ·), so as to have the variable z
+
+better mimic a binary gate (rather than a scale variable).
+
+3
+
+Published as a conference paper at ICLR 2018
+
+distributions q(s) that allow for the reparameterization trick (Kingma & Welling, 2014; Rezende
+et al., 2014) we can express the objective in Eq. 7 as an expectation over a parameter free noise
+distribution p((cid:15)) and a deterministic and differentiable transformation f (·) of the parameters φ and (cid:15):
+
+R(˜θ, φ) = Ep((cid:15))
+
+(cid:20) 1
+N
+
+(cid:18) N
+(cid:88)
+
+i=1
+
+L(cid:0)h(xi; ˜θ (cid:12) g(f (φ, (cid:15)))), yi
+
+(cid:1)
+
+(cid:19)(cid:21)
+
++ λ
+
+|θ|
+(cid:88)
+
+j=1
+
+(cid:0)1 − Q(sj ≤ 0|φj)(cid:1),
+
+(8)
+
+which allows us to make the following Monte Carlo approximation to the (generally) intractable
+expectation over the noise distribution p((cid:15)):
+
+ˆR(˜θ, φ) =
+
+1
+L
+
+L
+(cid:88)
+
+l=1
+
+(cid:18) 1
+N
+
+(cid:18) N
+(cid:88)
+
+i=1
+
+L(cid:0)h(xi; ˜θ (cid:12) z(l)), yi
+
+(cid:1)
+
+(cid:19)(cid:19)
+
++ λ
+
+|θ|
+(cid:88)
+
+j=1
+
+(cid:0)1 − Q(sj ≤ 0|φj)(cid:1)
+
+= LE(˜θ, φ) + λLC(φ), where z(l) = g(f (φ, (cid:15)(l))) and (cid:15)(l) ∼ p((cid:15)).
+
+(9)
+
+LE corresponds to the error loss that measures how well the model is ﬁtting the current dataset
+whereas LC refers to the complexity loss that measures the ﬂexibility of the model. Crucially, the
+total cost in Eq. 9 is now differentiable w.r.t. φ, thus enabling for efﬁcient stochastic gradient based
+optimization, while still allowing for exact zeros at the parameters. One price we pay is that now
+the gradient of the log-likelihood w.r.t. the parameters φ of q(s) is sparse due to the rectiﬁcations;
+nevertheless this should not pose an issue considering the prevalence of rectiﬁed linear units in neural
+networks. Furthermore, due to the stochasticity at s the hard-sigmoid gate z is smoothed to a soft
+version on average, thus allowing for gradient based optimization to succeed, even when the mean
+of s is negative or larger than one. An example visualization can be seen in Figure 2b. It should be
+noted that a similar argument was also shown at Bengio et al. (2013), where with logistic noise a
+rectiﬁer nonlinearity was smoothed to a softplus3 on average.
+
+2.2 THE HARD CONCRETE DISTRIBUTION
+
+The framework described in Section 2.1 gives us the freedom to choose an appropriate smoothing
+distribution q(s). A choice that seems to work well in practice is the following; assume that we have
+a binary concrete (Maddison et al., 2016; Jang et al., 2016) random variable s distributed in the (0, 1)
+interval with probability density qs(s|φ) and cumulative density Qs(s|φ). The parameters of the
+distribution are φ = (log α, β), where log α is the location and β is the temperature. We can “stretch”
+this distribution to the (γ, ζ) interval, with γ < 0 and ζ > 1, and then apply a hard-sigmoid on its
+random samples:
+
+u ∼ U(0, 1),
+
+s = Sigmoid(cid:0)(log u − log(1 − u) + log α)/β(cid:1),
+z = min(1, max(0, ¯s)).
+
+¯s = s(ζ − γ) + γ,
+
+(10)
+
+(11)
+
+This would then induce a distribution where the probability mass of q¯s(¯s|φ) on the negative values,
+Q¯s(0|φ), is “folded” to a delta peak at zero, the probability mass on values larger than one, 1 −
+Q¯s(1|φ), is “folded” to a delta peak at one and the original distribution q¯s(¯s|φ) is truncated to the (0,
+1) range. We provide more information and the density of the resulting distribution at the appendix.
+
+Notice that a similar behavior would have been obtained even if we passed samples from any other
+distribution over the real line through a hard-sigmoid. The only requirement of the approach is
+that we can evaluate the CDF of ¯s at 0 and 1. The main reason for picking the binary concrete is
+its close ties with Bernoulli r.v.s. It was originally proposed at Maddison et al. (2016); Jang et al.
+(2016) as a smooth approximation to Bernoulli r.vs, a fact that allows for gradient based optimization
+of its parameters through the reparametrization trick. The temperature β controls the degree of
+approximation, as with β = 0 we can recover the original Bernoulli r.v. (but lose the differentiable
+properties) whereas with 0 < β < 1 we obtain a probability density that concentrates its mass
+near the endpoints (e.g. as shown in Figure 2a). As a result, the hard concrete also inherits the
+same theoretical properties w.r.t. the Bernoulli distribution. Furthermore, it can serve as a better
+approximation of the discrete nature, since it includes {0, 1} in its support, while still allowing for
+(sub)gradient optimization of its parameters due to the continuous probability mass that connects
+those two values. We can also view this distribution as a “rounded" version of the original binary
+
+3f (x) = log(1 + exp(x)).
+
+4
+
+Published as a conference paper at ICLR 2018
+
+(a)
+
+(b)
+
+Figure 2: (a) The binary concrete distribution with location log α = 0 and temperature β = 0.5
+and the hard concrete equivalent distribution obtained by stretching the concrete distribution to
+(γ = −0.1, ζ = 1.1) and then applying a hard-sigmoid. Under this speciﬁcation the hard concrete
+distribution assigns, roughly, half of its mass to {0, 1} and the rest to (0, 1). (b) The expected value
+of the afforementioned concrete and hard concrete gate as a function of the location log α, obtained
+by averaging 10000 samples. We also added the value of the gates obtained by removing the noise
+entirely. We can see that the noise smooths the hard-sigmoid to a sigmoid on average.
+
+concrete, where values larger than 1−γ
+ζ−γ are
+rounded to zero. We provide an example visualization of the hard concrete distribution in Figure 2a.
+
+ζ−γ are rounded to one whereas values smaller than −γ
+
+The L0 complexity loss of the objective in Eq. 9 under the hard concrete r.v. is conveniently expressed
+as follows:
+
+|θ|
+(cid:88)
+
+LC =
+
+(cid:0)1 − Q¯sj (0|φ)(cid:1) =
+
+|θ|
+(cid:88)
+
+Sigmoid(cid:0) log αj − β log
+
+−γ
+ζ
+
+(cid:1).
+
+(12)
+
+j=1
+At test time we use the following estimator for the ﬁnal parameters θ∗ under a hard concrete gate:
+
+j=1
+
+ˆz = min(1, max(0, Sigmoid(log α)(ζ − γ) + γ)),
+
+θ∗ = ˜θ
+
+∗
+
+(cid:12) ˆz.
+
+(13)
+
+2.3 COMBINING THE L0 NORM WITH OTHER NORMS
+
+While the L0 norm leads to sparse estimates without imposing any shrinkage on θ it might still
+be desirable to impose some form of prior assumptions on the values of θ with alternative norms,
+e.g. impose smoothness with the L2 norm (i.e. weight decay). In the following we will show how
+this combination is feasible for the L2 norm. The expected L2 norm under the Bernoulli gating
+mechanism can be conveniently expressed as:
+
+Eq(z|π)
+
+(cid:2)(cid:107)θ(cid:107)2
+
+2
+
+(cid:3) =
+
+|θ|
+(cid:88)
+
+j=1
+
+Eq(zj |πj )
+
+(cid:2)z2
+
+j
+
+˜θ2
+j
+
+(cid:3) =
+
+|θ|
+(cid:88)
+
+j=1
+
+πj
+
+˜θ2
+j ,
+
+(14)
+
+where πj corresponds to the success probability of the Bernoulli gate zj. To maintain a similar
+expression with our smoothing mechanism, and avoid extra shrinkage for the gates zj, we can take
+into account that the standard L2 norm penalty is proportional to the negative log density of a zero
+mean Gaussian prior with a standard deviation of σ = 1. We will then assume that the σ for each θ is
+governed by z in a way that when z = 0 we have that σ = 1 and when z > 0 we have that σ = z. As
+a result, we can obtain the following expression for the L2 penalty (where ˆθ = θ
+
+σ ):
+
+Eq(z|φ)
+
+(cid:2)(cid:107)ˆθ(cid:107)2
+
+2
+
+(cid:3) =
+
+|θ|
+(cid:88)
+
+(cid:18)
+
+Q¯sj (0|φj)
+
+0
+1
+
++ (cid:0)1 − Q¯sj (0|φj)(cid:1) Eq(zj |φj ,¯sj >0)
+
+j=1
+
+|θ|
+(cid:88)
+
+j=1
+
+=
+
+(cid:0)1 − Q¯sj (0|φj)(cid:1)˜θ2
+j .
+
+5
+
+j
+
+(cid:20) ˜θ2
+j (cid:19)(cid:19)z2
+(cid:19)(cid:19)z2
+
+j
+
+(cid:21)(cid:19)
+
+(15)
+
+Published as a conference paper at ICLR 2018
+
+2.4 GROUP SPARSITY UNDER AN L0 NORM
+
+For reasons of computational efﬁciency it is usually desirable to perform group sparsity instead
+of parameter sparsity, as this can allow for practical computation savings. For example, in neural
+networks speedups can be obtained by employing a dropout (Srivastava et al., 2014) like procedure
+with neuron sparsity in fully connected layers or feature map sparsity for convolutional layers (Wen
+et al., 2016; Louizos et al., 2017; Neklyudov et al., 2017). This is straightforward to do with hard
+concrete gates; simply share the gate between all of the members of the group. The expected L0 and,
+according to section 2.3, L2 penalties in this scenario can be rewritten as:
+
+(cid:20)
+
+(cid:20)
+
+Eq(z|φ)
+
+Eq(z|φ)
+
+(cid:21)
+
+(cid:107)θ(cid:107)0
+
+=
+
+|G|
+(cid:88)
+
+g=1
+
+(cid:18)
+
+(cid:19)
+
+|g|
+
+1 − Q(sg ≤ 0|φg)
+
+(cid:21)
+
+=
+
+(cid:107)ˆθ(cid:107)2
+2
+
+|G|
+(cid:88)
+
+(cid:18)
+
+g=1
+
+(cid:0)1 − Q(sg ≤ 0|φg)(cid:1)
+
+(cid:19)
+.
+
+˜θ2
+j
+
+|g|
+(cid:88)
+
+j=1
+
+(16)
+
+(17)
+
+where |G| corresponds to the number of groups and |g| corresponds to the number of parameters of
+group g. For all of our subsequent experiments we employed neuron sparsity, where we introduced a
+gate per input neuron for fully connected layers and a gate per output feature map for convolutional
+layers. Notice that in the interpretation we adopt the gate is shared across all locations of the feature
+map for convolutional layers, akin to spatial dropout (Tompson et al., 2015). This can lead to
+practical computation savings while training, a beneﬁt which is not possible with the commonly used
+independent dropout masks per spatial location (e.g. as at Zagoruyko & Komodakis (2016)).
+
+3 RELATED WORK
+
+Compression and sparsiﬁcation of neural networks has recently gained much traction in the deep
+learning community. The most common and straightforward technique is parameter / neuron prun-
+ing (LeCun et al., 1990) according to some criterion. Whereas weight pruning (Han et al., 2015;
+Ullrich et al., 2017; Molchanov et al., 2017) is in general inefﬁcient for saving computation time,
+neuron pruning (Wen et al., 2016; Louizos et al., 2017; Neklyudov et al., 2017) can lead to computa-
+tion savings. Unfortunately, all of the aforementioned methods require training the original dense
+network thus precluding the beneﬁts we can obtain by having exact sparsity on the computation
+during training. This is in contrast to our approach where sparsiﬁcation happens during training, thus
+theoretically allowing conditional computation to speed-up training (Bengio et al., 2013; 2015).
+
+Emulating binary r.v.s with rectiﬁcations of continuous r.v.s is not a new concept and has been
+previously done with Gaussian distributions in the context of generative modelling (Hinton &
+Ghahramani, 1997; Harva & Kabán, 2007; Salimans, 2016) and with logistic distributions at (Bengio
+et al., 2013) in the context of conditional computation. These distributions can similarly represent the
+value of exact zero, while still maintaining the tractability of continuous optimization. Nevertheless,
+they are sub-optimal when we require approximations to binary r.v.s (as is the case for the L0 penalty);
+we cannot represent the bimodal behavior of a Bernoulli r.v. due to the fact that the underlying
+distribution is unimodal. Another technique that allows for gradient based optimization of discrete
+r.v.s are the smoothing transformations proposed by Rolfe (2016). There the core idea is that if a
+model has binary latent variables, then we can smooth them with continuous noise in a way that allows
+for reparametrization gradients. There are two main differences with the hard concrete distribution
+we employ here; ﬁrstly, the double rectiﬁcation of the hard concrete r.v.s allows us to represent the
+values of exact zero and one (instead of just zero) and, secondly, due to the underlying concrete
+distribution the random samples from the hard concrete will better emulate binary r.v.s.
+
+4 EXPERIMENTS
+
+We validate the effectiveness of our method on two tasks. The ﬁrst corresponds to the toy classiﬁca-
+tion task of MNIST using a simple multilayer perceptron (MLP) with two hidden layers of size 300
+and 100 (LeCun et al., 1998), and a simple convolutional network, the LeNet-5-Caffe4. The second
+
+4https://github.com/BVLC/caffe/tree/master/examples/mnist
+
+6
+
+Published as a conference paper at ICLR 2018
+
+corresponds to the more modern task of CIFAR 10 and CIFAR 100 classiﬁcation using Wide Residual
+Networks (Zagoruyko & Komodakis, 2016). For all of our experiments we set γ = −0.1, ζ = 1.1
+and, following the recommendations from Maddison et al. (2016), set β = 2/3 for the concrete distri-
+butions. We initialized the locations log α by sampling from a normal distribution with a standard
+deviation of 0.01 and a mean that yields α
+α+1 to be approximately equal to the original dropout rate
+employed at each of the networks. We used a single sample of the gate z for each minibatch of data-
+points during the optimization, even though this can lead to larger variance in the gradients (Kingma
+et al., 2015). In this way we show that we can obtain the speedups in training with practical imple-
+mentations, without actually hurting the overall performance of the network. We have made the code
+publicly available at https://github.com/AMLab-Amsterdam/L0_regularization.
+
+4.1 MNIST CLASSIFICATION AND SPARSIFICATION
+
+For these experiments we did no further regularization besides the L0 norm and optimization was
+done with Adam (Kingma & Ba, 2014) using the default hyper-parameters and temporal averaging.
+We can see at Table 1 that our approach is competitive with other methods that tackle neural network
+compression. However, it is worth noting that all of these approaches prune the network post-training
+using thresholds while requiring training the full network. We can further see that our approach
+minimizes the amount of parameters more at layers where the gates affect a larger part of the cost;
+for the MLP this corresponds to the input layer whereas for the LeNet5 this corresponds to the
+ﬁrst fully connected layer. In contrast, the methods with sparsity inducing priors (Louizos et al.,
+2017; Neklyudov et al., 2017) sparsify parameters irrespective of that extra cost (since they are only
+encouraged by the prior to move parameters to zero) and as a result they achieve similar sparsity on all
+of the layers. Nonetheless, it should be mentioned that we can in principle increase the sparsiﬁcation
+on speciﬁc layers simply by specifying a separate λ for each layer, e.g. by increasing the λ for gates
+that affect less parameters. We provide such results at the “λ sep.” rows.
+
+Table 1: Comparison of the learned architectures and performance of the baselines from Louizos
+et al. (2017) and the proposed L0 minimization under L0hc . We show the amount of neurons left
+after pruning with the estimator in Eq. 13 along with the error in the test set after 200 epochs. N
+denotes the number of training datapoints.
+
+Network & size Method
+
+Pruned architecture Error (%)
+
+MLP
+784-300-100
+
+LeNet-5-Caffe
+20-50-800-500 GL (Wen et al., 2016)
+
+Sparse VD (Molchanov et al., 2017)
+BC-GNJ (Louizos et al., 2017)
+BC-GHS (Louizos et al., 2017)
+L0hc , λ = 0.1/N
+L0hc , λ sep.
+Sparse VD (Molchanov et al., 2017)
+
+GD (Srinivas & Babu, 2016)
+SBP (Neklyudov et al., 2017)
+BC-GNJ (Louizos et al., 2017)
+BC-GHS (Louizos et al., 2017)
+L0hc , λ = 0.1/N
+L0hc , λ sep.
+
+512-114-72
+278-98-13
+311-86-14
+
+219-214-100
+266-88-33
+
+14-19-242-131
+3-12-192-500
+7-13-208-16
+3-18-284-283
+8-13-88-13
+5-10-76-16
+
+20-25-45-462
+9-18-65-25
+
+1.8
+1.8
+1.8
+
+1.4
+1.8
+
+1.0
+1.0
+1.1
+0.9
+1.0
+1.0
+
+0.9
+1.0
+
+To get a better idea about the potential speedup we can obtain in training we plot in Figure 3 the
+expected, under the probability of the gate being active, ﬂoating point operations (FLOPs) as a
+function of the training iterations. We also included the theoretical speedup we can obtain by using
+dropout (Srivastava et al., 2014) networks. As we can observe, our L0 minimization procedure that is
+targeted towards neuron sparsity can potentially yield signiﬁcant computational beneﬁts compared to
+the original or dropout architectures, with minimal or no loss in performance. We further observe
+that there is a signiﬁcant difference in the ﬂop count for the LeNet model between the λ = 0.1/N
+and λ sep. settings. This is because we employed larger values for λ (10/N and 0.5/N ) for the
+convolutional layers (which contribute the most to the computation) in the λ sep. setting. As a result,
+
+7
+
+Published as a conference paper at ICLR 2018
+
+this setting is more preferable when we are concerned with speedup, rather than network compression
+(which is affected only by the number of parameters).
+
+(a) Expected FLOPs at the MLP.
+
+(b) Expected FLOPs at LeNet5.
+
+Figure 3: Expected number of ﬂoating point operations (FLOPs) during training for the original,
+dropout and L0 regularized networks. These were computed by assuming one ﬂop for multiplication
+and one ﬂop for addition.
+
+4.2 CIFAR CLASSIFICATION
+
+For WideResNets we apply L0 regularization on the weights of the hidden layer of the residual blocks,
+i.e. where dropout is usually employed. We also employed an L2 regularization term as described
+in Section 2.3 with the weight decay coefﬁcient used in Zagoruyko & Komodakis (2016). For the
+layers with the hard concrete gates we divided the weight decay coefﬁcient by 0.7 to ensure that
+a-priori we assume the same length-scale as the 0.3 dropout equivalent network. For optimization
+we employed the procedure described in Zagoruyko & Komodakis (2016) with a minibatch of 128
+datapoints, which was split between two GPUs, and used a single sample for the gates for each GPU.
+
+Table 2: Results on the benchmark classiﬁcation tasks of CIFAR 10 and CIFAR 100. All of the
+baseline results are taken from Zagoruyko & Komodakis (2016). For the L0 regularized WRN we
+report the median of the error on the test set after 200 epochs over 5 runs.
+
+Network
+
+CIFAR-10 CIFAR-100
+
+original-ResNet-110 (He et al., 2016a)
+pre-act-ResNet-110 (He et al., 2016b)
+
+WRN-28-10 (Zagoruyko & Komodakis, 2016)
+WRN-28-10-dropout (Zagoruyko & Komodakis, 2016)
+
+WRN-28-10-L0hc, λ = 0.001/N
+WRN-28-10-L0hc, λ = 0.002/N
+
+6.43
+6.37
+
+4.00
+3.89
+
+3.83
+3.93
+
+25.16
+-
+
+21.18
+18.85
+
+18.75
+19.04
+
+(a)
+
+(b)
+
+(c)
+
+Figure 4: (a, b) Expected number of FLOPs during training for the dropout and L0 regularized WRNs
+for CIFAR 10 (a) and CIFAR 100 (b). The original WRN is not shown as it has the same practical
+FLOPs as the dropout equivalent network. (c) Train (dashed) and test (solid) error as a function of
+the training epochs for dropout and L0 WRNs at CIFAR 10.
+
+8
+
+Published as a conference paper at ICLR 2018
+
+As we can observe at Table 2, with a λ of 0.001/N the L0 regularized wide residual network improves
+upon the accuracy of the dropout equivalent network on both CIFAR 10 and CIFAR 100. Furthermore,
+it simultaneously allows for potential training time speedup due to gradually decreasing the number
+of FLOPs, as we can see in Figures 4a, 4b. This sparsity is also obtained without any “lag” in
+convergence speed, as at Figure 4c we observe a behaviour that is similar to the dropout network.
+Finally, we observe that by further increasing λ we obtain a model that has a slight error increase but
+can allow for a larger speedup.
+
+5 DISCUSSION
+
+We have described a general recipe that allows for optimizing the L0 norm of parametric models in
+a principled and effective manner. The method is based on smoothing the combinatorial problem
+with continuous distributions followed by a hard-sigmoid. To this end, we also proposed a novel
+distribution which we coin as the hard concrete; it is a “stretched” binary concrete distribution, the
+samples of which are transformed by a hard-sigmoid. This in turn better mimics the binary nature of
+Bernoulli distributions while still allowing for efﬁcient gradient based optimization. In experiments
+we have shown that the proposed L0 minimization process leads to neural network sparsiﬁcation that
+is competitive with current approaches while theoretically allowing for speedup in training. We have
+further shown that this process can provide a good inductive bias and regularizer, as on the CIFAR
+experiments with wide residual networks we improved upon dropout.
+
+As for future work; better harnessing the power of conditional computation for efﬁciently training
+very large neural networks with learned sparsity patterns is a potential research direction. It would be
+also interesting to adopt a full Bayesian treatment over the parameters θ, such as the one employed
+at Molchanov et al. (2017); Louizos et al. (2017). This would then allow for further speedup and
+compression due to the ability of automatically learning the bit precision of each weight. Finally, it
+would be interesting to explore the behavior of hard concrete r.v.s at binary latent variable models,
+since they can be used as a drop in replacement that allow us to maintain both the discrete nature as
+well as the efﬁcient reparametrization gradient optimization.
+
+ACKNOWLEDGEMENTS
+
+We would like to thank Taco Cohen, Thomas Kipf, Patrick Forré, and Rianne van den Berg for
+feedback on an early draft of this paper.
+
+REFERENCES
+
+Hirotogu Akaike. Information theory and an extension of the maximum likelihood principle. In
+
+Selected Papers of Hirotugu Akaike, pp. 199–213. Springer, 1998.
+
+Matthew James Beal. Variational algorithms for approximate Bayesian inference. 2003.
+
+Emmanuel Bengio, Pierre-Luc Bacon, Joelle Pineau, and Doina Precup. Conditional computation in
+
+neural networks for faster models. arXiv preprint arXiv:1511.06297, 2015.
+
+Yoshua Bengio, Nicholas Léonard, and Aaron Courville. Estimating or propagating gradients through
+
+stochastic neurons for conditional computation. arXiv preprint arXiv:1308.3432, 2013.
+
+Thomas M Cover and Joy A Thomas. Elements of information theory. John Wiley & Sons, 2012.
+
+Yarin Gal, Jiri Hron, and Alex Kendall. Concrete dropout. arXiv preprint arXiv:1705.07832, 2017.
+
+Song Han, Huizi Mao, and William J Dally. Deep compression: Compressing deep neural networks
+with pruning, trained quantization and huffman coding. arXiv preprint arXiv:1510.00149, 2015.
+
+Markus Harva and Ata Kabán. Variational learning for rectiﬁed factor analysis. Signal Processing,
+
+87(3):509–527, 2007.
+
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image
+recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition,
+pp. 770–778, 2016a.
+
+9
+
+Published as a conference paper at ICLR 2018
+
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Identity mappings in deep residual
+
+networks. In European Conference on Computer Vision, pp. 630–645. Springer, 2016b.
+
+John R Hershey and Peder A Olsen. Approximating the kullback leibler divergence between
+gaussian mixture models. In Acoustics, Speech and Signal Processing, 2007. ICASSP 2007. IEEE
+International Conference on, volume 4, pp. IV–317. IEEE, 2007.
+
+Geoffrey E Hinton and Zoubin Ghahramani. Generative models for discovering sparse distributed
+representations. Philosophical Transactions of the Royal Society of London B: Biological Sciences,
+352(1358):1177–1190, 1997.
+
+Eric Jang, Shixiang Gu, and Ben Poole. Categorical reparameterization with gumbel-softmax. arXiv
+
+preprint arXiv:1611.01144, 2016.
+
+Diederik Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint
+
+arXiv:1412.6980, 2014.
+
+Diederik P Kingma and Max Welling. Auto-encoding variational bayes. International Conference on
+
+Learning Representations (ICLR), 2014.
+
+Diederik P Kingma, Tim Salimans, and Max Welling. Variational dropout and the local reparameteri-
+
+zation trick. In Advances in Neural Information Processing Systems, pp. 2575–2583, 2015.
+
+Yann LeCun, John S Denker, and Sara A Solla. Optimal brain damage. In Advances in neural infor-
+mation processing systems 2, NIPS 1989, volume 2, pp. 598–605. Morgan-Kaufmann Publishers,
+1990.
+
+Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to
+
+document recognition. Proceedings of the IEEE, 86(11):2278–2324, 1998.
+
+Christos Louizos, Karen Ullrich, and Max Welling. Bayesian compression for deep learning. arXiv
+
+preprint arXiv:1705.08665, 2017.
+
+Chris J Maddison, Andriy Mnih, and Yee Whye Teh. The concrete distribution: A continuous
+
+relaxation of discrete random variables. arXiv preprint arXiv:1611.00712, 2016.
+
+Toby J Mitchell and John J Beauchamp. Bayesian variable selection in linear regression. Journal of
+
+the American Statistical Association, 83(404):1023–1032, 1988.
+
+Andriy Mnih and Karol Gregor. Neural variational inference and learning in belief networks. arXiv
+
+preprint arXiv:1402.0030, 2014.
+
+Andriy Mnih and Danilo Rezende. Variational inference for monte carlo objectives. In International
+
+Conference on Machine Learning, pp. 2188–2196, 2016.
+
+Dmitry Molchanov, Arsenii Ashukha, and Dmitry Vetrov. Variational dropout sparsiﬁes deep neural
+
+networks. arXiv preprint arXiv:1701.05369, 2017.
+
+Kirill Neklyudov, Dmitry Molchanov, Arsenii Ashukha, and Dmitry Vetrov. Structured bayesian
+
+pruning via log-normal multiplicative noise. arXiv preprint arXiv:1705.07283, 2017.
+
+Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and
+In Proceedings of the 31th International
+approximate inference in deep generative models.
+Conference on Machine Learning, ICML 2014, Beijing, China, 21-26 June 2014, pp. 1278–1286,
+2014.
+
+Jason Tyler Rolfe. Discrete variational autoencoders. arXiv preprint arXiv:1609.02200, 2016.
+
+Tim Salimans. A structured variational auto-encoder for learning deep hierarchies of sparse features.
+
+arXiv preprint arXiv:1602.08734, 2016.
+
+Gideon Schwarz et al. Estimating the dimension of a model. The annals of statistics, 6(2):461–464,
+
+1978.
+
+Suraj Srinivas and R Venkatesh Babu. Generalized dropout. arXiv preprint arXiv:1611.06791, 2016.
+
+10
+
+Published as a conference paper at ICLR 2018
+
+Suraj Srinivas, Akshayvarun Subramanya, and R Venkatesh Babu. Training sparse neural networks.
+In Computer Vision and Pattern Recognition Workshops (CVPRW), 2017 IEEE Conference on, pp.
+455–462. IEEE, 2017.
+
+Nitish Srivastava, Geoffrey E Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov.
+Dropout: a simple way to prevent neural networks from overﬁtting. Journal of machine learning
+research, 15(1):1929–1958, 2014.
+
+Robert Tibshirani. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical
+
+Society. Series B (Methodological), pp. 267–288, 1996.
+
+Jonathan Tompson, Ross Goroshin, Arjun Jain, Yann LeCun, and Christoph Bregler. Efﬁcient object
+localization using convolutional networks. In Proceedings of the IEEE Conference on Computer
+Vision and Pattern Recognition, pp. 648–656, 2015.
+
+George Tucker, Andriy Mnih, Chris J Maddison, and Jascha Sohl-Dickstein. Rebar: Low-variance,
+unbiased gradient estimates for discrete latent variable models. arXiv preprint arXiv:1703.07370,
+2017.
+
+Karen Ullrich, Edward Meeds, and Max Welling. Soft weight-sharing for neural network compression.
+
+ICLR, 2017.
+
+Wei Wen, Chunpeng Wu, Yandan Wang, Yiran Chen, and Hai Li. Learning structured sparsity in
+deep neural networks. In Advances in Neural Information Processing Systems, pp. 2074–2082,
+2016.
+
+Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement
+
+learning. Machine learning, 8(3-4):229–256, 1992.
+
+Sergey Zagoruyko and Nikos Komodakis. Wide residual networks. arXiv preprint arXiv:1605.07146,
+
+2016.
+
+Chiyuan Zhang, Samy Bengio, Moritz Hardt, Benjamin Recht, and Oriol Vinyals. Understanding
+
+deep learning requires rethinking generalization. arXiv preprint arXiv:1611.03530, 2016.
+
+APPENDIX
+
+A RELATION TO VARIATIONAL INFERENCE
+
+The objective function described in Eq. 3 is in fact a special case of a variational lower bound over
+the parameters of the network under a spike and slab (Mitchell & Beauchamp, 1988) prior. The spike
+and slab distribution is the golden standard in sparsity as far as Bayesian inference is concerned and
+it is deﬁned as a mixture of a delta spike at zero and a continuous distribution over the real line (e.g.
+a standard normal):
+
+p(z) = Bernoulli(π),
+
+p(θ|z = 0) = δ(θ),
+
+p(θ|z = 1) = N (θ|0, 1).
+
+(18)
+
+Since the true posterior distribution over the parameters under this prior is intractable, we will use
+variational inference (Beal, 2003). Let q(θ, z) be a spike and slab approximate posterior over the
+parameters θ and gate variables z, where we assume that it factorizes over the dimensionality of the
+parameters θ. It turns out that we can write the following variational free energy under the spike and
+
+11
+
+Published as a conference paper at ICLR 2018
+
+slab prior and approximate posterior over a parameter vector θ:
+
+F = − Eq(z)q(θ|z)[log p(D|θ)] +
+
+|θ|
+(cid:88)
+
+j=1
+
+KL(q(zj)||p(zj))+
+
++
+
+|θ|
+(cid:88)
+
+j=1
+
+(cid:0)q(zj = 1)KL(q(θj|zj = 1)||p(θj|zj = 1))+
+
++ q(zj = 0)KL(q(θj|zj = 0)||p(θj|zj = 0))(cid:1)
+
+(19)
+
+= − Eq(z)q(θ|z)[log p(D|θ)] +
+
+|θ|
+(cid:88)
+
+j=1
+
+KL(q(zj)||p(zj))+
+
++
+
+|θ|
+(cid:88)
+
+j=1
+
+q(zj = 1)KL(q(θj|zj = 1)||p(θj|zj = 1)),
+
+(20)
+
+where the last step is due to KL(q(θj|zj = 0)||p(θj|zj = 0)) = 05. The term that involves
+KL(q(zj)||p(zj)) corresponds to the KL-divergence from the Bernoulli prior p(zj) to the Bernoulli
+approximate posterior q(zj) and KL(q(θj|zj = 1)||p(θj|zj = 1)) can be interpreted as the “code
+cost” or else the amount of information the parameter θj contains about the data D, measured by the
+KL-divergence from the prior p(θj|zj = 1).
+
+Now consider making the assumption that we are optimizing, rather than integrating, over θ and
+further assuming that KL(q(θj|zj = 1)||p(θj|zj = 1)) = λ. We can justify this assumption from
+an empirical Bayesian procedure: there is a hypothetical prior for each parameter p(θj|zj = 1)
+that adapts to q(θj|zj = 1) in a way that results into needing, approximately, λ nats to transform
+p(θj|zj = 1) to that particular q(θj|zj = 1). Those λ nats are thus the amount of information the
+q(θj|zj = 1) can encode about the data had we used that p(θj|zj = 1) as the prior. Notice that under
+this view we can consider λ as the amount of ﬂexibility of that hypothetical prior; with λ = 0 we
+have a prior that is ﬂexible enough to represent exactly q(θj|zj = 1), thus resulting into no code cost
+and possible overﬁtting. Under this assumption the variational free energy can be re-written as:
+
+F = − Eq(z)[log p(D|˜θ (cid:12) z)] +
+
+|θ|
+(cid:88)
+
+j=1
+
+KL(q(zj)||p(zj)) + λ
+
+|θ|
+(cid:88)
+
+j=1
+
+q(zj = 1)
+
+(21)
+
+≥ − Eq(z)[log p(D|˜θ (cid:12) z)] + λ
+
+|θ|
+(cid:88)
+
+j=1
+
+πj,
+
+(22)
+
+where ˜θ corresponds to the optimized θ and the last step is due to the positivity of the KL-divergence.
+Now by taking the negative log-probability of the data to be equal to the loss L(·) of Eq. 1 we see that
+Eq. 22 is the same as Eq. 3. Note that in case that we are interested over the uncertainty of the gates
+z, we should optimize Eq. 21, rather than Eq. 22, as this will properly penalize the entropy of q(z).
+Furthermore, Eq. 21 also allows for the incorporation of prior information about the behavior of the
+gates (e.g. gates being active 10% of the time, on average). We have thus shown that the expected L0
+minimization procedure is in fact a close surrogate to a variational bound involving a spike and slab
+distribution over the parameters and a ﬁxed coding cost for the parameters when the gates are active.
+
+B THE HARD CONCRETE DISTRIBUTION
+
+As mentioned in the main text, the hard concrete is a straightforward modiﬁcation of the binary
+concrete (Maddison et al., 2016; Jang et al., 2016); let qs(s|φ) be the probability density function
+
+5We can see that this is indeed the case by taking the limit of σ → 0 of the KL divergence of two Gaussians
+
+that have the same mean and variance.
+
+12
+
+Published as a conference paper at ICLR 2018
+
+(pdf) and Qs(s|φ) the cumulative distribution function (CDF) of a binary concrete random variable s:
+
+qs(s|φ) =
+
+βαs−β−1(1 − s)−β−1
+(αs−β + (1 − s)−β)2 ,
+
+Qs(s|φ) = Sigmoid((log s − log(1 − s))β − log α).
+
+(23)
+
+(24)
+
+Now by stretching this distribution to the (γ, ζ) interval, with γ < 0 and ζ > 1 we obtain ¯s =
+s(ζ − γ) + γ with the following pdf and CDF:
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:18) ¯s − γ
+ζ − γ
+
+(cid:18) ¯s − γ
+ζ − γ
+
+1
+|ζ − γ|
+
+Q¯s(¯s|φ) = Qs
+
+q¯s(¯s|φ) =
+
+(cid:19)
+.
+
+(25)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+qs
+
+(cid:19)
+
+φ
+
+φ
+
+,
+
+and by further rectifying ¯s with the hard-sigmoid, z = min(1, max(0, ¯s)), we obtain the following
+distribution over z:
+
+q(z|φ) = Q¯s(0|φ)δ(z) + (1 − Q¯s(1|φ))δ(z − 1) + (Q¯s(1|φ) − Q¯s(0|φ))q¯s(z|¯s ∈ (0, 1), φ),
+
+(26)
+
+which is composed by a delta peak at zero with probability Q¯s(0|φ), a delta peak at one with
+probability 1 − Q¯s(1|φ), and a truncated version of q¯s(¯s|φ) in the (0, 1) range.
+
+C NEGATIVE KL-DIVERGENCE FOR HARD CONCRETE DISTRIBUTIONS
+
+In case th 21 is to be optimized with a hard concrete q(z) then we have to compute the KL-divergence
+from a prior p(z) to q(z). It is necessary for the prior p(z) to have the same support as q(z) in order
+for the KL-divergence to be valid; as a result we can let the prior p(z) similarly be a hard-sigmoid
+transformation of an arbitrary continuous distribution p(¯s) with CDF P¯s(¯s):
+
+p(z) = P¯s(0)δ(z) + (1 − P¯s(1))δ(z − 1) + (P¯s(1) − P¯s(0))p¯s(z|¯s ∈ (0, 1))
+
+(27)
+
+Since both q(z) and p(z) are mixtures with the same number of components we can use the chain
+rule of relative entropy (Cover & Thomas, 2012; Hershey & Olsen, 2007) in order to compute the
+KL-divergence:
+
+KL(q(z)||p(z)) = Q¯s(0) log
+
+Q¯s(0)
+P¯s(0)
+
++ (1 − Q¯s(1)) log
+
+1 − Q¯s(1)
+1 − P¯s(1)
+
++
+
++ (Q¯s(1) − Q¯s(0)) Eq¯s(z|¯s∈(0,1))[log q¯s(z) − log p¯s(z)],
+
+(28)
+
+where ¯s corresponds to the the pre-rectiﬁed variable. Notice that in case that the integral under the
+truncated distribution q(¯s|¯s ∈ (0, 1)) is not available in closed form we can still obtain a Monte Carlo
+estimate by sampling the truncated distribution, on e.g. a (γ, ζ) interval, via the inverse transform
+method:
+
+u ∼ U(0, 1),
+
+z = Q−1
+
+¯s
+
+(cid:0)Q¯s(γ) + u(Q¯s(ζ) − Q¯s(γ))(cid:1),
+
+(29)
+
+where Q−1
+¯s (·) corresponds to the quantile function and Q¯s(·) to the CDF of the random variable ¯s.
+Furthermore, it should be mentioned that KL(q(z)||p(z)) (cid:54)= KL(q(¯s)||p(¯s)), since the rectiﬁcations
+are not invertible transformations.
+
+13
+
+

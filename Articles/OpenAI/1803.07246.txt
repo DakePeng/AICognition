@@ -1,0 +1,2317 @@
+8
+1
+0
+2
+
+r
+a
+
+M
+0
+2
+
+]
+
+G
+L
+.
+s
+c
+[
+
+1
+v
+6
+4
+2
+7
+0
+.
+3
+0
+8
+1
+:
+v
+i
+X
+r
+a
+
+Published as a conference paper at ICLR 2018
+
+VARIANCE REDUCTION FOR POLICY GRADIENT WITH
+ACTION-DEPENDENT FACTORIZED BASELINES
+
+Cathy Wu1, Aravind Rajeswaran2, Yan Duan13, Vikash Kumar23,
+Alexandre M Bayen14, Sham Kakade2, Igor Mordatch3, Pieter Abbeel13
+cathywu@eecs.berkeley.edu, aravraj@cs.washington.edu,
+rockyduan@eecs.berkeley.edu, vikash@cs.washington.edu,
+bayen@berkeley.edu, sham@cs.washington.edu,
+igor.mordatch@gmail.com, pabbeel@cs.berkeley.edu
+1 Department of EECS, UC Berkeley
+2 Department of CSE, University of Washington
+3 OpenAI
+4 Institute for Transportation Studies, UC Berkeley
+
+ABSTRACT
+
+Policy gradient methods have enjoyed great success in deep reinforcement learn-
+ing but suffer from high variance of gradient estimates. The high variance problem
+is particularly exasperated in problems with long horizons or high-dimensional
+action spaces. To mitigate this issue, we derive a bias-free action-dependent base-
+line for variance reduction which fully exploits the structural form of the stochas-
+tic policy itself and does not make any additional assumptions about the MDP.
+We demonstrate and quantify the beneﬁt of the action-dependent baseline through
+both theoretical analysis as well as numerical results, including an analysis of
+the suboptimality of the optimal state-dependent baseline. The result is a com-
+putationally efﬁcient policy gradient algorithm, which scales to high-dimensional
+control problems, as demonstrated by a synthetic 2000-dimensional target match-
+ing task. Our experimental results indicate that action-dependent baselines al-
+low for faster learning on standard reinforcement learning benchmarks and high-
+dimensional hand manipulation and synthetic tasks. Finally, we show that the
+general idea of including additional information in baselines for improved vari-
+ance reduction can be extended to partially observed and multi-agent tasks.
+
+1
+
+INTRODUCTION
+
+Deep reinforcement learning has achieved impressive results in recent years in domains such as
+video games from raw visual inputs (Mnih et al., 2015), board games (Silver et al., 2016), sim-
+ulated control tasks (Schulman et al., 2016; Lillicrap et al., 2016; Rajeswaran et al., 2017a), and
+robotics (Levine et al., 2016). An important class of methods behind many of these success stories
+are policy gradient methods (Williams, 1992; Sutton et al., 2000; Kakade, 2002; Schulman et al.,
+2015; Mnih et al., 2016), which directly optimize parameters of a stochastic policy through local
+gradient information obtained by interacting with the environment using the current policy. Policy
+gradient methods operate by increasing the log probability of actions proportional to the future re-
+wards inﬂuenced by these actions. On average, actions which perform better will acquire higher
+probability, and the policy’s expected performance improves.
+
+A critical challenge of policy gradient methods is the high variance of the gradient estimator. This
+high variance is caused in part due to difﬁculty in credit assignment to the actions which affected the
+future rewards. Such issues are further exacerbated in long horizon problems, where assigning cred-
+its properly becomes even more challenging. To reduce variance, a “baseline” is often employed,
+which allows us to increase or decrease the log probability of actions based on whether they perform
+better or worse than the average performance when starting from the same state. This is particu-
+larly useful in long horizon problems, since the baseline helps with temporal credit assignment by
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+Published as a conference paper at ICLR 2018
+
+removing the inﬂuence of future actions from the total reward. A better baseline, which predicts the
+average performance more accurately, will lead to lower variance of the gradient estimator.
+
+The key insight of this paper is that when the individual actions produced by the policy can be
+decomposed into multiple factors, we can incorporate this additional information into the baseline
+to further reduce variance. In particular, when these factors are conditionally independent given the
+current state, we can compute a separate baseline for each factor, whose value can depend on all
+quantities of interest except that factor. This serves to further help credit assignment by removing
+the inﬂuence of other factors on the rewards, thereby reducing variance. In other words, information
+about the other factors can provide a better evaluation of how well a speciﬁc factor performs. Such
+factorized policies are very common, with some examples listed below.
+
+• In continuous control and robotics tasks, multivariate Gaussian policies with a diagonal covari-
+ance matrix are often used. In such cases, each action coordinate can be considered a factor.
+Similarly, factorized categorical policies are used in game domains like board games and Atari.
+• In multi-agent and distributed systems, each agent deploys its own policy, and thus the actions of
+each agent can be considered a factor of the union of all actions (by all agents). This is particu-
+larly useful in the recent emerging paradigm of centralized learning and decentralized execution
+(Foerster et al., 2017; Lowe et al., 2017). In contrast to the previous example, where factorized
+policies are a common design choice, in these problems they are dictated by the problem setting.
+
+We demonstrate that action-dependent baselines consistently improve the performance compared
+to baselines that use only state information. The relative performance gain is task-speciﬁc, but in
+certain tasks, we observe signiﬁcant speed-up in the learning process. We evaluate our proposed
+method on standard benchmark continuous control tasks, as well as on a high-dimensional door
+opening task with a ﬁve-ﬁngered hand, a synthetic high-dimensional target matching task, on a blind
+peg insertion POMDP task, and a multi-agent communication task. We believe that our method will
+facilitate further applications of reinforcement learning methods in domains with extremely high-
+dimensional actions, including multi-agent systems. Videos and additional results of the paper are
+available at https://sites.google.com/view/ad-baselines.
+
+2 RELATED WORKS
+
+Three main classes of methods for reinforcement learning include value-based methods (Watkins &
+Dayan, 1992), policy-based methods (Williams, 1992; Kakade, 2002; Schulman et al., 2015), and
+actor-critic methods (Konda & Tsitsiklis, 2000; Peters & Schaal, 2008; Mnih et al., 2016). Value-
+based and actor-critic methods usually compute a gradient of the objective through the use of critics,
+which are often biased, unless strict compatibility conditions are met (Sutton et al., 2000; Konda &
+Tsitsiklis, 2000). Such conditions are rarely satisﬁed in practice due to the use of stochastic gradient
+methods and powerful function approximators. In comparison, policy gradient methods are able to
+compute an unbiased gradient, but suffer from high variance. Policy gradient methods are therefore
+usually less sample efﬁcient, but can be more stable than critic-based methods (Duan et al., 2016).
+
+A large body of work has investigated variance reduction techniques for policy gradient methods.
+One effective method to reduce variance without introducing bias is through using a baseline, which
+has been widely studied (Sutton & Barto, 1998; Weaver & Tao, 2001; Greensmith et al., 2004;
+Schulman et al., 2016). However, fully exploiting the factorizability of the policy probability dis-
+tribution to further reduce variance has not been studied. Recently, methods like Q-Prop (Gu et al.,
+2017) make use of an action-dependent control variate, a technique commonly used in Monte Carlo
+methods and recently adopted for RL. Since Q-Prop utilizes off-policy data, it has the potential to
+be more sample efﬁcient than pure on-policy methods. However, Q-prop is signiﬁcantly more com-
+putationally expensive, since it needs to perform a large number of gradient updates on the critic
+using the off-policy data, thus not suitable with fast simulators.
+In contrast, our formulation of
+action-dependent baselines has little computational overhead, and improves the sample efﬁciency
+compared to on-policy methods with state-only baseline.
+
+The idea of using additional information in the baseline or critic has also been studied in other con-
+texts. Methods such as Guided Policy Search (Levine et al., 2016; Mordatch et al., 2015) and variants
+train policies that act on high-dimensional observations like images, but use a low dimensional en-
+coding of the problem like joint positions during the training process. Recent efforts in multi-agent
+
+2
+
+Published as a conference paper at ICLR 2018
+
+systems (Foerster et al., 2017; Lowe et al., 2017) also use additional information in the centralized
+training phase to speed-up learning. However, using the structure in the policy parameterization
+itself to enhance the learning speed, as we do in this work, has not been explored.
+
+3 PRELIMINARIES
+
+In this section, we establish the notations used throughout this paper, as well as basic results for
+policy gradient methods, and variance reduction via baselines.
+
+3.1 NOTATION
+
+This paper assumes a discrete-time Markov decision process (MDP), deﬁned by (S, A, P, r, ρ0, γ),
+in which S ⊆ Rn is an n-dimensional state space, A ⊆ Rm an m-dimensional action space,
+P : S × A × S → R+ a transition probability function, r : S × A → R a bounded reward function,
+ρ0 : S → R+ an initial state distribution, and γ ∈ (0, 1] a discount factor. The presented models
+are based on the optimization of a stochastic policy πθ : S × A → R+ parameterized by θ. Let
+η(πθ) denote its expected return: η(πθ) = Eτ [(cid:80)∞
+t=0 γtr(st, at)], where τ = (s0, a0, . . .) denotes
+the whole trajectory, s0 ∼ ρ0(s0), at ∼ πθ(at|st), and st+1 ∼ P(st+1|st, at) for all t. Our goal is
+to ﬁnd the optimal policy arg maxθ η(πθ). We will use ˆQ(st, at) to describe samples of cumulative
+discounted return, and Q(at, st) to describe a function approximation of ˆQ(st, at). We will use
+”Q-function” when describing an abstract action-value function.
+
+For a partially observable Markov decision process (POMDP), two more components are required,
+namely Ω, a set of observations, and O : S × Ω → R≥0, the observation probability distribution.
+In the fully observable case, Ω ≡ S. Though the analysis in this article is written for policies over
+states, the same analysis can be done for policies over observations.
+
+3.2 THE SCORE FUNCTION (SF) ESTIMATOR
+
+An important technique used in the derivation of the policy gradient is known as the score function
+(SF) estimator (Williams, 1992), which also comes up in the justiﬁcation of baselines. Suppose that
+we want to estimate ∇θEx[f (x)] where x ∼ pθ(x), and the family of distributions {pθ(x) : θ ∈ Θ}
+has common support. Further suppose that log pθ(x) is continuous in θ. In this case we have
+
+∇θEx[f (x)] = ∇θ
+
+(cid:90)
+
+pθ(x)f (x)dx =
+
+(cid:90)
+
+pθ(x)
+
+∇θpθ(x)
+pθ(x)
+
+f (x)dx
+
+(cid:90)
+
+=
+
+pθ(x)∇θ log pθ(x)f (x)dx = Ex [∇θ log pθ(x)f (x)] .
+
+(1)
+
+3.3 POLICY GRADIENT
+
+The Policy Gradient Theorem (Sutton et al., 2000) states that
+
+∇θη(πθ) = Eτ
+
+(cid:34) ∞
+(cid:88)
+
+∇θ log πθ(at|st)
+
+∞
+(cid:88)
+
+(cid:35)
+
+.
+
+γt(cid:48)−trt(cid:48)
+
+(2)
+
+For convenience, deﬁne ρπ(s) = (cid:80)∞
+ˆQ(st, at) = (cid:80)∞
+
+t=0
+t=0 γtp(st = s) as the state visitation frequency, and
+
+t(cid:48)=t
+
+t(cid:48)=t γt(cid:48)−trt(cid:48). We can rewrite the above equation (with abuse of notation) as
+
+∇θη(πθ) = Eρπ,π
+
+∇θ log πθ(at|st) ˆQ(st, at)
+
+.
+
+(3)
+
+(cid:104)
+
+(cid:105)
+
+It is further shown that we can reduce the variance of this gradient estimator without introducing
+bias by subtracting off a quantity dependent on st from ˆQ(st, at) (Williams, 1992; Greensmith
+et al., 2004). See Appendix A for a derivation of the optimal state-dependent baseline.
+
+∇θη(πθ) = Eρπ,π
+
+(cid:104)
+∇θ log πθ(at|st)
+
+(cid:16) ˆQ(st, at) − b(st)
+
+(cid:17)(cid:105)
+
+This is valid because, applying the SF estimator in the opposite direction, we have
+
+Eat [∇θ log πθ(at|st)b(st)] = ∇θEat [b(st)] = 0
+
+(4)
+
+(5)
+
+3
+
+Published as a conference paper at ICLR 2018
+
+4 ACTION-DEPENDENT BASELINES
+
+In practice there can be rich internal structure in the policy parameterization. For example, for con-
+tinuous control tasks, a very common parameterization is to make πθ(at|st) a multivariate Gaussian
+with diagonal variance, in which case each dimension ai
+t of the action at is conditionally independent
+of other dimensions, given the current state st. Another example is when the policy outputs a tuple
+of discrete actions with factorized categorical distributions. In the following subsections, we show
+that such structure can be exploited to further reduce the variance of the gradient estimator without
+introducing bias by changing the form of the baseline. Then, we derive the optimal action-dependent
+baseline for a class of problems and analyze the suboptimality of non-optimal baselines in terms of
+variance reduction. We then propose several practical baselines for implementation purposes. We
+conclude the section with the overall policy gradient algorithm with action-dependent baselines for
+factorized policies. We provide an exposition for situations when the conditional independence
+assumption does not hold, such as for stochastic policies with general covariance structures, in Ap-
+pendix E, and for compatibility with other variance reduction techniques in Appendix F.
+
+4.1 BASELINES FOR POLICIES WITH CONDITIONALLY INDEPENDENT FACTORS
+
+In the following, we analyze action-dependent baselines for policies with conditionally indepen-
+dent factors. For example, multivariate Gaussian policies with a diagonal covariance structure are
+commonly used in continuous control tasks. Assuming an m-dimensional action space, we have
+πθ(at|st) = (cid:81)m
+
+t|st). Hence
+
+i=1 πθ(ai
+
+∇θη(πθ) = Eρπ,π
+
+(cid:105)
+(cid:104)
+∇θ log πθ(at|st) ˆQ(st, at)
+
+= Eρπ,π
+
+∇θ log πθ(ai
+
+t|st) ˆQ(st, at)
+
+(6)
+
+(cid:35)
+
+(cid:34) m
+(cid:88)
+
+i=1
+
+t denote all dimensions other than i in at and denote the ith baseline by bi(st, a−i
+
+In this case, we can set bi, the baseline for the ith factor, to depend on all other actions in addition to
+the state. Let a−i
+t ).
+Due to conditional independence and the score function estimator, we have
+(cid:2)bi(st, a−i
+
+(cid:2)∇θ log πθ(ai
+
+t|st)bi(st, a−i
+
+t )(cid:3) = E
+
+t )(cid:3)(cid:105)
+
+∇θE
+
+Eat
+
+= 0
+
+(7)
+
+(cid:104)
+
+a−i
+t
+
+ai
+t
+
+Hence we can use the following gradient estimator
+
+∇θη(πθ) = Eρπ,π
+
+(cid:34) m
+(cid:88)
+
+i=1
+
+∇θ log πθ(ai
+
+t|st)
+
+(cid:16) ˆQ(st, at) − bi(st, a−i
+t )
+
+(cid:17)
+
+(cid:35)
+
+This is compatible with advantage function form of the policy gradient (Schulman et al., 2016):
+
+∇θη(πθ) = Eρπ,π
+
+∇θ log πθ(ai
+
+(cid:35)
+t|st) ˆAi(st, at)
+
+(cid:34) m
+(cid:88)
+
+i=1
+
+(8)
+
+(9)
+
+where ˆAi(st, at) = Q(st, at) − bi(st, a−i
+component policy gradient terms, each with a different advantage term.
+
+t ). Note that the policy gradient now comprises of m
+
+In Appendix E, we show that the methodology also applies to general policy structures (for exam-
+ple, a Gaussian policy with a general covariance structure), where the conditional independence
+assumption does not hold. The result is bias-free albeit different baselines.
+
+4.2 OPTIMAL ACTION-DEPENDENT BASELINE
+In this section, we derive the optimal action-dependent baseline and show that it is better than the
+state-only baseline. We seek the optimal baseline to minimize the variance of the policy gradient
+estimate. First, we write out the variance of the policy gradient under any action-dependent baseline.
+Let us deﬁne zi := ∇θ log πθ(ai
+
+t|st) and the component policy gradient:
+
+∇ηi(πθ) := Eρπ,π
+
+(cid:104)
+
+∇θ log πθ(ai
+
+t|st)
+
+(cid:16) ˆQ(st, at) − bi(st, a−i
+t )
+
+(cid:17)(cid:105)
+
+.
+
+For simplicity of exposition, we make the following assumption:
+
+∇θ log πθ(ai
+
+t|st)T ∇θ log πθ(aj
+
+t |st) ≡ zT
+
+i zj = 0,
+
+∀i (cid:54)= j
+
+(10)
+
+(11)
+
+4
+
+Published as a conference paper at ICLR 2018
+
+which translates to meaning that different subsets of parameters strongly inﬂuence different ac-
+tion dimensions or factors. We note that this assumption is primarily for the theoretical analysis
+to be clean, and is not required to run the algorithm in practice. In particular, even without this
+assumption, the proposed baseline is bias-free. When the assumption holds, the optimal action-
+dependent baseline can be analyzed thoroughly. Some examples where these assumptions do hold
+include multi-agent settings where the policies are conditionally independent by construction, cases
+where the policy acts based on independent components (Cao et al., 2007) of the observation space,
+and cases where different function approximators are used to control different actions or synergies
+(Todorov & Ghahramani, 2004; Todorov et al., 2005) without weight sharing.
+
+The optimal action-dependent baseline is then derived to be:
+
+i (st, a−i
+b∗
+
+t ) =
+
+E
+
+ai
+t
+
+(cid:104)
+
+∇θ log πθ(ai
+E
+
+(cid:2)∇θ log πθ(ai
+
+ai
+t
+
+t|st)T ∇θ log πθ(ai
+
+t|st)T ∇θ log πθ(ai
+
+(cid:105)
+t|st) ˆQ(st, at)
+t|st)(cid:3)
+
+.
+
+(12)
+
+See Appendix B for the full derivation. Since the optimal action-dependent baseline is different for
+different action coordinates, it is outside the family of state-dependent baselines barring pathological
+cases.
+
+4.3 SUBOPTIMALITY OF THE OPTIMAL STATE-DEPENDENT BASELINE
+
+How much do we reduce variance over a traditional baseline that only depends on state? We use the
+following notation:
+
+Zi := Zi(st, a−i
+
+Yi := Yi(st, a−i
+
+t ) = E
+t ) = E
+
+ai
+t
+
+ai
+t
+
+(cid:2)∇θ log πθ(ai
+(cid:104)
+∇θ log πθ(ai
+
+t|st)T ∇θ log πθ(ai
+t|st)T ∇θ log πθ(ai
+
+t|st)(cid:3)
+(cid:105)
+t|st) ˆQ(st, at)
+
+(13)
+
+(14)
+
+Then, using Equation (51) (Appendix C), we show the following improvement with the optimal
+action-dependent baseline:
+
+Ib=b∗(s) =
+
+(cid:88)
+
+i
+
+E
+
+ρπ,a−i
+
+t
+
+
+
+
+1
+Zi
+
+
+
+
+
+
+
+Zi
+j Zj
+
+(cid:80)
+
+(cid:88)
+
+j
+
+2
+
+
+
+Yj − Yi
+
+
+
+
+
+
+(15)
+
+See Appendices C and D for the full derivation. We conclude that the optimal action-dependent
+baseline does not degenerate into the optimal state-dependent baseline. Equation (15) states that
+the variance difference is a weighted sum of the deviation of the per-component score-weighted
+marginalized Q (denoted Yi) from the component weight (based on score only, not Q) of the overall
+aggregated marginalized Q values (denoted (cid:80)
+j Yj). This suggests that the difference is particularly
+large when the Q function is highly sensitive to the actions, especially along those directions that
+inﬂuence the gradient the most. Our empirical results in Section 5 additionally demonstrate the
+beneﬁt of action-dependent over state-only baselines.
+
+4.4 MARGINALIZATION OF THE GLOBAL ACTION-VALUE FUNCTION
+
+Using the previous theory, we now consider various baselines that could be used in practice and their
+associated computational cost.
+
+Marginalized Q baseline Even though the optimal state-only baseline is known, it is rarely used
+in practice (Duan et al., 2016). Rather, for both computational and conceptual beneﬁt, the choice
+of b(st) = Eat[ ˆQ(st, at)] = V (st) is often used. Similarly, we propose to use bi(st, a−i
+t ) =
+E
+which is the action-dependent analogue. In particular, when log probability of each
+policy factor is loosely correlated with the action-value function, then the proposed baseline is close
+to the optimal baseline.
+
+(cid:105)
+(cid:104) ˆQ(st, at)
+
+ai
+t
+
+Ib=E
+
+ai
+t
+
+[ ˆQ(at,st)] =
+
+(cid:88)
+
+i
+
+E
+
+ρπ,a−i
+
+t
+
+
+
+
+Zi
+
+
+Eai
+
+(cid:104) ˆQ(at, st)
+
+(cid:105)
+
+−
+
+E
+
+ai
+t
+
+5
+
+(cid:104)
+i zi ˆQ(st, at)
+zT
+i zi
+
+(cid:2)zT
+
+E
+
+(cid:3)
+
+ai
+t
+
+(cid:105)
+
+2
+
+
+
+
+
+
+ ≈ 0
+
+(16)
+
+Published as a conference paper at ICLR 2018
+
+when E
+
+ai
+t
+
+(cid:104)
+
+(cid:105)
+i zi ˆQ(st, at)
+zT
+
+≈ E
+
+ai
+t
+
+(cid:2)zT
+
+i zi
+
+(cid:3) E
+
+ai
+t
+
+(cid:104) ˆQ(st, at)
+(cid:105)
+
+.
+
+This has the added beneﬁt of requiring learning only one function approximator, for estimating
+Q(st, at), and implicitly using it to obtain the baselines for each action coordinate. That is, Q(st, at)
+is a function approximating samples ˆQ(st, at).
+
+Monte Carlo marginalized Q baseline After ﬁtting Qπθ (st, at) we can obtain the baselines
+through Monte Carlo estimates:
+
+bi(st, a−i
+
+t ) =
+
+1
+M
+
+M
+(cid:88)
+
+j=0
+
+Qπθ (st, (a−i
+t
+
+, αj))
+
+(17)
+
+where αj ∼ πθ(ai
+to aggregate the samples, so long as it does not depend on the sample value ai
+discrete action dimensions, the sample max can be computed instead of the mean.
+
+t|st) are samples of the action coordinate i. In general, any function may be used
+t. For instance, for
+
+Mean marginalized Q baseline Though we reduced the computational burden from learning m
+functions to one function, the use of Monte Carlo samples can still be computationally expensive.
+In particular, when using deep neural networks to approximate the Q-function, forward propaga-
+tion through the network can be even more computationally expensive than stepping through a fast
+simulator (e.g. MuJoCo). In such settings, we further propose the following more computationally
+practical baseline:
+
+where ¯ai
+
+t = Eπθ
+
+(cid:2)ai
+
+t
+
+bi(st, a−i
+t ) = Qπθ (st, (a−i
+t
+(cid:3) is the average action for coordinate i.
+
+, ¯ai
+
+t))
+
+(18)
+
+4.5 FINAL ALGORITHM
+
+The ﬁnal practical algorithm for fully factorized policies is as follows.
+
+Algorithm 1 Policy gradient for factorized policies using action-dependent baselines
+
+Require: number of iterations N , batch size B, initial policy parameters θ
+Initialize action-value function estimate Qπθ (st, at) ≡ 0 and policy πθ
+for j in {1, . . . , N } do
+
+Collect samples: (st, at)t∈{1,...,B}
+t ) = E
+Compute baseline: bi(st, a−i
+
+ai
+t
+
+(cid:105)
+(cid:104) ˆQ(st, at)
+
+for i ∈ {1, . . . , m} [e.g. Equations (17- 18)]
+
+Compute advantages: ˆAi(st, at) := ˆQ(st, at) − bi(st, a−i
+Perform a policy update step on θ using ˆAi(st, at) [Equation (9)]
+Update action-value function approximation with current batch: Qπθ (st, at)
+
+t ), ∀t
+
+end for
+
+Computing the baseline can be done with either proposed technique in Section 4.4. A similar al-
+gorithm can be written for general policies (Appendix E), which makes no assumptions on the
+conditional independence across action dimensions.
+
+5 EXPERIMENTS AND RESULTS
+
+Continuous control benchmarks Firstly, we present the results of the proposed action-dependent
+baselines on popular benchmark tasks. These tasks have been widely studied in the deep reinforce-
+ment learning community (Duan et al., 2016; Gu et al., 2017; Lillicrap et al., 2016; Rajeswaran et al.,
+2017b). The studied tasks include the hopper, half-cheetah, and ant locomotion tasks simulated in
+MuJoCo (Todorov et al., 2012).1 In addition to these tasks, we also consider a door opening task
+
+1We used physics parameters as recommended in Rajeswaran et al. (2017b) and use the MuJoCo 1.5 simu-
+
+lator. Thus the reward numbers may not be consistent with numbers previously reported in literature.
+
+6
+
+Published as a conference paper at ICLR 2018
+
+with a high-dimensional multi-ﬁngered hand, introduced in Rajeswaran et al. (2017a), to study the
+effectiveness of the proposed approach in high-dimensional tasks. Figure 1 presents the learning
+curves on these tasks. We compare the action-dependent baseline with a baseline that uses only
+information about the states, which is the most common approach in the literature. We observe that
+the action-dependent baselines perform consistently better.
+
+A popular baseline parameterization choice is a linear function on a small number of non-linear
+features of the state (Duan et al., 2016), especially for policy gradient methods. In this work, to
+enable a fair comparison, we use a Random Fourier Feature representation for the baseline (Rahimi
+& Recht, 2007; Rajeswaran et al., 2017b). The features are constructed as: y(x) = sin( 1
+ν P x + φ)
+where P is a matrix with each element independently drawn from the standard normal distribution, φ
+is a random phase shift in [−π, π) and, and ν is a bandwidth parameter. These features approximate
+the RKHS features under an RBF kernel. Using these features, the baseline is parameterized as
+b = wT y(x) where x are the appropriate inputs to the baseline, and w are trainable parameters. P
+and φ are not trained in this parameterization. Such a representation was chosen for two reasons:
+(a) we wish to have the same number of trainable parameters for all the baseline architectures, and
+not have more parameters in the action-dependent case (which has a larger number of inputs to the
+baseline); (b) since the ﬁnal representation is linear, it is possible to accurately estimate the optimal
+parameters with a Newton step, thereby alleviating the results from confounding optimization issues.
+For policy optimization, we use a variant of the natural policy gradient method as described in
+Rajeswaran et al. (2017b). See Appendix G for further experimental details.
+
+Figure 1: Comparison between value function baseline and action-conditioned baseline on various
+continuous control tasks. Action-dependent baseline performs consistently better across all the tasks.
+
+Choice of action-dependent baseline form Next, we study the inﬂuence of computing the base-
+line by using empirical averages sampled from the Q-function versus using the mean-action of the
+action-coordinate for computing the baseline (both described in 4.4). In our experiments, as shown
+in Figure 2 we ﬁnd that the two variants perform comparably, with the latter performing slightly bet-
+ter towards the end of the learning process. This suggests that though sampling from the Q-function
+might provide a better estimate of the conditional expectation in theory, function approximation from
+ﬁnite samples injects errors that may degrade the quality of estimates. In particular, sub-sampling
+from the Q-function is likely to produce better results if the learned Q-function is accurate for a large
+fraction of the action space, but getting such high quality approximations might be hard in practice.
+
+High-dimensional action spaces
+Intuitively, the beneﬁt of the action-dependent baseline can be
+greater for higher dimensional problems. We show this effect on a simple synthetic example called
+m-DimTargetMatching. The example is a one-step MDP comprising of a single state, S = {0}, an
+m-dimensional action space, A = Rm, and a ﬁxed vector c ∈ Rm. The reward is given as the nega-
+tive squared (cid:96)2 loss of the action vector, r(s, a) = −(cid:107)a − c(cid:107)2
+2. The optimal action is thus to match
+
+7
+
+050100150200250Iterations500050010001500200025003000ScoreAntBi=V(s)iBi=Q(s,[i,ai]) (Ours)050100150200250Iterations01000200030004000ScoreHalfCheetahBi=V(s)iBi=Q(s,[i,ai]) (Ours)050100150200250Iterations05001000150020002500300035004000ScoreHopperBi=V(s)iBi=Q(s,[i,ai]) (Ours)0255075100125150175200Iterations020406080100Success PercentageDoor OpeningBi=V(s)iBi=Q(s,[i,ai]) (Ours)Published as a conference paper at ICLR 2018
+
+Figure 2: Variants of the action-dependent baseline that use: (i) sampling from the Q-function to
+estimate the conditional expectation; (ii) Using the mean action to form a linear approximation to
+the conditional expectation. We ﬁnd that both variants perform comparably, with the latter being
+more computationally efﬁcient.
+
+the given vector by selecting a = c. The results for the demonstrative example are shown in Table 1,
+which shows that the action-dependent baseline successfully improves convergence more for higher
+dimensional problems than lower dimensional problems. Due to the lack of state information, the
+linear baseline reduces to whitening the returns. The action-dependent baseline, on the other hand,
+allows the learning algorithm to assess the advantage of each individual action dimension by utiliz-
+ing information from all other action dimensions. Additionally, this experiment demonstrates that
+our algorithm scales well computationally to high-dimensional problems.
+
+Action
+
+Solve time (iterations)
+
+dimensions Action-dependent
+
+State-dependent Delta
+
+12
+100
+400
+2000
+
+45.6
+136
+268.2
+595.5
+
+45.6
+150
+304
+671.5
+
+0
+14
+35.8
+76
+
+% speed
+improvement
+0.0%
+9.3%
+11.8%
+11.3%
+
+Solution
+threshold
+-0.01
+-0.25
+-0.99
+-4.96
+
+Table 1: Shown are the results for the synthetic high-dimensional target matching task (5 seeds),
+for 12 to 2000 dimensional action spaces. At high dimensions, the linear feature action-dependent
+baseline provides notable and consistent variance reduction, as compared to a linear feature baseline,
+resulting in around 10% faster convergence. For the corresponding learning curves, see Appendix G.
+
+Partially observable and multi-agent tasks Finally, we also consider the extension of the core
+idea of using global information, by studying a POMDP task and a multi-agent task. We use the
+blind peg-insertion task which is widely studied in the robot learning literature (Montgomery &
+Levine, 2016). The task requires the robot to insert the peg into the hole (slot), but the robot is blind
+to the location of the hole. Thus, we expect a searching behavior to emerge from the robot, where
+it learns that the hole is present on the table and performs appropriate sweeping motions till it is
+able to ﬁnd the hole. In this case, we consider a baseline that is given access to the location of the
+hole. We observe that a baseline with this additional information enables faster learning. For the
+multi-agent setting, we analyze a two-agent particle environment task in which the goal is for each
+agent to reach their goal, where their goal is known by the other agent and they have a continuous
+communication channel. Similar training procedures have been employed in recent related works
+Lowe et al. (2017); Levine et al. (2016). Figure 3 shows that including the inclusion of information
+from other agents into the action-dependent baseline improves the training performance, indicating
+that variance reduction may be key for multi-agent reinforcement learning.
+
+6 CONCLUSION
+
+An action-dependent baseline enables using additional signals beyond the state to achieve bias-free
+variance reduction.
+In this work, we consider both conditionally independent policies and gen-
+eral policies, and derive an optimal action-dependent baseline. We provide analysis of the variance
+
+8
+
+Published as a conference paper at ICLR 2018
+
+(a) Success percentage on the blind peg inser-
+tion task. The policy still acts on the obser-
+vations and does not know the hole location.
+However, the baseline has access to this goal
+information, in addition to the observations and
+action, and helps to speed up the learning. By
+comparison, in blue, the baseline has access
+only to the observations and actions.
+
+(b) Training curve for multi-agent communication task with
+two agents. Two policies are simultaneously trained, one for
+each agent. Each policy acts on the observations of its respec-
+tive agent only. However, the shared baseline has access to
+the other agent’s state and action, in addition to its own state
+and action, and results in considerably faster training. By
+comparison, in blue, the independent learners baseline has
+access to only a single agent’s state and action.
+
+Figure 3: Experiments with additional information in the baseline.
+
+reduction improvement over non-optimal baselines, including the traditional optimal baseline that
+only depends on state. We additionally propose several practical action-dependent baselines which
+perform well on a variety of continuous control tasks and synthetic high-dimensional action prob-
+lems. The use of additional signals beyond the local state generalizes to other problem settings,
+for instance in POMDP and multi-agent tasks. In future work, we propose to investigate related
+methods in such settings on large-scale problems.
+
+REFERENCES
+
+Yong Cao, Ari Shapiro, Petros Faloutsos, and Fr´ed´eric Pighin. Motion editing with independent
+
+component analysis. Visual Computer, 2, 2007.
+
+Yan Duan, Xi Chen, Rein Houthooft, John Schulman, and Pieter Abbeel. Benchmarking deep rein-
+forcement learning for continuous control. In Proceedings of the 33rd International Conference
+on Machine Learning (ICML), 2016.
+
+Jakob Foerster, Gregory Farquhar, Triantafyllos Afouras, Nantas Nardelli, and Shimon Whiteson.
+
+Counterfactual multi-agent policy gradients. arXiv preprint arXiv:1705.08926, 2017.
+
+Evan Greensmith, Peter L Bartlett, and Jonathan Baxter. Variance reduction techniques for gradient
+estimates in reinforcement learning. Journal of Machine Learning Research, 5(Nov):1471–1530,
+2004.
+
+Shixiang Gu, Timothy Lillicrap, Zoubin Ghahramani, Richard E Turner, and Sergey Levine. Q-
+prop: Sample-efﬁcient policy gradient with an off-policy critic. In International Conference on
+Learning Representations (ICLR2017), 2017.
+
+Sham M Kakade. A natural policy gradient. In Advances in neural information processing systems,
+
+pp. 1531–1538, 2002.
+
+Vijay R Konda and John N Tsitsiklis. Actor-critic algorithms. In Advances in neural information
+
+processing systems, pp. 1008–1014, 2000.
+
+Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel. End-to-end training of deep visuo-
+
+motor policies. Journal of Machine Learning Research, 17(39):1–40, 2016.
+
+Timothy P Lillicrap, Jonathan J Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez, Yuval Tassa,
+David Silver, and Daan Wierstra. Continuous control with deep reinforcement learning. In Inter-
+national Conference on Learning Representations (ICLR2016), 2016.
+
+Ryan Lowe, Yi Wu, Aviv Tamar, Jean Harb, Pieter Abbeel, and Igor Mordatch. Multi-agent actor-
+critic for mixed cooperative-competitive environments. arXiv preprint arXiv:1706.02275, 2017.
+
+9
+
+0255075100125150175200Iterations020406080Success PercentageBlind Peg InsertionBi=Q(s,[i,ai])Bi=Q(s,g,[i,ai])0100200300400Iterations25020015010050ScoreCommunicateTargetBi=Q(s,[i,ai]) independent learnersBi=Q(s,[i,ai]) shared baseline (Ours)Published as a conference paper at ICLR 2018
+
+Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Belle-
+mare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level
+control through deep reinforcement learning. Nature, 518(7540):529–533, 2015.
+
+Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap, Tim
+Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement
+learning. In International Conference on Machine Learning, pp. 1928–1937, 2016.
+
+William Montgomery and Sergey Levine. Guided policy search as approximate mirror descent. In
+
+NIPS, 2016.
+
+Igor Mordatch, Kendall Lowrey, Galen Andrew, Zoran Popovic, and Emanuel Todorov. Interactive
+
+Control of Diverse Complex Characters with Neural Networks. In NIPS, 2015.
+
+Jan Peters and Stefan Schaal. Natural actor-critic. Neurocomputing, 71(7):1180–1190, 2008.
+
+Ali Rahimi and Benjamin Recht. Random Features for Large-Scale Kernel Machines.
+
+In NIPS,
+
+2007.
+
+Aravind Rajeswaran, Vikash Kumar, Abhishek Gupta, John Schulman, Emanuel Todorov, and
+Sergey Levine. Learning complex dexterous manipulation with deep reinforcement learning and
+demonstrations. CoRR, abs/1709.10087, 2017a.
+
+Aravind Rajeswaran, Kendall Lowrey, Emanuel Todorov, and Sham Kakade. Towards Generaliza-
+
+tion and Simplicity in Continuous Control. In NIPS, 2017b.
+
+John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region
+policy optimization. In Proceedings of the 32nd International Conference on Machine Learning
+(ICML-15), pp. 1889–1897, 2015.
+
+John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. High-
+dimensional continuous control using generalized advantage estimation. In International Con-
+ference on Learning Representations (ICLR2016), 2016.
+
+David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche,
+Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering
+the game of go with deep neural networks and tree search. Nature, 529(7587):484–489, 2016.
+
+Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction, volume 1. MIT
+
+press Cambridge, 1998.
+
+Richard S Sutton, David A McAllester, Satinder P Singh, and Yishay Mansour. Policy gradient
+methods for reinforcement learning with function approximation. In Advances in neural informa-
+tion processing systems, pp. 1057–1063, 2000.
+
+Emanuel Todorov and Zoubin Ghahramani. Analysis of the synergies underlying complex hand
+manipulation. In Engineering in Medicine and Biology Society, 2004. IEMBS’04. 26th Annual
+International Conference of the IEEE, volume 2, pp. 4637–4640. IEEE, 2004.
+
+Emanuel Todorov, Weiwei Li, and Xiuchuan Pan. From task parameters to motor synergies: A
+hierarchical framework for approximately optimal control of redundant manipulators. Journal of
+Field Robotics, 22(11):691–710, 2005.
+
+Emanuel Todorov, Tom Erez, and Yuval Tassa. MuJoCo: A physics engine for model-based control.
+
+In International Conference on Intelligent Robots and Systems, 2012.
+
+Christopher JCH Watkins and Peter Dayan. Q-learning. Machine learning, 8(3-4):279–292, 1992.
+
+Lex Weaver and Nigel Tao. The optimal reward baseline for gradient-based reinforcement learning.
+In Proceedings of the Seventeenth conference on Uncertainty in artiﬁcial intelligence, pp. 538–
+545. Morgan Kaufmann Publishers Inc., 2001.
+
+Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement
+
+learning. Machine learning, 8(3-4):229–256, 1992.
+
+10
+
+Published as a conference paper at ICLR 2018
+
+A DERIVATION OF THE OPTIMAL STATE-DEPENDENT BASELINE
+
+We provide a derivation of the optimal state-dependent baseline, which minimizes the variance of
+the policy gradient estimate, and is based in (Greensmith et al., 2004, Theorem 8). More precisely,
+we minimize the trace of the covariance of the policy gradient; that is, the sum of the variance of the
+components of the vectors. Recall the policy gradient expression with a state-dependent baseline:
+
+∇θη(πθ) := Eρπ,π
+
+(cid:104)
+
+∇θ log πθ(at|st)
+
+(cid:16) ˆQ(st, at) − b(st)
+
+(cid:17)(cid:105)
+
+(19)
+
+Denote g to be the associated random variable, that is, ∇θη(πθ) = Eρπ,π[g]:
+
+g := ∇θ log πθ(at|st)
+
+(cid:17)
+(cid:16) ˆQ(st, at) − b(st)
+
+,
+
+at ∼ πθ(at|st), st ∼ ρπ(st)
+
+(20)
+
+The variance of the policy gradient is:
+
+Var(g) = Eρπ,π
+= Eρπ,π
+
+(cid:2)(g − Eρπ,π [g])T (g − Eρπ,π [g])(cid:3)
+(cid:2)∇θ log πθ(at|st)T ∇θ log πθ(at|st)(cid:3) b(st)2
+
+− 2Eρπ,π
+
+(cid:105)
+(cid:104)
+∇θ log πθ(at|st)T ∇θ log πθ(at|st) ˆQ(st, at)
+
+b(st)
+
+(21)
+
+(22)
+
+(23)
+
+Note that E [η(πθ)]) contains a bias-free term, by the score function argument, which then does not
+affect the minimizer. Terms which do not depend on b(st) also do not affect the minimizer.
+
+∂
+∂b
+
+[Var(g)] = 0
+
+= 2Eρπ,π
+
+(cid:2)∇θ log πθ(at|st)T ∇θ log πθ(at|st)(cid:3) b(st)
+
+− 2Eρπ,π
+
+(cid:105)
+(cid:104)
+∇θ log πθ(at|st)T ∇θ log πθ(at|st) ˆQ(st, at)
+
+=⇒ b∗(st) =
+
+Eρπ,π
+
+(cid:104)
+
+(cid:105)
+∇θ log πθ(at|st)T ∇θ log πθ(at|st) ˆQ(st, at)
+
+Eρπ,π [∇θ log πθ(at|st)T ∇θ log πθ(at|st)]
+
+(24)
+
+(25)
+
+(26)
+
+(27)
+
+B DERIVATION OF THE OPTIMAL ACTION-DEPENDENT BASELINE
+
+We derive the optimal action-dependent baseline, which minimizes the variance of the policy gra-
+dient estimate. First, we write out the variance of the policy gradient under any action-dependent
+baseline. Recall the following notations: we deﬁne zi
+t|st) and the component
+policy gradient:
+
+:= ∇θ log πθ(ai
+
+∇ηi(πθ) := Eρπ,π
+
+(cid:104)
+
+∇θ log πθ(ai
+
+t|st)
+
+(cid:16) ˆQ(st, at) − bi(st, a−i
+t )
+
+(cid:17)(cid:105)
+
+.
+
+(28)
+
+Denote gi to be the associated random variables:
+
+gi := ∇θ log πθ(ai
+
+t|st)
+
+(cid:16) ˆQ(st, at) − bi(st, a−i
+t )
+
+(cid:17)
+
+,
+
+at ∼ πθ(at|st), st ∼ ρπ(st),
+
+(29)
+
+such that
+
+∇θη(πθ) = ∇θ
+
+(cid:35)
+
+ηi(πθ)
+
+= Eρπ,π
+
+(cid:34) m
+(cid:88)
+
+i=1
+
+(cid:34) m
+(cid:88)
+
+(cid:35)
+
+gi
+
+.
+
+i=1
+
+(30)
+
+Recall the following assumption:
+
+∇θ log πθ(ai
+
+t|st)T ∇θ log πθ(aj
+
+t |st) ≡ zT
+
+i zj ≈ 0,
+
+∀i (cid:54)= j,
+
+(31)
+
+which translates to meaning that different subsets of parameters strongly inﬂuence different action
+dimensions or factors. This is true in case of distributed systems by construction, and also true
+
+11
+
+Published as a conference paper at ICLR 2018
+
+in a single agent system if different action coordinates are strongly inﬂuenced by different policy
+network channels. Under this assumption, we have:
+
+Var(
+
+m
+(cid:88)
+
+i=1
+
+gi) =
+
+=
+
+=
+
+=
+
+(cid:88)
+
+i
+(cid:88)
+
+i
+(cid:88)
+
+i
+(cid:88)
+
+i
+
+Var(gi) +
+
+Var(gi) +
+
+(cid:88)
+
+(cid:88)
+
+i
+(cid:88)
+
+j(cid:54)=i
+(cid:88)
+
+Cov(gi, gj)
+
+Eρπ,π
+
+(cid:2)gT
+
+i gj
+
+(cid:3) − Eρπ,π [gi]T Eρπ,π [gj]
+
+(32)
+
+(33)
+
+i
+
+Var(gi) + 0 −
+
+j(cid:54)=i
+(cid:88)
+
+(cid:88)
+
+Var(gi) −
+
+(cid:88)
+
+i
+(cid:88)
+
+j(cid:54)=i
+
+Mij
+
+i
+
+j(cid:54)=i
+
+Eρπ,π [gi]T Eρπ,π [gj]
+
+(by Equation (31))
+
+(34)
+
+(by score function estimator)
+
+(35)
+
+where we denote the mean correction term Mij := Eρπ,π
+let M = (cid:80)
+i
+value.
+
+. Also
+j Mij. Note that M does not depend on bi(·), and thus does not affect the optimal
+
+Eρπ,π
+
+(cid:80)
+
+(cid:104)
+zi ˆQ(st, at)
+
+(cid:105)T
+
+(cid:104)
+
+(cid:105)
+zj ˆQ(st, at)
+
+i (st, a−i
+
+Var(gi) = Eρπ,π
+
+The overall variance is minimized when each component variance is minimized. We now derive the
+optimal baselines b∗
+t ) which minimize each respective component.
+(cid:16) ˆQ(st, at) − bi(st, a−i
+t )
+(cid:16) ˆQ(st, at) − bi(st, a−i
+t )
+(cid:16) ˆQ(st, at)2 − 2bi(st, a−i
+
+(cid:16) ˆQ(st, at) − bi(st, a−i
+t )
+(cid:17)2(cid:21)
+
+− Eρπ,π
+(cid:20)
+zT
+i zi
+
+(cid:20)
+zT
+i zi
+
+= Eρπ,π
+
+Eρπ,π
+
+(cid:104)
+zi
+
+(cid:17)2(cid:21)
+
+(37)
+
+(36)
+
+(cid:17)(cid:105)T
+
+(cid:17)(cid:105)
+
+zi
+
+(cid:104)
+
+t ) ˆQ(st, at) + bi(st, a−i
+t )
+(cid:16) ˆQ(st, at)
+
+(cid:17)(cid:105)
+
+(cid:17)(cid:105)T
+
+Eρπ,π
+
+(cid:104)
+zi
+
+= Eρπ,π
+
+(cid:16) ˆQ(st, at)
+(cid:104)
+− Eρπ,π
+zi
+i zi ˆQ(st, at)2(cid:105)
+(cid:104)
+zT
+(cid:104)
+−2bi(st, a−i
+
++ E
+
+ρπ,a−i
+
+t
+
+(cid:104)
+
+(cid:105)
+i zi ˆQ(st, at)
+zT
+
++ bi(st, a−i
+
+t )2E
+
+ai
+t
+
+(38)
+
+(cid:3)(cid:105)
+
+(cid:2)zT
+
+i zi
+
+− Mii
+
+t )E
+
+ai
+t
+
+Having written down the expression for variance under any action-dependent baseline, we seek the
+optimal baseline that would minimize this variance.
+
+(cid:34)
+
+∂
+∂bi
+
+(cid:88)
+
+Var(
+
+(cid:35)
+
+gi)
+
+=
+
+i
+
+∂
+∂bi
+
+[Var(gi)] = 0
+
+=⇒ b∗
+
+i (st, a−i
+
+t ) =
+
+The optimal action-dependent baseline is:
+
+(cid:104)
+
+E
+
+ai
+t
+
+(cid:105)
+i zi ˆQ(st, at)
+zT
+i zi
+
+(cid:2)zT
+
+(cid:3)
+
+ai
+t
+
+E
+
+i (st, a−i
+b∗
+
+t ) =
+
+E
+
+ai
+t
+
+(cid:104)
+∇θ log πθ(ai
+E
+
+(cid:2)∇θ log πθ(ai
+
+ai
+t
+
+t|st)T ∇θ log πθ(ai
+
+t|st)T ∇θ log πθ(ai
+
+(cid:105)
+t|st) ˆQ(st, at)
+t|st)(cid:3)
+
+(39)
+
+(40)
+
+(41)
+
+C DERIVATION OF VARIANCE REDUCTION IMPROVEMENT
+
+We now turn to quantifying the reduction in variance of the policy gradient estimate under the
+optimal baseline derived above. Let Var∗((cid:80)
+i gi) denote the variance resulting from the optimal
+action-dependent baseline, and let Var((cid:80)
+i gi) denote the variance resulting from another baseline
+
+12
+
+Published as a conference paper at ICLR 2018
+
+b = (bi(st, a−i
+
+t ))i∈[m], which may be suboptimal or action-independent. Recall the notation:
+
+Zi := Zi(st, a−i
+
+Yi := Yi(st, a−i
+
+t ) = E
+t ) = E
+
+ai
+t
+
+ai
+t
+
+Xi := Xi(st, a−i
+
+t ) = E
+
+ai
+t
+
+(cid:2)∇θ log πθ(ai
+(cid:104)
+∇θ log πθ(ai
+(cid:104)
+
+∇θ log πθ(ai
+
+t|st)(cid:3)
+t|st) ˆQ(st, at)
+t|st) ˆQ(st, at)2(cid:105)
+
+(cid:105)
+
+t|st)T ∇θ log πθ(ai
+t|st)T ∇θ log πθ(ai
+
+t|st)T ∇θ log πθ(ai
+i gi) − Var∗((cid:80)
+
+i gi). Using these deﬁnitions,
+
+Finally, deﬁne the variance improvement Ib := Var((cid:80)
+the variance can be re-written as:
+
+(cid:88)
+
+Var(
+
+gi) =
+
+(cid:88)
+
+i
+
+i
+
+E
+
+ρπ,a−i
+
+t
+
+(cid:2)Xi − 2bi(st, a−i
+
+t )Yi + bi(st, a−i
+
+t )2Zi
+
+(cid:3) − M
+
+(45)
+
+Furthermore, the variance of the gradient with the optimal baseline can be written as
+
+(cid:88)
+
+Var∗(
+
+gi) =
+
+(cid:88)
+
+i
+
+i
+
+E
+
+ρπ,a−i
+
+t
+
+(cid:20)
+Xi −
+
+(cid:21)
+
+Y 2
+i
+Zi
+
+− M
+
+The difference in variance can be calculated as:
+
+(cid:18)
+
+(cid:88)
+
+Ib :=
+
+E
+
+ρπ,a−i
+
+t
+
+(cid:2)Xi − 2bi(st, a−i
+
+t )Yi + bi(st, a−i
+
+t )2Zi
+
+(cid:3) − (E
+
+ρπ,a−i
+
+t
+
+(cid:20)
+Xi −
+
+(cid:19)
+
+(cid:21)
+)
+
+Y 2
+i
+Zi
+
+i
+
+(cid:88)
+
+i
+
+=
+
+(cid:88)
+
+=
+
+i
+
+(cid:88)
+
+i
+(cid:88)
+
+i
+(cid:88)
+
+i
+
+=
+
+=
+
+=
+
+E
+
+ρπ,a−i
+
+t
+
+(cid:20)
+−2bi(st, a−i
+
+t )Yi + bi(st, a−i
+
+t )2Zi +
+
+(cid:21)
+
+Y 2
+i
+Zi
+
+(cid:34)(cid:18)
+
+bi(st, a−i
+t )
+
+(cid:112)
+
+Zi −
+
+E
+
+ρπ,a−i
+
+t
+
+(cid:34)
+
+(cid:18)
+
+Zi
+
+bi(st, a−i
+
+t ) −
+
+E
+
+ρπ,a−i
+
+t
+
+Yi
+Zi
+
+(cid:19)2(cid:35)
+
+Yi√
+Zi
+(cid:19)2(cid:35)
+
+E
+
+ρπ,a−i
+
+t
+
+(cid:104)
+Zi
+
+(cid:0)bi(st, a−i
+
+t ) − b∗
+
+i (st, a−i
+
+t )(cid:1)2(cid:105)
+
+E
+
+ρπ,a−i
+
+t
+
+(cid:104)
+E
+
+ai
+t
+
+(cid:2)∇θ log πθ(ai
+
+t|st)T ∇θ log πθ(ai
+
+t|st)(cid:3) (cid:0)bi(st, a−i
+
+t ) − b∗
+
+i (st, a−i
+
+t )(cid:1)2(cid:105)
+
+D DERIVATION OF SUBOPTIMALITY OF THE OPTIMAL STATE-DEPENDENT
+
+BASELINE
+
+Using the notation from Appendix C and working off of Equation (51), we have:
+
+Ib=b∗(s) :=
+
+(cid:88)
+
+i
+
+E
+
+ρπ,a−i
+
+t
+
+(cid:104)
+Zi
+
+(cid:0)b∗(st) − b∗
+
+i (st, a−i
+
+t )(cid:1)2(cid:105)
+
+(cid:88)
+
+=
+
+i
+
+(cid:88)
+
+=
+
+i
+
+E
+
+ρπ,a−i
+
+t
+
+E
+
+ρπ,a−i
+
+t
+
+
+
+Zi
+
+(cid:32) (cid:80)
+(cid:80)
+
+j Yj
+j Zj
+
+−
+
+Yi
+Zi
+
+(cid:33)2
+
+
+
+
+
+
+
+1
+Zi
+
+
+
+
+
+Zi
+j Zj
+
+(cid:80)
+
+(cid:88)
+
+j
+
+2
+
+
+
+Yj − Yi
+
+
+
+
+
+
+(42)
+
+(43)
+
+(44)
+
+(46)
+
+(47)
+
+(48)
+
+(49)
+
+(50)
+
+(51)
+
+(52)
+
+(53)
+
+(54)
+
+(55)
+
+E BASELINES FOR GENERAL ACTIONS
+
+In the preceding derivations, we have assumed policy actions are conditionally independent across
+t through am
+In the more general case, we only assume that there are m factors a1
+dimensions.
+t
+
+13
+
+Published as a conference paper at ICLR 2018
+
+which altogether forms the action at. Conditioned on st, the different factors form a certain directed
+acyclic graphical model (including the fully dependent case). Without loss of generality, we assume
+that the following factorization holds:
+
+πθ(at|st) =
+
+m
+(cid:89)
+
+i=1
+
+πθ(ai
+
+t|st, af (i)
+
+t
+
+)
+
+(56)
+
+where f (i) denotes the indices of the parents of the ith factor. Let D(i) denote the indices of
+descendants of i in the graphical model (including i itself). In this case, we can set the ith baseline
+to be bi(st, a[m]\D(i)
+), where [m] = {1, 2, . . . , m}. In other words, the ith baseline can depend on
+all other factors which the ith factor does not inﬂuence. The overall gradient estimator is given by
+
+t
+
+∇θη(πθ) = Eρπ,π
+
+(cid:34) m
+(cid:88)
+
+i=1
+
+∇θ log πθ(ai
+
+t|st, af (i)
+
+t
+
+(cid:16) ˆQ(st, at) − bi(st, a[m]\D(i)
+
+t
+
+(cid:17)
+)
+
+)
+
+(cid:35)
+
+(57)
+
+In the most general case without any conditional independence assumptions, we have f (i) =
+{1, 2, . . . , i − 1}, and D(i) = {i, i + 1, . . . , m}. The above equation reduces to
+(cid:16) ˆQ(st, at) − bi(st, a1
+
+∇θη(πθ) = Eρπ,π
+
+∇θ log πθ(ai
+
+t , . . . , ai−1
+
+t , . . . , ai−1
+
+t|st, a1
+
+(cid:34) m
+(cid:88)
+
+(cid:17)
+)
+
+(58)
+
+(cid:35)
+
+)
+
+t
+
+t
+
+i=1
+
+The above analysis for optimal baselines and variance suboptimality transfers also to the case of
+general actions.
+
+The applicability of our techniques to general action spaces may be of crucial importance for many
+application domains where the conditional independence assumption does not hold up, such as lan-
+guage tasks and other compositional domains. Even in continuous control tasks, such as hand ma-
+nipulation, and many other tasks where it is common practice to use conditionally independent
+factorized policies, it is reasonable to expect training improvement from policies without a full con-
+ditionally independence structure.
+
+Computing action-dependent baselines for general actions The marginalization presented in
+Section 4.4 does not apply for the general action setting. Instead, m individual baselines can be
+trained according to the factorization, and each of them can be ﬁtted from data collected from the
+previous iteration. In the general case, this means ﬁtting m functions bi(st, a1
+), for i ∈
+{1, . . . , m}. The resulting method is described in Algorithm 2.
+
+t , . . . , ai−1
+
+t
+
+There may also exist special cases like conditional independent actions, for which more efﬁcient
+baseline constructions exist. A closely related example to the conditionally independent case is the
+case of block diagonal covariance structures (e.g. in multi-agent settings), where we may wish to
+instead learn an overall Q function and marginalize over block factors. Another interesting example
+to explore is sparse covariance structures.
+
+Algorithm 2 Policy gradient for general factorization policies using action-dependent baselines
+
+Require: number of iterations N , batch size B, initial policy parameters θ
+
+Initialize baselines bi(st, a[m]\D(i)
+for j in {1, . . . , N } do
+
+t
+
+) ≡ 0, for i ∈ {1, . . . , m} and policy πθ
+
+Collect samples: (st, at)t∈{1,...,B}
+Compute advantages: ˆAi(st, at) := ˆQ(st, at) − bi(st, a[m]\D(i)
+Perform a policy update step on θ using ˆAi(st, at) [Equation (57)]
+Update baseline functions with current batch: bi(st, a[m]\D(i)
+
+)
+
+t
+
+t
+
+), ∀t
+
+end for
+
+F COMPATIBILITY WITH GAE
+
+Temporal Difference (TD) learning methods such as GAE (Schulman et al., 2016) allow us to
+smoothly interpolate between high-bias, low-variance estimates and low-bias, high-variance esti-
+mates of the policy gradient. These methods are based on the idea of being able to predict future
+
+14
+
+Published as a conference paper at ICLR 2018
+
+returns, thereby bootstrapping the learning procedure. In particular, when using the value function
+as a baseline, we have A(st, at) = E [rt + γV (st+1) − V (st)] = [rt + γb(st+1) − b(st)]] if b(s)
+is an unbiased estimator for V (s). GAE uses an exponential averaging of such temporal difference
+terms over a trajectory to signiﬁcantly reduce the variance of the advantage at the cost of a small bias
+(it allows us to pick where we want to be on the bias-variance curve). Similarly, if we use bi(st, a−i
+t )
+as an unbiased estimator for E
+ai
+t
+(cid:2)rt + γbi(st+1, a−i
+
+(59)
+Thus, the temporal difference error with the action dependent baselines is an unbiased estimator for
+the advantage function as well. This allows us to use the GAE procedure to further reduce variance
+at the cost of some bias.
+
+t )(cid:3) = Q(st, at) − E
+
+[ ˆQ(st, at)] = Ai(st, at)
+
+[ ˆQ(st, at)], we have:
+
+t+1) − bi(st, a−i
+
+Eπ,M
+
+ai
+t
+
+The following study shows that action-dependent baselines are consistent with TD procedures with
+their temporal differences being estimates of the advantage function. Our results summarized in
+Figure 4 suggests that slightly biasing the gradient to reduce variance produces the best results,
+while high-bias estimates perform poorly. Prior work with baselines that utilize global information
+(Foerster et al., 2017) employ the high-bias variant. The results here suggest that there is potential
+to further improve upon those results by carefully studying the bias-variance trade-off.
+
+Figure 4: We study the inﬂuence of λ in GAE which allows us to trade off bias and variance as
+desired. High bias gradient corresponding to smaller values of λ do not make progress after a while.
+High variance gradient (λ = 1) has trouble learning initially. Allowing for a small bias to reduce
+the variance, corresponding to the intermediate λ = 0.97 produces the best overall result, consistent
+with the ﬁndings in Schulman et al. (2016).
+
+G HIGH-DIMENSIONAL ACTION SPACES: TRAINING CURVES
+
+Figure 5 shows the resulting training curves for a synthetic high-dimensional target matching task,
+as described in Section 5. For higher dimensional action spaces (100 dimensions or greater), the
+action-dependent baseline consistently converges to the optimal solution 10% faster than the state-
+only baseline.
+
+H EXPERIMENT DETAILS
+
+Parameters: Unless otherwise stated, the following parameters are used in the experiments in this
+work: γ = 0.995, λGAE = 0.97, kldesired = 0.025.
+
+Policies: The policies used are 2-layer fully connected networks with hidden sizes=(32, 32).
+
+Initialization: the policy is initialized with Xavier initialization except ﬁnal layer weights are scaled
+down (by a factor of 100x). Note that since the baseline is linear (with RBF features) and estimated
+with a Newton step, the initialization is inconsequential.
+
+Per-experiment conﬁguration: The following parameters in Table 2 are for both state-only and
+action-dependent versions of the experiments. The m-DimTargetMatching experiments use a linear
+feature baseline. Table 3 details the dimensionality of the action space for each task.
+
+15
+
+050100150200250Iterations01000200030004000ScoreEffect of GAE()=0=0.5=0.9=0.97=1.0Published as a conference paper at ICLR 2018
+
+Figure 5: Shown is the learning curve for a synthetic high-dimensional target matching task (5
+seeds), for 12 to 2000 dimensional action spaces. At high dimensions, the linear feature action-
+dependent baseline provides notable and consistent variance reduction, as compared to a linear fea-
+ture state baseline. For 100, 400, and 2000 dimensions, our method converges 10% faster to the
+optimal solution.
+
+Task
+Trajectories
+Horizon
+RBF features
+
+Benchmarks Hand task
+
+Peg Insertion CommunicateTarget m-DimTargetMatching
+
+10
+1000
+100
+
+100
+200
+250
+
+200
+250
+250
+
+300
+100
+250
+
+150
+1
+N/A
+
+Table 2: Experiment details
+
+Task
+Hopper
+HalfCheetah
+Ant
+Hand
+Peg
+CommunicateTarget
+m-DimTargetMatching m
+
+Action dimensions
+3
+6
+8
+30
+7
+8 (4 per agent)
+
+Table 3: Action dimensionality of tasks
+
+16
+
+01020304050Iterations1.61.41.21.00.80.60.4Score12-DimTargetMatchingBi=V(s)iBi=Q(s,[i,ai]) (Ours)020406080100120140Iterations3.02.52.01.51.0Score100-DimTargetMatchingBi=V(s)iBi=Q(s,[i,ai]) (Ours)050100150200250300Iterations4.54.03.53.02.52.01.51.0Score400-DimTargetMatchingBi=V(s)iBi=Q(s,[i,ai]) (Ours)0100200300400500600Iterations65432Score2000-DimTargetMatchingBi=V(s)iBi=Q(s,[i,ai]) (Ours)

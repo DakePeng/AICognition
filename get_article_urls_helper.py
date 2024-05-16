@@ -1,20 +1,26 @@
 from bs4_handle_helper import *
 from urllib.parse import urljoin
 
-def scrapeLinks(base, totalPageNum, groupingClass, postLinkClass = None, hasReseachLink = False, researchLinkClass = None, useHeader = True, infiniteScroll = False, infiniteScrollButtonXPath = None):
+def scrapeLinks(base, totalPageNum, groupingClass, postLinkClass = None, hasReseachLink = False, researchLinkClass = None, useHeader = True, infiniteScroll = False, infiniteScrollButtonXPath = None, useDriver = False):
     allLinks = []
     if totalPageNum == 0:
         url = base
         if infiniteScroll:
             soup = getSoupWithInfiniteScroll(url, infiniteScrollButtonXPath)
         else:
-            soup = getSoup(url, useHeader)
+            if useDriver == True:
+                soup = getSoupWithWebDriver(url)
+            else:
+                soup = getSoup(url, useHeader)
         pageLinks = getPostLinksFromSoup(soup, url, groupingClass, postLinkClass, hasReseachLink, researchLinkClass)
         allLinks = pageLinks
     else:
         for page in range(1, totalPageNum + 1):
             url = base + str(page)
-            soup = getSoup(url, useHeader)
+            if useDriver == True:
+                soup = getSoupWithWebDriver(url)
+            else:
+                soup = getSoup(url, useHeader)
             if soup == None: continue
             pageLinks = getPostLinksFromSoup(soup, url, groupingClass, postLinkClass, hasReseachLink, researchLinkClass)
             allLinks = allLinks + pageLinks

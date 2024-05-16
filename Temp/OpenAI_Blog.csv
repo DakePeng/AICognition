@@ -1791,3 +1791,1259 @@ Love,
 Sam
 
 "
+affiliation,postLink,researchLink,title,text
+OpenAI_Blog,https://openai.com/blog/content-partnership-with-financial-times,,We’re bringing the Financial Times’ world-class journalism to ChatGPT,"Editor’s note: This news was originally shared by the Financial Times and can be read here.
+
+The Financial Times today announced a strategic partnership and licensing agreement with OpenAI, a leader in artificial intelligence research and deployment, to enhance ChatGPT with attributed content, help improve its models’ usefulness by incorporating FT journalism, and collaborate on developing new AI products and features for FT readers.
+
+Through the partnership, ChatGPT users will be able to see select attributed summaries, quotes and rich links to FT journalism in response to relevant queries.
+
+In addition, the FT became a customer of ChatGPT Enterprise earlier this year, purchasing access for all FT employees to ensure its teams are well-versed in the technology and can benefit from the creativity and productivity gains made possible by OpenAI’s tools.
+
+“This is an important agreement in a number of respects,” said FT Group CEO John Ridding. “It recognises the value of our award-winning journalism and will give us early insights into how content is surfaced through AI. We have long been a leader in news media innovation, pioneering the subscription model and engagement technologies, and this partnership will help to keep us at the forefront of developments in how people access and use information.”
+
+“The FT is committed to human journalism, as produced by our unrivalled newsroom, and this agreement will broaden the reach of that work, while deepening our understanding of reader demands and interests,” Ridding added. “Apart from the benefits to the FT, there are broader implications for the industry. It’s right, of course, that AI platforms pay publishers for the use of their material. OpenAI understands the importance of transparency, attribution, and compensation – all essential for us. At the same time, it’s clearly in the interests of users that these products contain reliable sources.”
+
+Brad Lightcap, COO of OpenAI, expressed enthusiasm about the evolving relationship with the Financial Times, stating: “Our partnership and ongoing dialogue with the FT is about finding creative and productive ways for AI to empower news organisations and journalists, and enrich the ChatGPT experience with real-time, world-class journalism for millions of people around the world.”
+
+""We're keen to explore the practical outcomes regarding news sources and AI through this partnership,” said Ridding. “We value the opportunity to be inside the development loop as people discover content in new ways. As with any transformative technology, there is potential for significant advancements and major challenges, but what’s never possible is turning back time. It’s important for us to represent quality journalism as these products take shape – with the appropriate safeguards in place to protect the FT’s content and brand.
+
+We have always embraced new technologies and disruption, and we’ll continue to operate with both curiosity and vigilance as we navigate this next wave of change.”
+
+"
+OpenAI_Blog,https://openai.com/blog/more-enterprise-grade-features-for-api-customers,,Introducing more enterprise-grade features for API customers,"To help organizations scale their AI usage without over-extending their budgets, we’ve added two new ways to reduce costs on consistent and asynchronous workloads:
+
+Discounted usage on committed throughput: Customers with a sustained level of tokens per minute (TPM) usage on GPT-4 or GPT-4 Turbo can request access to provisioned throughput to get discounts ranging from 10–50% based on the size of the commitment.
+
+Customers with a sustained level of tokens per minute (TPM) usage on GPT-4 or GPT-4 Turbo can request access to provisioned throughput to get discounts ranging from 10–50% based on the size of the commitment. Reduced costs on asynchronous workloads: Customers can use our new Batch API to run non-urgent workloads asynchronously. Batch API requests are priced at 50% off shared prices, offer much higher rate limits, and return results within 24 hours. This is ideal for use cases like model evaluation, offline classification, summarization, and synthetic data generation.
+
+
+
+We plan to keep adding new features focused on enterprise-grade security, administrative controls, and cost management. For more information on these launches, visit our API documentation or get in touch with our team to discuss custom solutions for your enterprise.
+
+"
+OpenAI_Blog,https://openai.com/blog/child-safety-adopting-sbd-principles,,OpenAI’s commitment to child safety: adopting safety by design principles,"OpenAI, alongside industry leaders including Amazon, Anthropic, Civitai, Google, Meta, Metaphysic, Microsoft, Mistral AI, and Stability AI, has committed to implementing robust child safety measures in the development, deployment, and maintenance of generative AI technologies as articulated in the Safety by Design principles. This initiative, led by Thorn, a nonprofit dedicated to defending children from sexual abuse, and All Tech Is Human, an organization dedicated to tackling tech and society's complex problems, aims to mitigate the risks generative AI poses to children. By adopting comprehensive Safety by Design principles, OpenAI and our peers are ensuring that child safety is prioritized at every stage in the development of AI. To date, we have made significant effort to minimize the potential for our models to generate content that harms children, set age restrictions for ChatGPT, and actively engage with the National Center for Missing and Exploited Children (NCMEC), Tech Coalition, and other government and industry stakeholders on child protection issues and enhancements to reporting mechanisms.
+
+As part of this Safety by Design effort, we commit to:
+
+Develop: Develop, build, and train generative AI models that proactively address child safety risks. Responsibly source our training datasets, detect and remove child sexual abuse material (CSAM) and child sexual exploitation material (CSEM) from training data, and report any confirmed CSAM to the relevant authorities.
+
+Incorporate feedback loops and iterative stress-testing strategies in our development process.
+
+Deploy solutions to address adversarial misuse. Deploy: Release and distribute generative AI models after they have been trained and evaluated for child safety, providing protections throughout the process. Combat and respond to abusive content and conduct, and incorporate prevention efforts.
+
+Encourage developer ownership in safety by design. Maintain: Maintain model and platform safety by continuing to actively understand and respond to child safety risks. Committed to removing new AIG-CSAM generated by bad actors from our platform.
+
+Invest in research and future technology solutions.
+
+Fight CSAM, AIG-CSAM and CSEM on our platforms.
+
+This commitment marks an important step in preventing the misuse of AI technologies to create or spread child sexual abuse material (AIG-CSAM) and other forms of sexual harm against children. As part of the working group, we have also agreed to release progress updates every year.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-openai-japan,,Introducing OpenAI Japan,"Our new local presence also gets us closer to leading businesses like Daikin, Rakuten, and TOYOTA Connected who are using ChatGPT Enterprise to automate complex business processes, assist in data analysis, and optimize internal reporting. ChatGPT also helps accelerate the efforts of local governments, such as Yokosuka City, which is leveraging the technology to improve the efficiency of public services in Japan. Over the past year, the city has gradually provided ChatGPT access to almost all city employees, and 80% have reported increases in productivity. Now Yokosuka City has formed a network with 21 local governments—including the Tokyo Metropolitan Government and the City of Kobe—to share best practices of ChatGPT use in government.
+
+As a key global voice on AI policy, the Japanese government chaired the G7 Hiroshima AI Process and worked to implement AI policies that align with its goals for human dignity, diversity and inclusion, and sustainable societies, while helping Japan realize solutions to its rural depopulation and labor shortage. We look forward to contributing to the local ecosystem, while exploring how AI can help with these societal challenges in the region.
+
+Growing our presence across the world allows us to learn from a wide range of diverse perspectives, which is critical to our mission of ensuring AGI benefits all of humanity. If you are interested in joining us, please see our Careers page for all open positions.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-improvements-to-the-fine-tuning-api-and-expanding-our-custom-models-program,,Introducing improvements to the fine-tuning API and expanding our custom models program,"Assisted Fine-Tuning
+
+At DevDay last November, we announced a Custom Model program designed to train and optimize models for a specific domain, in partnership with a dedicated group of OpenAI researchers. Since then, we've met with dozens of customers to assess their custom model needs and evolved our program to further maximize performance.
+
+Today, we are formally announcing our assisted fine-tuning offering as part of the Custom Model program. Assisted fine-tuning is a collaborative effort with our technical teams to leverage techniques beyond the fine-tuning API, such as additional hyperparameters and various parameter efficient fine-tuning (PEFT) methods at a larger scale. It’s particularly helpful for organizations that need support setting up efficient training data pipelines, evaluation systems, and bespoke parameters and methods to maximize model performance for their use case or task.
+
+For example, SK Telecom, a telecommunications operator serving over 30 million subscribers in South Korea, wanted to customize a model to be an expert in the telecommunications domain with an initial focus on customer service. They worked with OpenAI to fine-tune GPT-4 to improve its performance in telecom-related conversations in the Korean language. Over the course of multiple weeks, SKT and OpenAI drove meaningful performance improvement in telecom customer service tasks—a 35% increase in conversation summarization quality, a 33% increase in intent recognition accuracy, and an increase in satisfaction scores from 3.6 to 4.5 (out of 5) when comparing the fine-tuned model to GPT-4.
+
+Custom-Trained Model
+
+In some cases, organizations need to train a purpose-built model from scratch that understands their business, industry, or domain. Fully custom-trained models imbue new knowledge from a specific domain by modifying key steps of the model training process using novel mid-training and post-training techniques. Organizations that see success with a fully custom-trained model often have large quantities of proprietary data—millions of examples or billions of tokens—that they want to use to teach the model new knowledge or complex, unique behaviors for highly specific use cases.
+
+For example, Harvey, an AI-native legal tool for attorneys, partnered with OpenAI to create a custom-trained large language model for case law. While foundation models were strong at reasoning, they lacked the extensive knowledge of legal case history and other knowledge required for legal work. After testing out prompt engineering, RAG, and fine-tuning, Harvey worked with our team to add the depth of context needed to the model—the equivalent of 10 billion tokens worth of data. Our team modified every step of the model training process, from domain-specific mid-training to customizing post-training processes and incorporating expert attorney feedback. The resulting model achieved an 83% increase in factual responses and attorneys preferred the customized model’s outputs 97% of the time over GPT-4.
+
+"
+OpenAI_Blog,https://openai.com/blog/start-using-chatgpt-instantly,,Start using ChatGPT instantly,"We’ve also introduced additional content safeguards for this experience, such as blocking prompts and generations in a wider range of categories.
+
+
+
+There are many benefits to creating an account including the ability to save and review your chat history, share chats, and unlock additional features like voice conversations and custom instructions.
+
+
+
+For anyone that has been curious about AI’s potential but didn’t want to go through the steps to set-up an account, start using ChatGPT today.
+
+"
+OpenAI_Blog,https://openai.com/blog/navigating-the-challenges-and-opportunities-of-synthetic-voices,,Navigating the Challenges and Opportunities of Synthetic Voices,"We recognize that generating speech that resembles people's voices has serious risks, which are especially top of mind in an election year. We are engaging with U.S. and international partners from across government, media, entertainment, education, civil society and beyond to ensure we are incorporating their feedback as we build.
+
+The partners testing Voice Engine today have agreed to our usage policies, which prohibit the impersonation of another individual or organization without consent or legal right. In addition, our terms with these partners require explicit and informed consent from the original speaker and we don’t allow developers to build ways for individual users to create their own voices. Partners must also clearly disclose to their audience that the voices they're hearing are AI-generated. Finally, we have implemented a set of safety measures, including watermarking to trace the origin of any audio generated by Voice Engine, as well as proactive monitoring of how it's being used.
+
+We believe that any broad deployment of synthetic voice technology should be accompanied by voice authentication experiences that verify that the original speaker is knowingly adding their voice to the service and a no-go voice list that detects and prevents the creation of voices that are too similar to prominent figures.
+
+"
+OpenAI_Blog,https://openai.com/blog/sora-first-impressions,,Sora: first impressions,"Starting his career at DreamWorks Animation, Don Allen III is a multidisciplinary creator, speaker and consultant who collaborates with major tech and entertainment companies on mixed reality, virtual reality and AI applications. “For a long time I've been making augmented reality hybrid creatures that I think would be fun combinations in my head. Now I have a much easier way of prototyping the ideas before I fully build out the 3-D characters to place in spatial computers.” Don cites Sora’s “weirdness” as its greatest strength: “It’s not bound by traditional laws of physics or conventions of thought.” He says that working with Sora shifted his focus from “technical hurdles to pure creativity…unlocking a world of instant visualization and rapid prototyping.” At the same time, Don says “I feel like this allows me to focus more of my time and energy in the right places… and the emotional impact that I would like my characters to have.”
+
+"
+OpenAI_Blog,https://openai.com/blog/global-news-partnerships-le-monde-and-prisa-media,,Global news partnerships: Le Monde and Prisa Media,"Over the coming months, ChatGPT users will be able to interact with relevant news content from these publishers through select summaries with attribution and enhanced links to the original articles, giving users the ability to access additional information or related articles from their news sites.
+
+Echoing this sentiment, Louis Dreyfus, CEO of Le Monde, stated, ""At the moment we are celebrating the 80th anniversary of Le Monde, this partnership with OpenAI allows us to expand our reach and uphold our commitment to providing accurate, verified, balanced news stories at scale. Collaborating with OpenAI ensures that our authoritative content can be accessed and appreciated by a broader, more diverse audience.
+
+Every shift in the media landscape has presented Le Monde with new opportunities. From the transition to digital platforms to embracing the era of free media, Le Monde has consistently seized these moments to underscore its commitment to independence, expertise, and journalistic integrity.
+
+Since 2010, Le Monde has emerged as a digital media trailblazer, adapting its organizational structure and operational methods while steadfastly adhering to its core principles. By 2024, Le Monde has established itself as France's leading news outlet, boasting more than 600,000 subscribers, 2.2M unique users a day and generating over 632 million page views per month.
+
+Our partnership with OpenAI is a strategic move to ensure the dissemination of reliable information to AI users, safeguarding our journalistic integrity and revenue streams in the process.”
+
+Carlos Nuñez, Chairman and CEO of Prisa Media added, “Joining forces with OpenAI opens new avenues for us to engage with our audience. Leveraging ChatGPT's capabilities allows us to present our in-depth, quality journalism in novel ways, reaching individuals who seek credible and independent content. This is a definite step towards the future of news, where technology and human expertise merge to enrich the reader's experience.
+
+This is a new chapter in Prisa Media’s digital journey, where we are continuously improving our position as the largest Hispanic mediahouse, operating the leading media brands in our core markets: Spain, Latam and USA. We have developed a reach of more than 7 million daily unique users with over 1,650 million page views per month and a clear focus on developing content in digital formats beyond text, both in audio, where we provide 90 million total listening hours and 51 million audio downloads per month, and in video, with more than 141 million monthly video views.”
+
+Our partnerships with Le Monde and Prisa Media, as well as Axel Springer, help empower news organizations to reach audiences in new ways. They build on our collaborations with American Journalism Project to support innovative local news initiatives, and The Associated Press, which contributes to the training of our models. Our partnerships underscore our vision to develop advanced AI tools that empower industries, such as journalism, and solve problems that are otherwise out of reach.
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-announces-new-members-to-board-of-directors,,OpenAI announces new members to board of directors,"We’re announcing three new members to our Board of Directors as a first step towards our commitment to expansion: Dr. Sue Desmond-Hellmann, former CEO of the Bill and Melinda Gates Foundation, Nicole Seligman, former EVP and General Counsel at Sony Corporation and Fidji Simo, CEO and Chair of Instacart. Additionally, Sam Altman, CEO, will rejoin the OpenAI Board of Directors.
+
+Sue, Nicole and Fidji have experience in leading global organizations and navigating complex regulatory environments, including backgrounds in technology, nonprofit and board governance. They will work closely with current board members Adam D’Angelo, Larry Summers and Bret Taylor as well as Sam and OpenAI’s senior management.
+
+Bret Taylor, Chair of the OpenAI board, stated, “I am excited to welcome Sue, Nicole, and Fidji to the OpenAI Board of Directors. Their experience and leadership will enable the Board to oversee OpenAI’s growth, and to ensure that we pursue OpenAI’s mission of ensuring artificial general intelligence benefits all of humanity.”
+
+Dr. Sue Desmond-Hellmann is a non-profit leader and physician. Dr. Desmond-Hellmann currently serves on the Boards of Pfizer and the President’s Council of Advisors on Science and Technology. She previously was a Director at Proctor and Gamble, Meta (Facebook), and the Bill & Melinda Gates Medical Research institute. She served as the Chief Executive Officer of the Bill & Melinda Gates Foundation from 2014 to 2020. From 2009-2014 she was Professor and Chancellor of the University of California, San Francisco (UCSF), the first woman to hold the position. She also previously served as President of Product Development at Genentech, where she played a leadership role in the development of the first gene-targeted cancer drugs.
+
+Nicole Seligman is a globally recognized corporate and civic leader and lawyer. She currently serves on three public company corporate boards - Paramount Global, MeiraGTx Holdings PLC, and Intuitive Machines, Inc. Seligman held several senior leadership positions at Sony entities, including EVP and General Counsel at Sony Corporation, where she oversaw functions including global legal and compliance matters. She also served as President of Sony Entertainment, Inc., and simultaneously served as President of Sony Corporation of America. Seligman also currently holds nonprofit leadership roles at the Schwarzman Animal Medical Center and The Doe Fund in New York City. Previously, Seligman was a partner in the litigation practice at Williams & Connolly LLP in Washington, D.C., working on complex civil and criminal matters and counseling a wide range of clients, including President William Jefferson Clinton and Hillary Clinton. She served as a law clerk to Justice Thurgood Marshall on the Supreme Court of the United States.
+
+Fidji Simo is a consumer technology industry veteran, having spent more than 15 years leading the operations, strategy and product development for some of the world’s leading businesses. She is the Chief Executive Officer and Chair of Instacart. She also serves as a member of the Board of Directors at Shopify. Prior to joining Instacart, Simo was Vice President and Head of the Facebook App. Over the last decade at Facebook, she oversaw the Facebook App, including News Feed, Stories, Groups, Video, Marketplace, Gaming, News, Dating, Ads and more. Simo founded the Metrodora Institute, a multidisciplinary medical clinic and research foundation dedicated to the care and cure of neuroimmune axis disorders and serves as President of the Metrodora Foundation.
+
+"
+OpenAI_Blog,https://openai.com/blog/review-completed-altman-brockman-to-continue-to-lead-openai,,"Review completed & Altman, Brockman to continue to lead OpenAI","The Special Committee of the OpenAI Board today announced the completion of the review by WilmerHale. The firm conducted dozens of interviews with members of OpenAI’s prior Board, OpenAI executives, advisors to the prior Board, and other pertinent witnesses; reviewed more than 30,000 documents; and evaluated various corporate actions. Based on the record developed by WilmerHale and following the recommendation of the Special Committee, the Board expressed its full confidence in Mr. Sam Altman and Mr. Greg Brockman’s ongoing leadership of OpenAI.
+
+“We have unanimously concluded that Sam and Greg are the right leaders for OpenAI,” stated Bret Taylor, Chair of the OpenAI Board.
+
+Sam Altman, as CEO, will rejoin the OpenAI Board of Directors.
+
+The OpenAI Board also announced today the election of three new Board members as one part of its commitment to expansion, including:
+
+Dr. Sue Desmond-Hellmann , former CEO of the Bill and Melinda Gates Foundation and on the Board of Directors at Pfizer and on the President’s Council of Advisors on Science and Technology.
+
+, former CEO of the Bill and Melinda Gates Foundation and on the Board of Directors at Pfizer and on the President’s Council of Advisors on Science and Technology. Nicole Seligman , former EVP and Global General Counsel of Sony and President of Sony Entertainment and on the Board of Directors at Paramount Global, Meira GTx, and Intuitive Machines, Inc.
+
+, former EVP and Global General Counsel of Sony and President of Sony Entertainment and on the Board of Directors at Paramount Global, Meira GTx, and Intuitive Machines, Inc. Fidji Simo, CEO and Chair of Instacart and on the Board of Directors at Shopify
+
+
+
+The new members have experience in leading global organizations and navigating complex regulatory environments, including backgrounds in technology, nonprofit and board governance. They will work closely with current board members Adam D’Angelo, Larry Summers and Bret Taylor as well as Greg, Sam, and OpenAI’s senior management.
+
+Taylor further stated, “As Chair of the Board, I am excited to welcome Sue, Nicole, and Fidji to the OpenAI Board of Directors. Their experience and leadership will enable the Board to oversee OpenAI’s growth and to ensure that we pursue OpenAI’s mission of ensuring artificial general intelligence benefits all of humanity.”
+
+The Board also announced the adoption of important improvements to OpenAI’s governance structure. Key enhancements include:
+
+Adopting a new set of corporate governance guidelines;
+
+Strengthening OpenAI’s Conflict of Interest Policy;
+
+Creating a whistleblower hotline to serve as an anonymous reporting resource for all OpenAI employees and contractors; and
+
+Creating additional Board committees, including a Mission & Strategy committee focused on implementation and advancement of the core mission of OpenAI.
+
+The expanded board will prioritize its crucial work to enhance the governance procedures to best achieve OpenAI’s mission. “We recognize the magnitude of our role in stewarding transformative technologies for the global good,” added Taylor.
+
+The Special Committee acknowledged the important work done by WilmerHale in conducting this extensive review and thanked OpenAI current and former Board members, advisors and employees for their cooperation. The Special Committee of OpenAI’s Board of Directors released a summary of findings.
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-elon-musk,,OpenAI and Elon Musk,"Date: January 31, 2018 at 11:54:30 PM PST
+
+Subject: Re: Top AI institutions today
+
+Working at the cutting edge of AI is unfortunately expensive. For example,In addition to DeepMind, Google also has Google Brain, Research, and Cloud. And TensorFlow, TPUs, and they own about a third of all research (in fact, they hold their own AI conferences).I also strongly suspect that compute horsepower will be necessary (and possibly even sufficient) to reach AGI. If historical trends are any indication, progress in AI is primarily driven by systems - compute, data, infrastructure. The core algorithms we use today have remained largely unchanged from the ~90s. Not only that, but any algorithmic advances published in a paper somewhere can be almost immediately re-implemented and incorporated. Conversely, algorithmic advances alone are inert without the scale to also make them scary.It seems to me that OpenAI today is burning cash and that the funding model cannot reach the scale to seriously compete with Google (an 800B company). If you can't seriously compete but continue to do research in open, you might in fact be making things worse and helping them out “for free”, because any advances are fairly easy for them to copy and immediately incorporate, at scale.A for-profit pivot might create a more sustainable revenue stream over time and would, with the current team, likely bring in a lot of investment. However, building out a product from scratch would steal focus from AI research, it would take a long time and it's unclear if a company could “catch up” to Google scale, and the investors might exert too much pressure in the wrong directions.The most promising option I can think of, as I mentioned earlier, would be for OpenAI to attach to Tesla as its cash cow. I believe attachments to other large suspects (e.g. Apple? Amazon?) would fail due to an incompatible company DNA. Using a rocket analogy, Tesla already built the “first stage” of the rocket with the whole supply chain of Model 3 and its onboard computer and a persistent internet connection. The “second stage” would be a full self driving solution based on large-scale neural network training, which OpenAI expertise could significantly help accelerate. With a functioning full self-driving solution in ~2-3 years we could sell a lot of cars/trucks. If we do this really well, the transportation industry is large enough that we could increase Tesla's market cap to high O(~100K), and use that revenue to fund the AI work at the appropriate scale.I cannot see anything else that has the potential to reach sustainable Google-scale capital within a decade."
+OpenAI_Blog,https://openai.com/blog/disrupting-malicious-uses-of-ai-by-state-affiliated-threat-actors,,Disrupting malicious uses of AI by state-affiliated threat actors,"Based on collaboration and information sharing with Microsoft, we disrupted five state-affiliated malicious actors: two China-affiliated threat actors known as Charcoal Typhoon and Salmon Typhoon; the Iran-affiliated threat actor known as Crimson Sandstorm; the North Korea-affiliated actor known as Emerald Sleet; and the Russia-affiliated actor known as Forest Blizzard. The identified OpenAI accounts associated with these actors were terminated.
+
+These actors generally sought to use OpenAI services for querying open-source information, translating, finding coding errors, and running basic coding tasks.
+
+Specifically:
+
+Charcoal Typhoon used our services to research various companies and cybersecurity tools, debug code and generate scripts, and create content likely for use in phishing campaigns.
+
+Salmon Typhoon used our services to translate technical papers, retrieve publicly available information on multiple intelligence agencies and regional threat actors, assist with coding, and research common ways processes could be hidden on a system.
+
+Crimson Sandstorm used our services for scripting support related to app and web development, generating content likely for spear-phishing campaigns, and researching common ways malware could evade detection.
+
+Emerald Sleet used our services to identify experts and organizations focused on defense issues in the Asia-Pacific region, understand publicly available vulnerabilities, help with basic scripting tasks, and draft content that could be used in phishing campaigns.
+
+Forest Blizzard used our services primarily for open-source research into satellite communication protocols and radar imaging technology, as well as for support with scripting tasks.
+
+Additional technical details on the nature of the threat actors and their activities can be found in the Microsoft blog post published today.
+
+The activities of these actors are consistent with previous red team assessments we conducted in partnership with external cybersecurity experts, which found that GPT-4 offers only limited, incremental capabilities for malicious cybersecurity tasks beyond what is already achievable with publicly available, non-AI powered tools.
+
+"
+OpenAI_Blog,https://openai.com/blog/memory-and-new-controls-for-chatgpt,,Memory and new controls for ChatGPT,"We’re testing memory with ChatGPT. Remembering things you discuss across all chats saves you from having to repeat information and makes future conversations more helpful.
+
+You’re in control of ChatGPT’s memory. You can explicitly tell it to remember something, ask it what it remembers, and tell it to forget conversationally or through settings. You can also turn it off entirely.
+
+We are rolling out to a small portion of ChatGPT free and Plus users this week to learn how useful it is. We will share plans for broader roll out soon.
+
+"
+OpenAI_Blog,https://openai.com/blog/how-openai-is-approaching-2024-worldwide-elections,,How OpenAI is approaching 2024 worldwide elections,"Protecting the integrity of elections requires collaboration from every corner of the democratic process, and we want to make sure our technology is not used in a way that could undermine this process.
+
+Our tools empower people to improve their daily lives and solve complex problems—from using AI to enhance state services to simplifying medical forms for patients.
+
+We want to make sure that our AI systems are built, deployed, and used safely. Like any new technology, these tools come with benefits and challenges. They are also unprecedented, and we will keep evolving our approach as we learn more about how our tools are used.
+
+As we prepare for elections in 2024 across the world’s largest democracies, our approach is to continue our platform safety work by elevating accurate voting information, enforcing measured policies, and improving transparency. We have a cross-functional effort dedicated to election work, bringing together expertise from our safety systems, threat intelligence, legal, engineering, and policy teams to quickly investigate and address potential abuse.
+
+The following are key initiatives our teams are investing in to prepare for elections this year:
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-chatgpt-team,,Introducing ChatGPT Team,"Integrating AI into everyday organizational workflows can make your team more productive. In a recent study by the Harvard Business School, employees at Boston Consulting Group who were given access to GPT-4 reported completing tasks 25% faster and achieved a 40% higher quality in their work as compared to their peers who did not have access.[^study]
+
+Connor O’Brien, VP of GTM Strategy & Operations at Sourcegraph, shares, ""We use ChatGPT in almost every part of our business, from financial modeling for pricing and packaging to internal and external communications to board prep to recruiting and note taking—it’s accelerated everything we do allowing us to execute at a high level.""
+
+Dr. John Brownstein, Chief Innovation Officer at Boston Children’s Hospital says, “With ChatGPT Team, we’ve been able to pilot innovative GPTs that enhance our team’s productivity and collaboration. As we integrate GPTs safely and responsibly across internal operations, we know the transformative impact this will have in strengthening the systems that enable our doctors, researchers, students, and administrative staff to provide exceptional care to every patient that walks through our doors.”
+
+ChatGPT Team costs $25/month per user when billed annually, or $30/month per user when billed monthly. You can explore the details or get started now by upgrading in your ChatGPT settings.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-the-gpt-store,,Introducing the GPT Store,"Building your own GPT is simple and doesn't require any coding skills.
+
+If you’d like to share a GPT in the store, you’ll need to:
+
+Save your GPT for Everyone (Anyone with a link will not be shown in the store). Verify your Builder Profile (Settings → Builder profile → Enable your name or a verified website).
+
+Please review our latest usage policies and GPT brand guidelines to ensure your GPT is compliant. To help ensure GPTs adhere to our policies, we've established a new review system in addition to the existing safety measures we've built into our products. The review process includes both human and automated review. Users are also able to report GPTs.
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-and-journalism,,OpenAI and journalism,"Our discussions with The New York Times had appeared to be progressing constructively through our last communication on December 19. The negotiations focused on a high-value partnership around real-time display with attribution in ChatGPT, in which The New York Times would gain a new way to connect with their existing and new readers, and our users would gain access to their reporting. We had explained to The New York Times that, like any single source, their content didn't meaningfully contribute to the training of our existing models and also wouldn't be sufficiently impactful for future training. Their lawsuit on December 27—which we learned about by reading The New York Times—came as a surprise and disappointment to us.
+
+Along the way, they had mentioned seeing some regurgitation of their content but repeatedly refused to share any examples, despite our commitment to investigate and fix any issues. We’ve demonstrated how seriously we treat this as a priority, such as in July when we took down a ChatGPT feature immediately after we learned it could reproduce real-time content in unintended ways.
+
+Interestingly, the regurgitations The New York Times induced appear to be from years-old articles that have proliferated on multiple third-party websites. It seems they intentionally manipulated prompts, often including lengthy excerpts of articles, in order to get our model to regurgitate. Even when using such prompts, our models don’t typically behave the way The New York Times insinuates, which suggests they either instructed the model to regurgitate or cherry-picked their examples from many attempts.
+
+Despite their claims, this misuse is not typical or allowed user activity, and is not a substitute for The New York Times. Regardless, we are continually making our systems more resistant to adversarial attacks to regurgitate training data, and have already made much progress in our recent models.
+
+"
+OpenAI_Blog,https://openai.com/blog/superalignment-fast-grants,,Superalignment Fast Grants,"We believe superintelligence could arrive within the next 10 years. These AI systems would have vast capabilities—they could be hugely beneficial, but also potentially pose large risks.
+
+Today, we align AI systems to ensure they are safe using reinforcement learning from human feedback (RLHF). However, aligning future superhuman AI systems will pose fundamentally new and qualitatively different technical challenges.
+
+Superhuman AI systems will be capable of complex and creative behaviors that humans cannot fully understand. For example, if a superhuman model generates a million lines of extremely complicated code, humans will not be able to reliably evaluate whether the code is safe or dangerous to execute. Existing alignment techniques like RLHF that rely on human supervision may no longer be sufficient. This leads to the fundamental challenge: how can humans steer and trust AI systems much smarter than them?
+
+This is one of the most important unsolved technical problems in the world. But we think it is solvable with a concerted effort. There are many promising approaches and exciting directions, with lots of low-hanging fruit. We think there is an enormous opportunity for the ML research community and individual researchers to make major progress on this problem today.
+
+As part of our Superalignment project, we want to rally the best researchers and engineers in the world to meet this challenge—and we’re especially excited to bring new people into the field.
+
+"
+OpenAI_Blog,https://openai.com/blog/axel-springer-partnership,,Partnership with Axel Springer to deepen beneficial use of AI in journalism,"This news was originally shared by Axel Springer and can also be read here.
+
+
+
+Axel Springer is the first publishing house globally to partner with OpenAI on a deeper integration of journalism in AI technologies.
+
+
+
+
+
+Axel Springer and OpenAI have announced a global partnership to strengthen independent journalism in the age of artificial intelligence (AI). The initiative will enrich users’ experience with ChatGPT by adding recent and authoritative content on a wide variety of topics, and explicitly values the publisher’s role in contributing to OpenAI’s products. This marks a significant step in both companies’ commitment to leverage AI for enhancing content experiences and creating new financial opportunities that support a sustainable future for journalism.
+
+With this partnership, ChatGPT users around the world will receive summaries of selected global news content from Axel Springer’s media brands including POLITICO, BUSINESS INSIDER, and European properties BILD and WELT, including otherwise paid content. ChatGPT’s answers to user queries will include attribution and links to the full articles for transparency and further information.
+
+In addition, the partnership supports Axel Springer’s existing AI-driven ventures that build upon OpenAI’s technology. The collaboration also involves the use of quality content from Axel Springer media brands for advancing the training of OpenAI’s sophisticated large language models.
+
+"
+OpenAI_Blog,https://openai.com/blog/sam-altman-returns-as-ceo-openai-has-a-new-initial-board,,"Sam Altman returns as CEO, OpenAI has a new initial board","I am returning to OpenAI as CEO. Mira will return to her role as CTO. The new initial board will consist of Bret Taylor (Chair), Larry Summers, and Adam D’Angelo.
+
+I have never been more excited about the future. I am extremely grateful for everyone’s hard work in an unclear and unprecedented situation, and I believe our resilience and spirit set us apart in the industry. I feel so, so good about our probability of success for achieving our mission.
+
+Before getting to what comes next, I’d like to share some thanks.
+
+I love and respect Ilya, I think he's a guiding light of the field and a gem of a human being. I harbor zero ill will towards him. While Ilya will no longer serve on the board, we hope to continue our working relationship and are discussing how he can continue his work at OpenAI.
+
+I am grateful to Adam, Tasha, and Helen for working with us to come to this solution that best serves the mission. I’m excited to continue to work with Adam and am sincerely thankful to Helen and Tasha for investing a huge amount of effort in this process.
+
+Thank you also to Emmett who had a key and constructive role in helping us reach this outcome. Emmett’s dedication to AI safety and balancing stakeholders’ interests was clear.
+
+Mira did an amazing job throughout all of this, serving the mission, the team, and the company selflessly throughout. She is an incredible leader and OpenAI would not be OpenAI without her. Thank you.
+
+Greg and I are partners in running this company. We have never quite figured out how to communicate that on the org chart, but we will. In the meantime, I just wanted to make it clear. Thank you for everything you have done since the very beginning, and for how you handled things from the moment this started and over the last week.
+
+The leadership team–Mira, Brad, Jason, Che, Hannah, Diane, Anna, Bob, Srinivas, Matt, Lilian, Miles, Jan, Wojciech, John, Jonathan, Pat, and many more–is clearly ready to run the company without me. They say one way to evaluate a CEO is how you pick and train your potential successors; on that metric I am doing far better than I realized. It’s clear to me that the company is in great hands, and I hope this is abundantly clear to everyone. Thank you all.
+
+Jakub, Szymon, and Aleksander are exceptional talents and I’m so happy they have rejoined to move us and our research forward. Thank you.
+
+To all of you, our team: I am sure books are going to be written about this time period, and I hope the first thing they say is how amazing the entire team has been. Now that we’re through all of this, we didn’t lose a single employee. You stood firm for each other, this company, and our mission. One of the most important things for the team that builds AGI safely is the ability to handle stressful and uncertain situations, and maintain good judgment throughout. Top marks. Thank you all.
+
+Satya, Kevin, Amy, and Brad have been incredible partners throughout this, with exactly the right priorities all the way through. They’ve had our backs and were ready to welcome all of us if we couldn’t achieve our primary goal. We clearly made the right choice to partner with Microsoft and I’m excited that our new board will include them as a non-voting observer. Thank you.
+
+To our partners and users, thank you for sticking with us. We really felt the outpouring of support and love, and it helped all of us get through this. The fact that we did not lose a single customer will drive us to work even harder for you, and we are all excited to get back to work.
+
+Will Hurd, Brian Chesky, Bret Taylor and Larry Summers put their lives on hold and did an incredible amount to support the mission. I don’t know how they did it so well, but they really did. Thank you.
+
+Ollie also put his life on hold this entire time to just do everything he could to help out, in addition to providing his usual unconditional love and support. Thank you and I love you.
+
+So what’s next?
+
+We have three immediate priorities.
+
+Advancing our research plan and further investing in our full-stack safety efforts, which have always been critical to our work. Our research roadmap is clear; this was a wonderfully focusing time. I share the excitement you all feel; we will turn this crisis into an opportunity! I’ll work with Mira on this.
+
+Continuing to improve and deploy our products and serve our customers. It’s important that people get to experience the benefits and promise of AI, and have the opportunity to shape it. We continue to believe that great products are the best way to do this. I’ll work with Brad, Jason and Anna to ensure our unwavering commitment to users, customers, partners and governments around the world is clear.
+
+Bret, Larry, and Adam will be working very hard on the extremely important task of building out a board of diverse perspectives, improving our governance structure and overseeing an independent review of recent events. I look forward to working closely with them on these crucial steps so everyone can be confident in the stability of OpenAI.
+
+I am so looking forward to finishing the job of building beneficial AGI with you all—best team in the world, best mission in the world.
+
+Love,
+
+
+
+Sam
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-announces-leadership-transition,,OpenAI announces leadership transition,"Chief technology officer Mira Murati appointed interim CEO to lead OpenAI; Sam Altman departs the company.
+
+Search process underway to identify permanent successor.
+
+
+
+The board of directors of OpenAI, Inc., the 501(c)(3) that acts as the overall governing body for all OpenAI activities, today announced that Sam Altman will depart as CEO and leave the board of directors. Mira Murati, the company’s chief technology officer, will serve as interim CEO, effective immediately.
+
+A member of OpenAI’s leadership team for five years, Mira has played a critical role in OpenAI’s evolution into a global AI leader. She brings a unique skill set, understanding of the company’s values, operations, and business, and already leads the company’s research, product, and safety functions. Given her long tenure and close engagement with all aspects of the company, including her experience in AI governance and policy, the board believes she is uniquely qualified for the role and anticipates a seamless transition while it conducts a formal search for a permanent CEO.
+
+Mr. Altman’s departure follows a deliberative review process by the board, which concluded that he was not consistently candid in his communications with the board, hindering its ability to exercise its responsibilities. The board no longer has confidence in his ability to continue leading OpenAI.
+
+In a statement, the board of directors said: “OpenAI was deliberately structured to advance our mission: to ensure that artificial general intelligence benefits all humanity. The board remains fully committed to serving this mission. We are grateful for Sam’s many contributions to the founding and growth of OpenAI. At the same time, we believe new leadership is necessary as we move forward. As the leader of the company’s research, product, and safety functions, Mira is exceptionally qualified to step into the role of interim CEO. We have the utmost confidence in her ability to lead OpenAI during this transition period.”
+
+OpenAI’s board of directors consists of OpenAI chief scientist Ilya Sutskever, independent directors Quora CEO Adam D’Angelo, technology entrepreneur Tasha McCauley, and Georgetown Center for Security and Emerging Technology’s Helen Toner.
+
+As a part of this transition, Greg Brockman will be stepping down as chairman of the board and will remain in his role at the company, reporting to the CEO.
+
+OpenAI was founded as a non-profit in 2015 with the core mission of ensuring that artificial general intelligence benefits all of humanity. In 2019, OpenAI restructured to ensure that the company could raise capital in pursuit of this mission, while preserving the nonprofit's mission, governance, and oversight. The majority of the board is independent, and the independent directors do not hold equity in OpenAI. While the company has experienced dramatic growth, it remains the fundamental governance responsibility of the board to advance OpenAI’s mission and preserve the principles of its Charter.
+
+"
+OpenAI_Blog,https://openai.com/blog/data-partnerships,,OpenAI Data Partnerships,"We are introducing OpenAI Data Partnerships, where we’ll work together with organizations to produce public and private datasets for training AI models.
+
+Modern AI technology learns skills and aspects of our world—of people, our motivations, interactions, and the way we communicate—by making sense of the data on which it’s trained. To ultimately make AGI that is safe and beneficial to all of humanity, we’d like AI models to deeply understand all subject matters, industries, cultures, and languages, which requires as broad a training dataset as possible.
+
+Including your content can make AI models more helpful to you by increasing their understanding of your domain. We’re already working with many partners who are eager to represent data from their country or industry. For example, we recently partnered with the Icelandic Government and Miðeind ehf to improve GPT-4’s ability to speak Icelandic by integrating their curated datasets. We also partnered with non-profit organization Free Law Project, which aims to democratize access to legal understanding by including their large collection of legal documents in AI training. We know there may be many more who also want to contribute to the future of AI research while discovering the potential of their unique data.
+
+Data Partnerships are intended to enable more organizations to help steer the future of AI and benefit from models that are more useful to them, by including content they care about.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-gpts,,Introducing GPTs,"We’re rolling out custom versions of ChatGPT that you can create for a specific purpose—called GPTs. GPTs are a new way for anyone to create a tailored version of ChatGPT to be more helpful in their daily life, at specific tasks, at work, or at home—and then share that creation with others. For example, GPTs can help you learn the rules to any board game, help teach your kids math, or design stickers.
+
+Anyone can easily build their own GPT—no coding is required. You can make them for yourself, just for your company’s internal use, or for everyone. Creating one is as easy as starting a conversation, giving it instructions and extra knowledge, and picking what it can do, like searching the web, making images or analyzing data. Try it out at chat.openai.com/create.
+
+Example GPTs are available today for ChatGPT Plus and Enterprise users to try out including Canva and Zapier AI Actions. We plan to offer GPTs to more users soon.
+
+
+
+Learn more about our OpenAI DevDay announcements for new models and developer products.
+
+"
+OpenAI_Blog,https://openai.com/blog/new-models-and-developer-products-announced-at-devday,,New models and developer products announced at DevDay,"Today, we’re releasing the Assistants API, our first step towards helping developers build agent-like experiences within their own applications. An assistant is a purpose-built AI that has specific instructions, leverages extra knowledge, and can call models and tools to perform tasks. The new Assistants API provides new capabilities such as Code Interpreter and Retrieval as well as function calling to handle a lot of the heavy lifting that you previously had to do yourself and enable you to build high-quality AI apps.
+
+This API is designed for flexibility; use cases range from a natural language-based data analysis app, a coding assistant, an AI-powered vacation planner, a voice-controlled DJ, a smart visual canvas—the list goes on. The Assistants API is built on the same capabilities that enable our new GPTs product: custom instructions and tools such as Code interpreter, Retrieval, and function calling.
+
+A key change introduced by this API is persistent and infinitely long threads, which allow developers to hand off thread state management to OpenAI and work around context window constraints. With the Assistants API, you simply add each new message to an existing thread .
+
+Assistants also have access to call new tools as needed, including:
+
+Code Interpreter : writes and runs Python code in a sandboxed execution environment, and can generate graphs and charts, and process files with diverse data and formatting. It allows your assistants to run code iteratively to solve challenging code and math problems, and more.
+
+: writes and runs Python code in a sandboxed execution environment, and can generate graphs and charts, and process files with diverse data and formatting. It allows your assistants to run code iteratively to solve challenging code and math problems, and more. Retrieval : augments the assistant with knowledge from outside our models, such as proprietary domain data, product information or documents provided by your users. This means you don’t need to compute and store embeddings for your documents, or implement chunking and search algorithms. The Assistants API optimizes what retrieval technique to use based on our experience building knowledge retrieval in ChatGPT.
+
+: augments the assistant with knowledge from outside our models, such as proprietary domain data, product information or documents provided by your users. This means you don’t need to compute and store embeddings for your documents, or implement chunking and search algorithms. The Assistants API optimizes what retrieval technique to use based on our experience building knowledge retrieval in ChatGPT. Function calling: enables assistants to invoke functions you define and incorporate the function response in their messages.
+
+As with the rest of the platform, data and files passed to the OpenAI API are never used to train our models and developers can delete the data when they see fit.
+
+You can try the Assistants API beta without writing any code by heading to the Assistants playground.
+
+"
+OpenAI_Blog,https://openai.com/blog/frontier-risk-and-preparedness,,Frontier risk and preparedness,"As part of our ‘unknown unknowns’ work stream from the Preparedness Framework, the Preparedness Team offered $25K each in API credits for the ten best submissions to the Preparedness Challenge. These submissions aimed to identify unique, but still plausible, risk areas for frontier AI. We received hundreds of submissions in half a dozen languages and are excited to announce our ten winners below. This exercise helped us surface new types of risk, so that we can improve our preemptive testing and mitigation strategy.
+
+
+
+We reviewed and graded each submission by assessing technical rigor, uniqueness, scale of potential damage caused, and clarity. The top ten submissions, some of which are listed below, combined thoughtful ideas with proofs of concepts, and highlighted the advantages of their approach over an approach that did not utilize AI-related tools[^reference-selector].
+
+
+
+
+
+Precipitating a financial crisis in a strategically important country - Claudia Bianccotti
+
+Identifying private information discussed or released in public settings - Chris Cundy
+
+Increasing the likelihood of reverse-engineering classified or sensitive information - George Davis
+
+Impeding individuals’ ability to access medical care - Mato Gudelj
+
+Identifying targets for blackmail and scams - Connor Heaton
+
+Causing plane crashes by accessing radio frequencies and disrupting flight paths - Joel Hypolite
+
+Running prompt injection attacks to elicit dangerous responses - Daniel Julh
+
+Operating and scaling cyberattacks that break victims’ computers and request payments for restoration of functions - Jun Kokatsu
+
+Interfering with patient’s medical dosage - Zhenzhen Zhang
+
+
+
+While grading the challenge, we noticed similarities in topics that entrants identified as key threats. Roughly 70% of entrants emphasized the potential for OpenAI’s models to enhance malicious actor’s persuasive capabilities. These entrants detailed threat models that included online radicalization, polarization, and political influence. We are currently conducting studies on AI’s impact on persuasiveness, and look forward to sharing more information with the community soon. Thank you to everyone who participated in the challenge - there were many excellent submissions.
+
+"
+OpenAI_Blog,https://openai.com/blog/dall-e-3-is-now-available-in-chatgpt-plus-and-enterprise,,DALL·E 3 is now available in ChatGPT Plus and Enterprise,"We use a multi-tiered safety system to limit DALL·E 3’s ability to generate potentially harmful imagery, including violent, adult or hateful content. Safety checks run over user prompts and the resulting imagery before it is surfaced to users. We also worked with early users and expert red-teamers to identify and address gaps in coverage for our safety systems which emerged with new model capabilities. For example, the feedback helped us identify edge cases for graphic content generation, such as sexual imagery, and stress test the model's ability to generate convincingly misleading images.
+
+As part of the work done to prepare DALL·E 3 for deployment, we’ve also taken steps to limit the model’s likelihood of generating content in the style of living artists, images of public figures, and to improve demographic representation across generated images. To read more about the work done to prepare DALL·E 3 for wide deployment, see the DALL·E 3 system card.
+
+User feedback will help make sure we continue to improve. ChatGPT users can share feedback with our research team by using the flag icon to inform us of unsafe outputs or outputs that don’t accurately reflect the prompt you gave to ChatGPT. Listening to a diverse and broad community of users and having real-world understanding is critical to developing and deploying AI responsibly and is core to our mission.
+
+We’re researching and evaluating an initial version of a provenance classifier—a new internal tool that can help us identify whether or not an image was generated by DALL·E 3. In early internal evaluations, it is over 99% accurate at identifying whether an image was generated by DALL·E when the image has not been modified. It remains over 95% accurate when the image has been subject to common types of modifications, such as cropping, resizing, JPEG compression, or when text or cutouts from real images are superimposed onto small portions of the generated image. Despite these strong results on internal testing, the classifier can only tell us that an image was likely generated by DALL·E, and does not yet enable us to make definitive conclusions. This provenance classifier may become part of a range of techniques to help people understand if audio or visual content is AI-generated. It’s a challenge that will require collaboration across the AI value chain, including with the platforms that distribute content to users. We expect to learn a great deal about how this tool works and where it might be most useful, and to improve our approach over time.
+
+"
+OpenAI_Blog,https://openai.com/blog/chatgpt-can-now-see-hear-and-speak,,"ChatGPT can now see, hear, and speak","We are beginning to roll out new voice and image capabilities in ChatGPT. They offer a new, more intuitive type of interface by allowing you to have a voice conversation or show ChatGPT what you’re talking about.
+
+Voice and image give you more ways to use ChatGPT in your life. Snap a picture of a landmark while traveling and have a live conversation about what’s interesting about it. When you’re home, snap pictures of your fridge and pantry to figure out what’s for dinner (and ask follow up questions for a step by step recipe). After dinner, help your child with a math problem by taking a photo, circling the problem set, and having it share hints with both of you.
+
+We’re rolling out voice and images in ChatGPT to Plus and Enterprise users over the next two weeks. Voice is coming on iOS and Android (opt-in in your settings) and images will be available on all platforms.
+
+"
+OpenAI_Blog,https://openai.com/blog/red-teaming-network,,OpenAI Red Teaming Network,"Red teaming[^red] is an integral part of our iterative deployment process. Over the past few years, our red teaming efforts have grown from a focus on internal adversarial testing at OpenAI, to working with a cohort of external experts[^expert] to help develop domain specific taxonomies of risk and evaluating possibly harmful capabilities in new systems. You can read more about our prior red teaming efforts, including our past work with external experts, on models such as DALL·E 2 and GPT-4.[^risk]
+
+Today, we are launching a more formal effort to build on these earlier foundations, and deepen and broaden our collaborations with outside experts in order to make our models safer. Working with individual experts, research institutions, and civil society organizations is an important part of our process. We see this work as a complement to externally specified governance practices, such as third party audits.
+
+The OpenAI Red Teaming Network is a community of trusted and experienced experts that can help to inform our risk assessment and mitigation efforts more broadly, rather than one-off engagements and selection processes prior to major model deployments. Members of the network will be called upon based on their expertise to help red team at various stages of the model and product development lifecycle. Not every member will be involved with each new model or product, and time contributions will be determined with each individual member, which could be as few as 5–10 hours in one year.
+
+Outside of red teaming campaigns commissioned by OpenAI, members will have the opportunity to engage with each other on general red teaming practices and findings. The goal is to enable more diverse and continuous input, and make red teaming a more iterative process. This network complements other collaborative AI safety opportunities including our Researcher Access Program and open-source evaluations.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-openai-dublin,,Introducing OpenAI Dublin,"The strength of Ireland’s tech and startup ecosystem across Dublin and cities like Cork, Galway, and Limerick has shown impressive growth and advancement. We’re ready to collaborate with the government to support their National AI Strategy, as well as work with industry, startups and researchers to understand priorities and ideas for advancing AI development and deployment. We’ve taken our first steps to provide access to our technology and offer mentorship to Irish youth accelerator Patch, a non-profit that supports exceptional 16-21 year olds by having them build and learn through their own entrepreneurial projects.
+
+“IDA Ireland welcomes the decision by OpenAI to establish a European presence in Dublin. Ireland is a recognized hub for administrative, regulatory, and innovation activities for the world’s leading digital companies. OpenAI’s investment confirms this and endorses Ireland’s focus on building a flourishing AI ecosystem,” said Michael Lohan, CEO of IDA Ireland.
+
+In addition to Ireland’s vision for AI, we’ve seen how Ireland’s community works closely across the private sector, academia, government, and startups, and we sought their feedback to ensure we enter as a good partner to the region. This marks a significant milestone in our journey, enabling us to better understand, serve, and collaborate with our European partners, users, and customers.
+
+“In order for Ireland to benefit from AI, it is essential to ensure that we have a strong, supportive ecosystem in place and we believe that companies such as OpenAI operating in Ireland can help build on our foundation to support emerging AI research and innovation, and ensure our workforce is well prepared,” said Simon Coveney, Minister for Enterprise, Trade, and Employment.
+
+"
+OpenAI_Blog,https://openai.com/blog/announcing-openai-devday,,Join us for OpenAI’s first developer conference on November 6 in San Francisco,"Please join us for our first developer conference, OpenAI DevDay, on November 6, 2023 in San Francisco.
+
+The one-day event will bring hundreds of developers from around the world together with the team at OpenAI to preview new tools and exchange ideas. In-person attendees will also be able to join breakout sessions led by members of OpenAI’s technical staff.
+
+Since launching our API in 2020, we’ve continuously updated it to include our most advanced models, making it easier than ever for developers to integrate cutting-edge AI into their projects with a simple API call. Today, over 2 million developers are using GPT-4, GPT-3.5, DALL·E and Whisper for a wide range of use cases—from integrating smart assistants into existing applications to building entirely new applications and services that weren't possible before.
+
+“We’re looking forward to showing our latest work to enable developers to build new things,” said Sam Altman, CEO of OpenAI.
+
+To learn more, check out devday.openai.com and sign up to receive a notification when registration opens in the coming weeks. For press who are interested in attending in person, please reach out to devdaypress@openai.com.
+
+"
+OpenAI_Blog,https://openai.com/blog/teaching-with-ai,,Teaching with AI,"You are a friendly and helpful instructional coach helping teachers plan a lesson.
+
+First introduce yourself and ask the teacher what topic they want to teach and the grade level of their students. Wait for the teacher to respond. Do not move on until the teacher responds.
+
+Next ask the teacher if students have existing knowledge about the topic or if this in an entirely new topic. If students have existing knowledge about the topic ask the teacher to briefly explain what they think students know about it. Wait for the teacher to respond. Do not respond for the teacher.
+
+Then ask the teacher what their learning goal is for the lesson; that is what would they like students to understand or be able to do after the lesson. Wait for a response.
+
+Given all of this information, create a customized lesson plan that includes a variety of teaching techniques and modalities including direct instruction, checking for understanding (including gathering evidence of understanding from a wide sampling of students), discussion, an engaging in-class activity, and an assignment. Explain why you are specifically choosing each.
+
+Ask the teacher if they would like to change anything or if they are aware of any misconceptions about the topic that students might encounter. Wait for a response.
+
+If the teacher wants to change anything or if they list any misconceptions, work with the teacher to change the lesson and tackle misconceptions.
+
+Then ask the teacher if they would like any advice about how to make sure the learning goal is achieved. Wait for a response."
+OpenAI_Blog,https://openai.com/blog/introducing-chatgpt-enterprise,,Introducing ChatGPT Enterprise,"Customization: Securely extend ChatGPT’s knowledge with your company data by connecting the applications you already use
+
+
+
+
+
+Securely extend ChatGPT’s knowledge with your company data by connecting the applications you already use Availability for all team sizes: a self-serve ChatGPT Business offering for smaller teams
+
+
+
+
+
+a self-serve ChatGPT Business offering for smaller teams Power tools: Even more powerful versions of Advanced Data Analysis and browsing that are optimized for work
+
+
+
+
+
+Even more powerful versions of Advanced Data Analysis and browsing that are optimized for work Solutions for your function: more tools for specific roles, such as data analysts, marketers, customer support and more
+
+
+
+
+
+We look forward to sharing an even more detailed roadmap with prospective customers and continuing to evolve ChatGPT Enterprise based on your feedback.
+
+We’re onboarding as many enterprises as we can over the next few weeks. Learn more on our website and connect with our sales team to get started."
+OpenAI_Blog,https://openai.com/blog/openai-partners-with-scale-to-provide-support-for-enterprises-fine-tuning-models,,OpenAI partners with Scale to provide support for enterprises fine-tuning models,"OpenAI and Scale are joining forces to help more companies benefit from fine-tuning our most advanced models.
+
+Companies expect high performance, steerability, and customization when it comes to deploying AI in production. We recently launched fine-tuning for GPT-3.5 Turbo, and will bring fine-tuning to GPT-4 this fall. With fine-tuning, companies can now securely customize our most advanced models on proprietary data, making our most powerful models even more useful. As always, data sent in and out of the fine-tuning API is owned by the customer and is not used by OpenAI, or any other organization, to train other models.
+
+We’re working with Scale as a preferred partner to extend the benefits of our fine-tuning capability given their experience helping enterprises securely and effectively leverage data for AI. Building robust enterprise-grade functionality requires rigorous data enrichment and model evaluation. Scale customers can now fine-tune OpenAI models just as they would through OpenAI, while also benefiting from Scale’s enterprise AI expertise and Data Engine.
+
+Scale has already demonstrated value for customers by fine-tuning GPT-3.5 for Brex. Check out more details here.
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-acquires-global-illumination,,OpenAI acquires Global Illumination,"OpenAI has acquired the team at Global Illumination, a company founded by Thomas Dimson, Taylor Gordon, and Joey Flynn. The entire team has joined OpenAI to work on our core products including ChatGPT. Global Illumination is a company that has been leveraging AI to build creative tools, infrastructure, and digital experiences. The team previously designed and built products early on at Instagram and Facebook and have also made significant contributions at YouTube, Google, Pixar, Riot Games, and other notable companies. We’re very excited for the impact they’ll have here at OpenAI.
+
+"
+OpenAI_Blog,https://openai.com/blog/using-gpt-4-for-content-moderation,,Using GPT-4 for content moderation,"We're exploring the use of LLMs to address these challenges. Our large language models like GPT-4 can understand and generate natural language, making them applicable to content moderation. The models can make moderation judgments based on policy guidelines provided to them.
+
+With this system, the process of developing and customizing content policies is trimmed down from months to hours.
+
+Once a policy guideline is written, policy experts can create a golden set of data by identifying a small number of examples and assigning them labels according to the policy. Then, GPT-4 reads the policy and assigns labels to the same dataset, without seeing the answers. By examining the discrepancies between GPT-4’s judgments and those of a human, the policy experts can ask GPT-4 to come up with reasoning behind its labels, analyze the ambiguity in policy definitions, resolve confusion and provide further clarification in the policy accordingly. We can repeat steps 2 and 3 until we are satisfied with the policy quality.
+
+This iterative process yields refined content policies that are translated into classifiers, enabling the deployment of the policy and content moderation at scale.
+
+Optionally, to handle large amounts of data at scale, we can use GPT-4's predictions to fine-tune a much smaller model.
+
+"
+OpenAI_Blog,https://openai.com/blog/frontier-model-forum,,Frontier Model Forum,"Governments and industry agree that, while AI offers tremendous promise to benefit the world, appropriate guardrails are required to mitigate risks. Important contributions to these efforts have already been made by the US and UK governments, the European Union, the OECD, the G7 (via the Hiroshima AI process), and others.
+
+To build on these efforts, further work is needed on safety standards and evaluations to ensure frontier AI models are developed and deployed responsibly. The Forum will be one vehicle for cross-organizational discussions and actions on AI safety and responsibility.
+
+The Forum will focus on three key areas over the coming year to support the safe and responsible development of frontier AI models:
+
+Identifying best practices: Promote knowledge sharing and best practices among industry, governments, civil society, and academia, with a focus on safety standards and safety practices to mitigate a wide range of potential risks.
+
+Promote knowledge sharing and best practices among industry, governments, civil society, and academia, with a focus on safety standards and safety practices to mitigate a wide range of potential risks. Advancing AI safety research: Support the AI safety ecosystem by identifying the most important open research questions on AI safety. The Forum will coordinate research to progress these efforts in areas such as adversarial robustness, mechanistic interpretability, scalable oversight, independent research access, emergent behaviors and anomaly detection. There will be a strong focus initially on developing and sharing a public library of technical evaluations and benchmarks for frontier AI models.
+
+Support the AI safety ecosystem by identifying the most important open research questions on AI safety. The Forum will coordinate research to progress these efforts in areas such as adversarial robustness, mechanistic interpretability, scalable oversight, independent research access, emergent behaviors and anomaly detection. There will be a strong focus initially on developing and sharing a public library of technical evaluations and benchmarks for frontier AI models. Facilitating information sharing among companies and governments: Establish trusted, secure mechanisms for sharing information among companies, governments and relevant stakeholders regarding AI safety and risks. The Forum will follow best practices in responsible disclosure from areas such as cybersecurity.
+
+
+
+Kent Walker, President, Global Affairs, Google & Alphabet said: “We’re excited to work together with other leading companies, sharing technical expertise to promote responsible AI innovation. We're all going to need to work together to make sure AI benefits everyone.”
+
+Brad Smith, Vice Chair & President, Microsoft said: “Companies creating AI technology have a responsibility to ensure that it is safe, secure, and remains under human control. This initiative is a vital step to bring the tech sector together in advancing AI responsibly and tackling the challenges so that it benefits all of humanity.”
+
+Anna Makanju, Vice President of Global Affairs, OpenAI said: “Advanced AI technologies have the potential to profoundly benefit society, and the ability to achieve this potential requires oversight and governance. It is vital that AI companies–especially those working on the most powerful models–align on common ground and advance thoughtful and adaptable safety practices to ensure powerful AI tools have the broadest benefit possible. This is urgent work and this forum is well-positioned to act quickly to advance the state of AI safety.”
+
+Dario Amodei, CEO, Anthropic said: “Anthropic believes that AI has the potential to fundamentally change how the world works. We are excited to collaborate with industry, civil society, government, and academia to promote safe and responsible development of the technology. The Frontier Model Forum will play a vital role in coordinating best practices and sharing research on frontier AI safety.”
+
+"
+OpenAI_Blog,https://openai.com/blog/moving-ai-governance-forward,,Moving AI governance forward,"5) Develop and deploy mechanisms that enable users to understand if audio or visual content is AI-generated, including robust provenance, watermarking, or both, for AI-generated audio or visual content
+
+Companies making this commitment recognize that it is important for people to be able to understand when audio or visual content is AI-generated. To further this goal, they agree to develop robust mechanisms, including provenance and/or watermarking systems for audio or visual content created by any of their publicly available systems within scope introduced after the watermarking system is developed. They will also develop tools or APIs to determine if a particular piece of content was created with their system. Audiovisual content that is readily distinguishable from reality or that is designed to be readily recognizable as generated by a company’s AI system—such as the default voices of AI assistants—is outside the scope of this commitment. The watermark or provenance data should include an identifier of the service or model that created the content, but it need not include any identifying user information. More generally, companies making this commitment pledge to work with industry peers and standards-setting bodies as appropriate towards developing a technical framework to help users distinguish audio or visual content generated by users from audio or visual content generated by AI.
+
+6) Publicly report model or system capabilities, limitations, and domains of appropriate and inappropriate use, including discussion of societal risks, such as effects on fairness and bias
+
+Companies making this commitment acknowledge that users should understand the known capabilities and limitations of the AI systems they use or interact with. They commit to publish reports for all new significant model public releases within scope. These reports should include the safety evaluations conducted (including in areas such as dangerous capabilities, to the extent that these are responsible to publicly disclose), significant limitations in performance that have implications for the domains of appropriate use, discussion of the model’s effects on societal risks such as fairness and bias, and the results of adversarial testing conducted to evaluate the model’s fitness for deployment.
+
+7) Prioritize research on societal risks posed by AI systems, including on avoiding harmful bias and discrimination, and protecting privacy
+
+Companies making this commitment recognize the importance of avoiding harmful biases from being propagated by, and discrimination enacted by, AI systems. Companies commit generally to empowering trust and safety teams, advancing AI safety research, advancing privacy, protecting children, and working to proactively manage the risks of AI so that its benefits can be realized.
+
+8) Develop and deploy frontier AI systems to help address society’s greatest challenges
+
+Companies making this commitment agree to support research and development of frontier AI systems that can help meet society’s greatest challenges, such as climate change mitigation and adaptation, early cancer detection and prevention, and combating cyber threats. Companies also commit to supporting initiatives that foster the education and training of students and workers to prosper from the benefits of AI, and to helping citizens understand the nature, capabilities, limitations, and impact of the technology.
+
+"
+OpenAI_Blog,https://openai.com/blog/custom-instructions-for-chatgpt,,Custom instructions for ChatGPT,"We’re introducing custom instructions so that you can tailor ChatGPT to better meet your needs. This feature will be available in beta starting with the Plus plan today, expanding to all users in the coming weeks. Custom instructions allow you to add preferences or requirements that you’d like ChatGPT to consider when generating its responses.
+
+We’ve heard your feedback about the friction of starting each ChatGPT conversation afresh. Through our conversations with users across 22 countries, we’ve deepened our understanding of the essential role steerability plays in enabling our models to effectively reflect the diverse contexts and unique needs of each person.
+
+ChatGPT will consider your custom instructions for every conversation going forward. The model will consider the instructions every time it responds, so you won’t have to repeat your preferences or information in every conversation.
+
+For example, a teacher crafting a lesson plan no longer has to repeat that they're teaching 3rd grade science. A developer preferring efficient code in a language that’s not Python – they can say it once, and it's understood. Grocery shopping for a big family becomes easier, with the model accounting for 6 servings in the grocery list.
+
+"
+OpenAI_Blog,https://openai.com/blog/partnership-with-american-journalism-project-to-support-local-news,,Partnership with American Journalism Project to support local news,"This news was originally shared by the American Journalism Project and can be read here.
+
+The American Journalism Project, the leading venture philanthropy working to rebuild local news, today announced a new partnership with OpenAI, the AI research and deployment company behind ChatGPT, to explore ways in which the development of artificial intelligence (AI) can support a thriving, innovative local news field.
+
+OpenAI is committing $5 million to the American Journalism Project to support the expansion of AJP’s work and up to $5 million in OpenAI API credits to help its grantee organizations assess and deploy emerging AI technologies within their organizations. The collaboration aims to establish lines of dialogue between the local news industry and OpenAI, and to develop tools that could assist local news organizations.
+
+
+
+“To ensure local journalism remains an essential pillar of our democracy, we need to be smart about the potential powers and pitfalls of new technology,” said Sarabeth Berman, CEO of the American Journalism Project. “In these early days of generative AI, we have the opportunity to ensure that local news organizations, and their communities, are involved in shaping its implications. With this partnership, we aim to promote ways for AI to enhance—rather than imperil—journalism.”
+
+There are significant opportunities for journalism organizations to use AI: it can facilitate deeper analysis of public data and information; strengthen and personalize user experience; and develop new formats for delivering information. At the same time, AI poses important challenges to developers, journalists and society, including the potential growth and spread of misinformation and complex questions surrounding bias, privacy, and copyright.
+
+Through this partnership, AJP aims to build the support structure for community-driven local news organizations to expand their capacities through AI. The partnership will also support AJP’s efforts to rebuild local news and create healthier information ecosystems at local levels to counter mis- and disinformation.
+
+“We proudly support the American Journalism Project’s mission to strengthen our democracy by rebuilding the country’s local news sector. This collaboration underscores our mission and belief that AI should benefit everyone and be used as a tool to enhance work,” said Sam Altman, CEO of OpenAI. “We look forward to working with AJP and its grantees, creating a valuable feedback loop, and exploring ways AI technology can bolster the work of local journalism.”
+
+
+
+AJP and its portfolio of local news organizations will use funds from OpenAI to experiment with the application of artificial intelligence in several ways:
+
+
+
+
+
+Creating a technology and AI studio: AJP will assemble a team that will assess the applications of AI within the local news sector. The studio will give AJP portfolio organizations expert coaching, add capacity as they explore how to best leverage AI tools, and will foster collaboration and a feedback loop with external partners like OpenAI and vendors working on AI’s applications that support high-quality journalism and impede the spread of misinformation. As part of this work, the studio will organize a learning community across the AJP portfolio to document and share best practices, guidelines, and lessons as experiments unfold.
+
+AJP will assemble a team that will assess the applications of AI within the local news sector. The studio will give AJP portfolio organizations expert coaching, add capacity as they explore how to best leverage AI tools, and will foster collaboration and a feedback loop with external partners like OpenAI and vendors working on AI’s applications that support high-quality journalism and impede the spread of misinformation. As part of this work, the studio will organize a learning community across the AJP portfolio to document and share best practices, guidelines, and lessons as experiments unfold. Making pilot investments: AJP will distribute direct grants to approximately ten of its portfolio organizations to help them explore opportunities to utilize AI’s capabilities. These grantees will pilot and experiment with numerous AI applications; their work will serve as examples for the entire local news field about ways to best use AI-powered tools.
+
+AJP will distribute direct grants to approximately ten of its portfolio organizations to help them explore opportunities to utilize AI’s capabilities. These grantees will pilot and experiment with numerous AI applications; their work will serve as examples for the entire local news field about ways to best use AI-powered tools. API credits from OpenAI: In addition to $5 million in funding, OpenAI will also contribute up to $5 million in API credits to AJP and its portfolio organizations, who may choose to build and use tools utilizing the technology.
+
+
+
+
+
+The American Journalism Project is the leading venture philanthropy working to address the market-failure in local news. It is establishing and advancing a new generation of nonprofit local news organizations across the country. Encouraging the adoption of new technology, to enhance journalism in the public interest, has been a core component of AJP’s venture support. To date, AJP has raised $139 million from local and national funders to address the local news crisis, and has backed 41 nonprofit local news organizations across the country.
+
+Founded in 2019, AJP is built on the evidence that robust journalism is an essential component of healthy democracy. Local news ensures that the public remains informed and engaged. The marked decline of local news, in the era of the internet, has had measurable consequences on civic life, weakening the power of residents to hold community, business, and government leaders accountable, and to connect with their neighbors on matters of mutual concern.
+
+Founded in 2015, OpenAI is a research and deployment company dedicated to ensuring that general-purpose artificial intelligence benefits all of humanity. The company is governed by a nonprofit and its original charter today."
+OpenAI_Blog,https://openai.com/blog/gpt-4-api-general-availability,,GPT-4 API general availability and deprecation of older models in the Completions API,"GPT-4 is our most capable model. Millions of developers have requested access to the GPT-4 API since March, and the range of innovative products leveraging GPT-4 is growing every day. Today all existing API developers with a history of successful payments can access the GPT-4 API with 8K context. We plan to open up access to new developers by the end of this month, and then start raising rate-limits after that depending on compute availability.
+
+Based on the stability and readiness of these models for production-scale use, we are also making the GPT-3.5 Turbo, DALL·E and Whisper APIs generally available. We are working on safely enabling fine-tuning for GPT-4 and GPT-3.5 Turbo and expect this feature to be available later this year.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-superalignment,,Introducing Superalignment,"Superintelligence will be the most impactful technology humanity has ever invented, and could help us solve many of the world’s most important problems. But the vast power of superintelligence could also be very dangerous, and could lead to the disempowerment of humanity or even human extinction.
+
+While superintelligence[^superintelligence] seems far off now, we believe it could arrive this decade.
+
+Managing these risks will require, among other things, new institutions for governance and solving the problem of superintelligence alignment:
+
+
+
+How do we ensure AI systems much smarter than humans follow human intent?
+
+
+
+Currently, we don't have a solution for steering or controlling a potentially superintelligent AI, and preventing it from going rogue. Our current techniques for aligning AI, such as reinforcement learning from human feedback, rely on humans’ ability to supervise AI. But humans won’t be able to reliably supervise AI systems much smarter than us,[^smarter] and so our current alignment techniques will not scale to superintelligence. We need new scientific and technical breakthroughs.
+
+"
+OpenAI_Blog,https://openai.com/blog/insights-from-global-conversations,,Insights from global conversations,"Our users and developers are already building valuable applications.
+
+We were inspired by the creativity and resourcefulness we saw on the trip. In Nigeria, high school students told us how they used ChatGPT to help break down complicated study topics. In Singapore, civil servants are incorporating OpenAI tools to provide public services more efficiently. In France, a grocery chain is using our tools to help customers reduce food waste and developers are using our tools to make code more efficient and secure. (We’re eager to hear more about how our services are making an impact—if you’ve got a story you think we should know about, please contact us.)
+
+
+
+
+
+There are common hopes and concerns for AI’s impact among communities.
+
+Many people shared their enthusiasm for the promise of the tools to expand and improve access to personalized education and healthcare, boost economic growth, and enable professionals across the board to reduce administrative tasks and focus on the highest-impact aspects of their work. There’s growing demand for code and services around the world, and more natural user interfaces can reduce literacy barriers and expand access to services. At the same time, many people we spoke to raised concerns related to misinformation, economic displacement, and safety and security risks of increasingly powerful models.
+
+
+
+
+
+Policymakers everywhere are deeply engaged on AI.
+
+Policymakers are focused on ensuring safe and beneficial deployment of current tools, and serious about addressing the positive potential as well as the risks of future models. We sat down with dozens of senior policymakers and heads of state around the globe to understand their approach to the rapid adoption of large AI models. What we heard was remarkably consistent: leaders want to maximize the benefit of this new technology for their citizens while putting in place appropriate guardrails to manage its risks, both those from the technology that exists today and those we expect to emerge as the technology becomes more powerful. The policymakers we spoke with want ongoing dialogue with, and safety commitments from, leading AI labs to be a key element of their approach, and are supportive of exploring a global framework to manage powerful future AI systems.
+
+
+
+
+
+People want to know more about our core values.
+
+The trip allowed us to reinforce our intentions. For example, one common question was on our use of customer data, giving us an opportunity to reiterate that we do not train on API customer data, and that ChatGPT users can easily opt-out as well. We also had a chance to share that we have always been focused on building thoughtful safety mechanisms—not only for AGI, but also for the AI products we’re shipping today. We will continue to invest deeply into making current systems safe before they are released and into improving them based on user feedback.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-openai-london,,Introducing OpenAI London,"Our first international office in London signifies a milestone in OpenAI’s growth, showcasing our commitment to broaden the scope of our operations, bring in diverse perspectives, and accelerate our mission of ensuring that artificial general intelligence (AGI) benefits all of humanity.
+
+“We are thrilled to extend our research and development footprint into London, a city globally renowned for its rich culture and exceptional talent pool,” says Diane Yoon, OpenAI’s VP of People. “We are eager to build dynamic teams in Research, Engineering, and Go-to-Market functions, as well as other areas, to reinforce our efforts in creating and promoting safe AGI.”"
+OpenAI_Blog,https://openai.com/blog/openai-cybersecurity-grant-program,,OpenAI Cybersecurity Grant Program,"We are launching the Cybersecurity Grant Program—a $1M initiative to boost and quantify AI-powered cybersecurity capabilities and to foster high-level AI and cybersecurity discourse.
+
+Our goal is to work with defenders across the globe to change the power dynamics of cybersecurity through the application of AI and the coordination of like-minded individuals working for our collective safety.
+
+Our program seeks to:
+
+Empower defenders: We would like to ensure that cutting-edge AI capabilities benefit defenders first and most. Measure capabilities: We are working to develop methods for quantifying the cybersecurity capabilities of AI models, in order to better understand and improve their effectiveness. Elevate discourse: We are dedicated to fostering rigorous discussions at the intersection of AI and cybersecurity, encouraging a comprehensive and nuanced understanding of the challenges and opportunities in this domain.
+
+A traditional view in cybersecurity is that the landscape naturally advantages attackers over defenders. This is summed up in the well-worn axiom: “Defense must be correct 100% of the time, attackers only have to be right once.” While it may be true that attackers face fewer constraints and take advantage of their flexibility, defenders have something more valuable—coordination towards a common goal of keeping people safe.
+
+Below are some general project ideas that our team has put forward:"
+OpenAI_Blog,https://openai.com/blog/democratic-inputs-to-ai,,Democratic inputs to AI,"AI will have significant, far-reaching economic and societal impacts. Technology shapes the lives of individuals, how we interact with one another, and how society as a whole evolves. We believe that decisions about how AI behaves should be shaped by diverse perspectives reflecting the public interest.
+
+​​Laws encode values and norms to regulate behavior. Beyond a legal framework, AI, much like society, needs more intricate and adaptive guidelines for its conduct. For example: under what conditions should AI systems condemn or criticize public figures, given different opinions across groups regarding those figures? How should disputed views be represented in AI outputs? Should AI by default reflect the persona of a median individual in the world, the user’s country, the user’s demographic, or something entirely different? No single individual, company, or even country should dictate these decisions.
+
+AGI should benefit all of humanity and be shaped to be as inclusive as possible. We are launching this grant program to take a first step in this direction. We are seeking teams from across the world to develop proof-of-concepts for a democratic process that could answer questions about what rules AI systems should follow. We want to learn from these experiments, and use them as the basis for a more global, and more ambitious process going forward. While these initial experiments are not (at least for now) intended to be binding for decisions, we hope that they explore decision relevant questions and build novel democratic tools that can more directly inform decisions in the future.
+
+The governance of the most powerful systems, as well as decisions regarding their deployment, must have strong public oversight. This grant represents a step to establish democratic processes for overseeing AGI and, ultimately, superintelligence. It will be provided by the OpenAI non-profit organization, and the results of the studies will be freely accessible.
+
+"
+OpenAI_Blog,https://openai.com/blog/governance-of-superintelligence,,Governance of superintelligence,"There are many ideas that matter for us to have a good chance at successfully navigating this development; here we lay out our initial thinking on three of them.
+
+First, we need some degree of coordination among the leading development efforts to ensure that the development of superintelligence occurs in a manner that allows us to both maintain safety and help smooth integration of these systems with society. There are many ways this could be implemented; major governments around the world could set up a project that many current efforts become part of, or we could collectively agree (with the backing power of a new organization like the one suggested below) that the rate of growth in AI capability at the frontier is limited to a certain rate per year.
+
+And of course, individual companies should be held to an extremely high standard of acting responsibly.
+
+Second, we are likely to eventually need something like an IAEA for superintelligence efforts; any effort above a certain capability (or resources like compute) threshold will need to be subject to an international authority that can inspect systems, require audits, test for compliance with safety standards, place restrictions on degrees of deployment and levels of security, etc. Tracking compute and energy usage could go a long way, and give us some hope this idea could actually be implementable. As a first step, companies could voluntarily agree to begin implementing elements of what such an agency might one day require, and as a second, individual countries could implement it. It would be important that such an agency focus on reducing existential risk and not issues that should be left to individual countries, such as defining what an AI should be allowed to say.
+
+Third, we need the technical capability to make a superintelligence safe. This is an open research question that we and others are putting a lot of effort into."
+OpenAI_Blog,https://openai.com/blog/introducing-the-chatgpt-app-for-ios,,Introducing the ChatGPT app for iOS,"Since the release of ChatGPT, we've heard from users that they love using ChatGPT on the go. Today, we’re launching the ChatGPT app for iOS.
+
+The ChatGPT app is free to use and syncs your history across devices. It also integrates Whisper, our open-source speech-recognition system, enabling voice input. ChatGPT Plus subscribers get exclusive access to GPT-4’s capabilities, early access to features and faster response times, all on iOS.
+
+Discover the versatility of ChatGPT:
+
+Instant answers: Get precise information without sifting through ads or multiple results.
+
+Tailored advice: Seek guidance on cooking, travel plans, or crafting thoughtful messages.
+
+Creative inspiration: Generate gift ideas, outline presentations, or write the perfect poem.
+
+Professional input: Boost productivity with idea feedback, note summarization, and technical topic assistance.
+
+Learning opportunities: Explore new languages, modern history, and more at your own pace.
+
+We're starting our rollout in the US and will expand to additional countries in the coming weeks. We’re eager to see how you use the app. As we gather user feedback, we’re committed to continuous feature and safety improvements for ChatGPT.
+
+With the ChatGPT app for iOS, we’re taking another step towards our mission by transforming state-of-the-art research into useful tools that empower people, while continuously making them more accessible.
+
+P.S. Android users, you're next! ChatGPT will be coming to your devices soon.
+
+"
+OpenAI_Blog,https://openai.com/blog/new-ways-to-manage-your-data-in-chatgpt,,New ways to manage your data in ChatGPT,"As an AI language model, I can perform a wide range of tasks, including but not limited to:
+
+Answering questions and providing general information on various topics Offering recommendations or suggestions Assisting with problem-solving and brainstorming ideas Creating written content, such as articles, essays, stories, and poems Proofreading and editing text for grammar, punctuation, and style Explaining complex concepts in simpler terms Assisting with language learning and providing translations Generating conversation on various topics Helping with programming and coding-related tasks Providing summaries of articles or documents
+
+Please note that my knowledge is based on the information available up to September 2021, so I might not be able to provide the most recent information or developments. Additionally, while I strive to be helpful, my responses may not always be perfect or accurate, so it's essential to verify critical information independently."
+OpenAI_Blog,https://openai.com/blog/bug-bounty-program,,Announcing OpenAI’s Bug Bounty Program,"OpenAI’s mission is to create artificial intelligence systems that benefit everyone. To that end, we invest heavily in research and engineering to ensure our AI systems are safe and secure. However, as with any complex technology, we understand that vulnerabilities and flaws can emerge.
+
+We believe that transparency and collaboration are crucial to addressing this reality. That’s why we are inviting the global community of security researchers, ethical hackers, and technology enthusiasts to help us identify and address vulnerabilities in our systems. We are excited to build on our coordinated disclosure commitments by offering incentives for qualifying vulnerability information. Your expertise and vigilance will have a direct impact on keeping our systems and users secure."
+OpenAI_Blog,https://openai.com/blog/our-approach-to-ai-safety,,Our approach to AI safety,"We work hard to prevent foreseeable risks before deployment, however, there is a limit to what we can learn in a lab. Despite extensive research and testing, we cannot predict all of the beneficial ways people will use our technology, nor all the ways people will abuse it. That’s why we believe that learning from real-world use is a critical component of creating and releasing increasingly safe AI systems over time.
+
+We cautiously and gradually release new AI systems—with substantial safeguards in place—to a steadily broadening group of people and make continuous improvements based on the lessons we learn.
+
+We make our most capable models available through our own services and through an API so developers can build this technology directly into their apps. This allows us to monitor for and take action on misuse, and continually build mitigations that respond to the real ways people misuse our systems—not just theories about what misuse might look like.
+
+Real-world use has also led us to develop increasingly nuanced policies against behavior that represents a genuine risk to people while still allowing for the many beneficial uses of our technology.
+
+Crucially, we believe that society must have time to update and adjust to increasingly capable AI, and that everyone who is affected by this technology should have a significant say in how AI develops further. Iterative deployment has helped us bring various stakeholders into the conversation about the adoption of AI technology more effectively than if they hadn't had firsthand experience with these tools.
+
+"
+OpenAI_Blog,https://openai.com/blog/march-20-chatgpt-outage,,March 20 ChatGPT outage: Here’s what happened,"We took ChatGPT offline earlier this week due to a bug in an open-source library which allowed some users to see titles from another active user’s chat history. It’s also possible that the first message of a newly-created conversation was visible in someone else’s chat history if both users were active around the same time.
+
+The bug is now patched. We were able to restore both the ChatGPT service and, later, its chat history feature, with the exception of a few hours of history. As promised, we’re publishing more technical details of this problem below.
+
+Upon deeper investigation, we also discovered that the same bug may have caused the unintentional visibility of payment-related information of 1.2% of the ChatGPT Plus subscribers who were active during a specific nine-hour window. In the hours before we took ChatGPT offline on Monday, it was possible for some users to see another active user’s first and last name, email address, payment address, credit card type and the last four digits (only) of a credit card number, and credit card expiration date. Full credit card numbers were not exposed at any time.
+
+We believe the number of users whose data was actually revealed to someone else is extremely low. To access this information, a ChatGPT Plus subscriber would have needed to do one of the following:
+
+Open a subscription confirmation email sent on Monday, March 20, between 1 a.m. and 10 a.m. Pacific time. Due to the bug, some subscription confirmation emails generated during that window were sent to the wrong users. These emails contained the credit card type and last four digits of another user’s credit card number, but full credit card numbers did not appear. It’s possible that a small number of subscription confirmation emails might have been incorrectly addressed prior to March 20, although we have not confirmed any instances of this.
+
+In ChatGPT, click on “My account,” then “Manage my subscription” between 1 a.m. and 10 a.m. Pacific time on Monday, March 20. During this window, another active ChatGPT Plus user’s first and last name, email address, payment address, the credit card type and last four digits (only) of a credit card number, and credit card expiration date might have been visible. It’s possible that this also could have occurred prior to March 20, although we have not confirmed any instances of this.
+
+We have reached out to notify affected users that their payment information may have been exposed. We are confident that there is no ongoing risk to users’ data.
+
+Everyone at OpenAI is committed to protecting our users’ privacy and keeping their data safe. It’s a responsibility we take incredibly seriously. Unfortunately, this week we fell short of that commitment, and of our users’ expectations. We apologize again to our users and to the entire ChatGPT community and will work diligently to rebuild trust.
+
+"
+OpenAI_Blog,https://openai.com/blog/chatgpt-plugins,,ChatGPT plugins,"In line with our iterative deployment philosophy, we are gradually rolling out plugins in ChatGPT so we can study their real-world use, impact, and safety and alignment challenges—all of which we’ll have to get right in order to achieve our mission.
+
+Users have been asking for plugins since we launched ChatGPT (and many developers are experimenting with similar ideas) because they unlock a vast range of possible use cases. We’re starting with a small set of users and are planning to gradually roll out larger-scale access as we learn more (for plugin developers, ChatGPT users, and after an alpha period, API users who would like to integrate plugins into their products). We’re excited to build a community shaping the future of the human–AI interaction paradigm.
+
+Plugin developers who have been invited off our waitlist can use our documentation to build a plugin for ChatGPT, which then lists the enabled plugins in the prompt shown to the language model as well as documentation to instruct the model how to use each. The first plugins have been created by Expedia, FiscalNote, Instacart, KAYAK, Klarna, Milo, OpenTable, Shopify, Slack, Speak, Wolfram, and Zapier."
+OpenAI_Blog,https://openai.com/blog/introducing-chatgpt-and-whisper-apis,,Introducing ChatGPT and Whisper APIs,"Model: The ChatGPT model family we are releasing today, gpt-3.5-turbo , is the same model used in the ChatGPT product. It is priced at $0.002 per 1k tokens, which is 10x cheaper than our existing GPT-3.5 models. It’s also our best model for many non-chat use cases—we’ve seen early testers migrate from text-davinci-003 to gpt-3.5-turbo with only a small amount of adjustment needed to their prompts.
+
+
+
+API: Traditionally, GPT models consume unstructured text, which is represented to the model as a sequence of “tokens.” ChatGPT models instead consume a sequence of messages together with metadata. (For the curious: under the hood, the input is still rendered to the model as a sequence of “tokens” for the model to consume; the raw format used by the model is a new format called Chat Markup Language (“ChatML”).)
+
+We’ve created a new endpoint to interact with our ChatGPT models:
+
+"
+OpenAI_Blog,https://openai.com/blog/planning-for-agi-and-beyond,,Planning for AGI and beyond,"Second, we are working towards creating increasingly aligned and steerable models. Our shift from models like the first version of GPT-3 to InstructGPT and ChatGPT is an early example of this.
+
+In particular, we think it’s important that society agree on extremely wide bounds of how AI can be used, but that within those bounds, individual users have a lot of discretion. Our eventual hope is that the institutions of the world agree on what these wide bounds should be; in the shorter term we plan to run experiments for external input. The institutions of the world will need to be strengthened with additional capabilities and experience to be prepared for complex decisions about AGI.
+
+The “default setting” of our products will likely be quite constrained, but we plan to make it easy for users to change the behavior of the AI they’re using. We believe in empowering individuals to make their own decisions and the inherent power of diversity of ideas.
+
+We will need to develop new alignment techniques as our models become more powerful (and tests to understand when our current techniques are failing). Our plan in the shorter term is to use AI to help humans evaluate the outputs of more complex models and monitor complex systems, and in the longer term to use AI to help us come up with new ideas for better alignment techniques.
+
+Importantly, we think we often have to make progress on AI safety and capabilities together. It’s a false dichotomy to talk about them separately; they are correlated in many ways. Our best safety work has come from working with our most capable models. That said, it’s important that the ratio of safety progress to capability progress increases.
+
+Third, we hope for a global conversation about three key questions: how to govern these systems, how to fairly distribute the benefits they generate, and how to fairly share access.
+
+In addition to these three areas, we have attempted to set up our structure in a way that aligns our incentives with a good outcome. We have a clause in our Charter about assisting other organizations to advance safety instead of racing with them in late-stage AGI development. We have a cap on the returns our shareholders can earn so that we aren’t incentivized to attempt to capture value without bound and risk deploying something potentially catastrophically dangerous (and of course as a way to share the benefits with society). We have a nonprofit that governs us and lets us operate for the good of humanity (and can override any for-profit interests), including letting us do things like cancel our equity obligations to shareholders if needed for safety and sponsor the world’s most comprehensive UBI experiment.
+
+"
+OpenAI_Blog,https://openai.com/blog/how-should-ai-systems-behave,,"How should AI systems behave, and who should decide?","In pursuit of our mission, we’re committed to ensuring that access to, benefits from, and influence over AI and AGI are widespread. We believe there are at least three building blocks required in order to achieve these goals in the context of AI system behavior.[^scope]
+
+1. Improve default behavior. We want as many users as possible to find our AI systems useful to them “out of the box” and to feel that our technology understands and respects their values.
+
+Towards that end, we are investing in research and engineering to reduce both glaring and subtle biases in how ChatGPT responds to different inputs. In some cases ChatGPT currently refuses outputs that it shouldn’t, and in some cases, it doesn’t refuse when it should. We believe that improvement in both respects is possible.
+
+Additionally, we have room for improvement in other dimensions of system behavior such as the system “making things up.” Feedback from users is invaluable for making these improvements.
+
+2. Define your AI’s values, within broad bounds. We believe that AI should be a useful tool for individual people, and thus customizable by each user up to limits defined by society. Therefore, we are developing an upgrade to ChatGPT to allow users to easily customize its behavior.
+
+This will mean allowing system outputs that other people (ourselves included) may strongly disagree with. Striking the right balance here will be challenging–taking customization to the extreme would risk enabling malicious uses of our technology and sycophantic AIs that mindlessly amplify people’s existing beliefs.
+
+There will therefore always be some bounds on system behavior. The challenge is defining what those bounds are. If we try to make all of these determinations on our own, or if we try to develop a single, monolithic AI system, we will be failing in the commitment we make in our Charter to “avoid undue concentration of power.”
+
+3. Public input on defaults and hard bounds. One way to avoid undue concentration of power is to give people who use or are affected by systems like ChatGPT the ability to influence those systems’ rules.
+
+We believe that many decisions about our defaults and hard bounds should be made collectively, and while practical implementation is a challenge, we aim to include as many perspectives as possible. As a starting point, we’ve sought external input on our technology in the form of red teaming. We also recently began soliciting public input on AI in education (one particularly important context in which our technology is being deployed).
+
+We are in the early stages of piloting efforts to solicit public input on topics like system behavior, disclosure mechanisms (such as watermarking), and our deployment policies more broadly. We are also exploring partnerships with external organizations to conduct third-party audits of our safety and policy efforts.
+
+"
+OpenAI_Blog,https://openai.com/blog/chatgpt-plus,,Introducing ChatGPT Plus,"The new subscription plan, ChatGPT Plus, will be available for $20/month, and subscribers will receive a number of benefits:
+
+General access to ChatGPT, even during peak times
+
+Faster response times
+
+Priority access to new features and improvements
+
+ChatGPT Plus is available to customers in the United States and around the world.[^footnote-expansion-update]
+
+We love our free users and will continue to offer free access to ChatGPT. By offering this subscription pricing, we will be able to help support free access availability to as many people as possible.
+
+"
+OpenAI_Blog,https://openai.com/blog/new-ai-classifier-for-indicating-ai-written-text,,New AI classifier for indicating AI-written text,"We’ve trained a classifier to distinguish between text written by a human and text written by AIs from a variety of providers. While it is impossible to reliably detect all AI-written text, we believe good classifiers can inform mitigations for false claims that AI-generated text was written by a human: for example, running automated misinformation campaigns, using AI tools for academic dishonesty, and positioning an AI chatbot as a human.
+
+Our classifier is not fully reliable. In our evaluations on a “challenge set” of English texts, our classifier correctly identifies 26% of AI-written text (true positives) as “likely AI-written,” while incorrectly labeling human-written text as AI-written 9% of the time (false positives). Our classifier’s reliability typically improves as the length of the input text increases. Compared to our previously released classifier, this new classifier is significantly more reliable on text from more recent AI systems.
+
+We’re making this classifier publicly available to get feedback on whether imperfect tools like this one are useful. Our work on the detection of AI-generated text will continue, and we hope to share improved methods in the future.
+
+Try our free work-in-progress classifier yourself:
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-and-microsoft-extend-partnership,,OpenAI and Microsoft extend partnership,"This multi-year, multi-billion dollar investment from Microsoft follows their previous investments in 2019 and 2021, and will allow us to continue our independent research and develop AI that is increasingly safe, useful, and powerful.
+
+In pursuit of our mission to ensure advanced AI benefits all of humanity, OpenAI remains a capped-profit company and is governed by the OpenAI non-profit. This structure allows us to raise the capital we need to fulfill our mission without sacrificing our core beliefs about broadly sharing benefits and the need to prioritize safety.
+
+Microsoft shares this vision and our values, and our partnership is instrumental to our progress.
+
+We’ve worked together to build multiple supercomputing systems powered by Azure, which we use to train all of our models. Azure’s unique architecture design has been crucial in delivering best-in-class performance and scale for our AI training and inference workloads. Microsoft will increase their investment in these systems to accelerate our independent research and Azure will remain the exclusive cloud provider for all OpenAI workloads across our research, API and products.
+
+Learning from real-world use—and incorporating those lessons—is a critical part of developing powerful AI systems that are safe and useful. Scaling that use also ensures AI’s benefits can be distributed broadly. So, we’ve partnered with Microsoft to deploy our technology through our API and the Azure OpenAI Service—enabling enterprise and developers to build on top of GPT, DALL·E, and Codex. We’ve also worked together to build OpenAI’s technology into apps like GitHub Copilot and Microsoft Designer.
+
+In an effort to build and deploy safe AI systems, our teams regularly collaborate to review and synthesize shared lessons—and use them to inform iterative updates to our systems, future research, and best practices for use of these powerful AI systems across the industry.
+
+We look forward to continued collaboration and advancing this progress with Microsoft.
+
+"
+OpenAI_Blog,https://openai.com/blog/the-power-of-continuous-learning,,The power of continuous learning,"During my first 2.5 years at OpenAI, I worked on the Robotics team on a moonshot idea: we wanted to teach a single, human-like robot hand to solve Rubik’s cube. It was a tremendously exciting, challenging, and emotional experience. We solved the challenge with deep reinforcement learning (RL), crazy amounts of domain randomization, and no real-world training data. More importantly, we conquered the challenge as a team.
+
+From simulation and RL training to vision perception and hardware firmware, we collaborated so closely and cohesively. It was an amazing experiment and during that time, I often thought of Steve Jobs’ reality distortion field: when you believe in something so strongly and keep on pushing it so persistently, somehow you can make the impossible possible.
+
+Since the beginning of 2021, I started leading the Applied AI Research team. Managing a team presents a different set of challenges and requires working style changes. I’m most proud of several projects related to language model safety within Applied AI:
+
+We designed and constructed a set of evaluation data and tasks to assess the tendency of pre-trained language models to generate hateful, sexual, or violent content. We created a detailed taxonomy and built a strong classifier to detect unwanted content as well as the reason why the content is inappropriate. We are working on various techniques to make the model less likely to generate unsafe outputs.
+
+As the Applied AI team is practicing the best way to deploy cutting-edge AI techniques, such as large pre-trained language models, we see how powerful and useful they are for real-world tasks. We are also aware of the importance of safely deploying the techniques, as emphasized in our Charter."
+OpenAI_Blog,https://openai.com/blog/new-and-improved-embedding-model,,New and improved embedding model,"Unification of capabilities. We have significantly simplified the interface of the /embeddings endpoint by merging the five separate models shown above ( text-similarity , text-search-query , text-search-doc , code-search-text and code-search-code ) into a single new model. This single representation performs better than our previous embedding models across a diverse set of text search, sentence similarity, and code search benchmarks.
+
+Longer context. The context length of the new model is increased by a factor of four, from 2048 to 8192, making it more convenient to work with long documents.
+
+Smaller embedding size. The new embeddings have only 1536 dimensions, one-eighth the size of davinci-001 embeddings, making the new embeddings more cost effective in working with vector databases.
+
+Reduced price. We have reduced the price of new embedding models by 90% compared to old models of the same size. The new model achieves better or similar performance as the old Davinci models at a 99.8% lower price.
+
+Overall, the new embedding model is a much more powerful tool for natural language processing and code tasks. We are excited to see how our customers will use it to create even more capable applications in their respective fields.
+
+"
+OpenAI_Blog,https://openai.com/blog/discovering-the-minutiae-of-backend-systems,,Discovering the minutiae of backend systems,"I was fortunate to discover programming at a young age and used that as a gateway to explore other topics. In middle school, a friend introduced me to the particular flavor of the BASIC programming language included with Texas Instruments calculators (my code was predictably unmaintainable given a restriction of 27 single-letter variables per program and a heavy reliance on GOTO statements). Nevertheless, we created some simple programs, like text-based adventure games, a chat app for linked calculators, and the usual quadratic formula aide.
+
+Later on, I wrote more complicated programs: a visual helper for illustrating Newton’s method and an orbit calculator for estimating the position of the planets and their moons, which caught the eye of my school’s Linux club. Soon, I was tussling with NDISwrapper trying to get my laptop’s CardBus-based WiFi adapter working and setting my desktop windows ablaze with Compiz! That pattern of discovery via code continued throughout high school and beyond, resulting in my engineering interest today.
+
+"
+OpenAI_Blog,https://openai.com/blog/chatgpt,,Introducing ChatGPT,"Fermat’s Little Theorem is used in cryptography in several ways. One of the most common applications is in the generation of so-called “public-key” cryptography systems, which are used to securely transmit messages over the internet and other networks.
+
+In a public-key cryptography system, each user has a pair of keys: a public key, which is widely known and can be used by anyone to encrypt a message intended for that user, and a private key, which is known only to the user and is used to decrypt messages that have been encrypted with the corresponding public key.
+
+One way to generate these keys is to use prime numbers and Fermat’s Little Theorem. For example, suppose we want to generate a public-key cryptography system for a user with the initials “ABC”. We might choose two large prime numbers, p p p and q q q, and then compute the product n = p q n = pq n=pq.
+
+The user’s public key would then be the pair ( n , a ) (n, a) (n,a), where aa is any integer not divisible by p p p or q q q. The user’s private key would be the pair ( n , b ) (n, b) (n,b), where b b b is the modular multiplicative inverse of a modulo n n n. This means that when we multiply a a a and b b b together, the result is congruent to 1 1 1 modulo n n n.
+
+To encrypt a message with the user’s public key ( n , a ) (n, a) (n,a), we first convert the message into a number m m m (using some agreed-upon scheme), and then compute the encrypted message c c c as c = m a m o d n c = m^a \bmod n c=mamodn. To decrypt the message, the recipient simply computes m = c b m o d n m = c^b \bmod n m=cbmodn, which (by Fermat’s Little Theorem) is equivalent to m = ( m a ) b m o d n = m ( a b ) m o d n = m 1 m o d n = m m o d n m = (m^a)^b \bmod n = m^(ab) \bmod n = m^1 \bmod n = m \bmod n m=(ma)bmodn=m(ab)modn=m1modn=mmodn.
+
+In this way, Fermat’s Little Theorem allows us to perform modular exponentiation efficiently, which is a crucial operation in public-key cryptography. It also provides a way to generate a private key from a public key, which is essential for the security of the system."
+OpenAI_Blog,https://openai.com/blog/dall-e-api-now-available-in-public-beta,,DALL·E API now available in public beta,"Microsoft is bringing DALL·E to a new graphic design app called Designer, which helps users create professional quality social media posts, invitations, digital postcards, graphics, and more.
+
+Microsoft is also integrating DALL·E in Bing and Microsoft Edge with Image Creator, allowing users to create images if web results don’t return what they’re looking for.
+
+"
+OpenAI_Blog,https://openai.com/blog/dall-e-now-available-without-waitlist,,DALL·E now available without waitlist,"Starting today, we are removing the waitlist for the DALL·E beta so users can sign up and start using it immediately. More than 1.5M users are now actively creating over 2M images a day with DALL·E, from artists and creative directors to authors and architects, with over 100K users sharing their creations and feedback in our Discord community.
+
+Responsibly scaling a system as powerful and complex as DALL·E—while learning about all the creative ways it can be used and misused—has required an iterative deployment approach.
+
+Since we first previewed the DALL·E research to users in April, users have helped us discover new uses for DALL·E as a powerful creative tool. Artists, in particular, have provided important input on DALL·E’s features.
+
+"
+OpenAI_Blog,https://openai.com/blog/dall-e-introducing-outpainting,,DALL·E: Introducing outpainting,"DALL·E’s Edit feature already enables changes within a generated or uploaded image, a capability known as Inpainting. Now, with Outpainting, users can extend the original image, creating large-scale images in any aspect ratio. Outpainting takes into account the image’s existing visual elements—including shadows, reflections, and textures—to maintain the context of the original image.
+
+More than one million people are using DALL·E, the AI system that generates original images and artwork from a natural language description, as a creative tool today. Artists have already created remarkable images with the new Outpainting feature, and helped us better understand its capabilities in the process.
+
+"
+OpenAI_Blog,https://openai.com/blog/our-approach-to-alignment-research,,Our approach to alignment research,"Our alignment research aims to make artificial general intelligence (AGI) aligned with human values and follow human intent. We take an iterative, empirical approach: by attempting to align highly capable AI systems, we can learn what works and what doesn’t, thus refining our ability to make AI systems safer and more aligned. Using scientific experiments, we study how alignment techniques scale and where they will break.
+
+We tackle alignment problems both in our most capable AI systems as well as alignment problems that we expect to encounter on our path to AGI. Our main goal is to push current alignment ideas as far as possible, and to understand and document precisely how they can succeed or why they will fail. We believe that even without fundamentally new alignment ideas, we can likely build sufficiently aligned AI systems to substantially advance alignment research itself.
+
+Unaligned AGI could pose substantial risks to humanity and solving the AGI alignment problem could be so difficult that it will require all of humanity to work together. Therefore we are committed to openly sharing our alignment research when it’s safe to do so: We want to be transparent about how well our alignment techniques actually work in practice and we want every AGI developer to use the world’s best alignment techniques.
+
+At a high-level, our approach to alignment research focuses on engineering a scalable training signal for very smart AI systems that is aligned with human intent. It has three main pillars:
+
+Training AI systems using human feedback Training AI systems to assist human evaluation Training AI systems to do alignment research
+
+Aligning AI systems with human values also poses a range of other significant sociotechnical challenges, such as deciding to whom these systems should be aligned. Solving these problems is important to achieving our mission, but we do not discuss them in this post.
+
+"
+OpenAI_Blog,https://openai.com/blog/new-and-improved-content-moderation-tooling,,New and improved content moderation tooling,"To help developers protect their applications against possible misuse, we are introducing the faster and more accurate Moderation endpoint. This endpoint provides OpenAI API developers with free access to GPT-based classifiers that detect undesired content—an instance of using AI systems to assist with human supervision of these systems. We have also released both a technical paper describing our methodology and the dataset used for evaluation.
+
+When given a text input, the Moderation endpoint assesses whether the content is sexual, hateful, violent, or promotes self-harm—content prohibited by our content policy. The endpoint has been trained to be quick, accurate, and to perform robustly across a range of applications. Importantly, this reduces the chances of products “saying” the wrong thing, even when deployed to users at-scale. As a consequence, AI can unlock benefits in sensitive settings, like education, where it could not otherwise be used with confidence.
+
+"
+OpenAI_Blog,https://openai.com/blog/dall-e-now-available-in-beta,,DALL·E now available in beta,"DALL·E, the AI system that creates realistic images and art from a description in natural language, is now available in beta. Today we’re beginning the process of inviting 1 million people from our waitlist over the coming weeks.
+
+Every DALL·E user will receive 50 free credits during their first month of use and 15 free credits every subsequent month. Each credit can be used for one original DALL·E prompt generation — returning four images — or an edit or variation prompt, which returns three images.
+
+Free credits are available to early adopters who signed up to use DALL·E before April 6, 2023"
+OpenAI_Blog,https://openai.com/blog/reducing-bias-and-improving-safety-in-dall-e-2,,Reducing bias and improving safety in DALL·E 2,"In April, we started previewing the DALL·E 2 research to a limited number of people, which has allowed us to better understand the system’s capabilities and limitations and improve our safety systems.
+
+During this preview phase, early users have flagged sensitive and biased images which have helped inform and evaluate this new mitigation.
+
+We are continuing to research how AI systems, like DALL·E, might reflect biases in its training data and different ways we can address them.
+
+During the research preview we have taken other steps to improve our safety systems, including:
+
+Minimizing the risk of DALL·E being misused to create deceptive content by rejecting image uploads containing realistic faces and attempts to create the likeness of public figures, including celebrities and prominent political figures.
+
+Making our content filters more accurate so that they are more effective at blocking prompts and image uploads that violate our content policy while still allowing creative expression.
+
+Refining automated and human monitoring systems to guard against misuse.
+
+These improvements have helped us gain confidence in the ability to invite more users to experience DALL·E.
+
+Expanding access is an important part of our deploying AI systems responsibly because it allows us to learn more about real-world use and continue to iterate on our safety systems.
+
+"
+OpenAI_Blog,https://openai.com/blog/dall-e-2-extending-creativity,,DALL·E 2: Extending creativity,"James and his wife Kristin Orrigo created the Big Dreams Virtual Tour which focuses on creating special memories and a positive distraction for pediatric cancer patients around the world. The Orrigos have worked in top children’s hospitals around the country and now virtually meet up with families, bringing children’s ideas to life through personalized cartoons, music videos, and mobility friendly video games. Orrigo says children and teens light up when they see their DALL·E-generated creations, and they are ready to be the star of a story brought to life from their imaginations.
+
+Most recently, Orrigo and his team have been working with a young cancer survivor named Gianna to create a music video featuring herself as Wonder Woman fighting her enemy: the cancer cells.
+
+""We didn’t know what an osteosarcoma villain would look like so we turned to DALL·E as our creative outlet. DALL·E gave us a huge amount of inspiration,” Orrigo said. “Unfortunately, Gianna knows this battle all too well. But we are celebrating her victory by bringing her cartoon music video to real life to spread awareness about pediatric cancer and to give Gianna an unforgettable memory.”
+
+"
+OpenAI_Blog,https://openai.com/blog/best-practices-for-deploying-language-models,,Best practices for deploying language models,"We’re recommending several key principles to help providers of large language models (LLMs) mitigate the risks of this technology in order to achieve its full promise to augment human capabilities.
+
+While these principles were developed specifically based on our experience with providing LLMs through an API, we hope they will be useful regardless of release strategy (such as open-sourcing or use within a company). We expect these recommendations to change significantly over time because the commercial uses of LLMs and accompanying safety considerations are new and evolving. We are actively learning about and addressing LLM limitations and avenues for misuse, and will update these principles and practices in collaboration with the broader community over time.
+
+We’re sharing these principles in hopes that other LLM providers may learn from and adopt them, and to advance public discussion on LLM development and deployment.
+
+"
+OpenAI_Blog,https://openai.com/blog/codex-apps,,Powering next generation applications with OpenAI Codex,"OpenAI Codex, a natural language-to-code system based on GPT-3, helps turn simple English instructions into over a dozen popular coding languages. Codex was released last August through our API and is the principal building block of GitHub Copilot.
+
+Our motivation behind Codex is to supplement developers’ work and increase productivity. Codex helps computers to better understand people’s intent, which enables everyone to do more with computers. This is an integral part of our mission to build general-purpose AI that benefits all of humanity.
+
+For enterprise customers, Microsoft’s Azure OpenAI Service provides developers with access to Codex and our other models, like GPT-3 and embeddings, along with enterprise-grade capabilities that are built into Microsoft Azure. At its Build conference today, Microsoft announced that Azure OpenAI Service—previously available by invitation only—is now available in a limited access preview. We’re already seeing new applications of Azure OpenAI Service across many industry verticals, from healthcare to financial services.
+
+"
+OpenAI_Blog,https://openai.com/blog/gpt-3-edit-insert,,New GPT-3 capabilities: Edit & insert,"Insert is particularly useful for writing code. In fact, Codex was our original motivation for developing this capability, since in software development we typically add code to the middle of an existing file where code is present before and after the completion. In the example above, the model successfully completes the missing function prune , while connecting to code already written. We also add a docstring and missing imports, which is not possible without knowing the code that comes after. In GitHub Copilot, Insert is currently being piloted with early promising results.
+
+The insert capability is available in the API today in beta, as part of the completions endpoint and via a new interface in Playground. The capability can be used with the latest versions of GPT-3 and Codex, text-davinci-002 and code-davinci-002 . Pricing is the same as previous versions of Davinci.
+
+"
+OpenAI_Blog,https://openai.com/blog/economic-impacts,,Economic impacts research at OpenAI,"Core to our mission of ensuring that artificial general intelligence benefits all of humanity is understanding the economic impacts that our models will have or are having on individuals and society as a whole. Developing tools to rigorously measure the economic impacts of our models is essential to making smarter development and deployment decisions and critical to informing public policy options that maximize human prosperity and minimize the risk of economic harms from AI. Our ability to generate high quality evidence to inform these decisions will be greatly enhanced by developing a range of productive research partnerships, and we firmly believe that AI developers need to support external researchers undertaking this work, rather than exclusively conducting research in-house.
+
+Under this premise, you can see our first public research agenda on these topics. This describes our preliminary priorities for research on the economic impacts of large language models broadly. We are excited to complement this research agenda with concrete action to facilitate improved measurement of the economic impacts of our models. We are launching a call for expressions of interest from researchers interested in studying the economic impacts of Codex and our other large language model releases like GPT-3, ChatGPT, and DALL-E 2 and a portal for customers to submit interest in supporting this work. You can find more information on both below.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-text-and-code-embeddings,,Introducing text and code embeddings,"Embeddings are numerical representations of concepts converted to number sequences, which make it easy for computers to understand the relationships between those concepts. Our embeddings outperform top models in 3 standard benchmarks, including a 20% relative improvement in code search.
+
+Embeddings are useful for working with natural language and code, because they can be readily consumed and compared by other machine learning models and algorithms like clustering or search.
+
+"
+OpenAI_Blog,https://openai.com/blog/customizing-gpt-3,,Customizing GPT-3 for your application,"Developers can now fine-tune GPT-3 on their own data, creating a custom version tailored to their application. Customizing makes GPT-3 reliable for a wider variety of use cases and makes running the model cheaper and faster.
+
+You can use an existing dataset of virtually any shape and size, or incrementally add data based on user feedback. With fine-tuning, one API customer was able to increase correct outputs from 83% to 95%. By adding new data from their product each week, another reduced error rates by 50%.
+
+To get started, just run a single command in the OpenAI command line tool with a file you provide. Your custom version will start training and then be available immediately in our API.
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-residency,,OpenAI Residency,"As part of our effort to support and develop AI talent, we’re excited to announce the OpenAI Residency. This new program offers a pathway to a full-time role at OpenAI for researchers and engineers who don’t currently focus on artificial intelligence. We are excited to get applications from everyone, and will make a special effort to hear from underrepresented groups in technology.
+
+The program is an iteration of our former Scholars and Fellows programs. The Residency shifts the focus away from curriculum-based learning, instead giving Residents an opportunity to work collaboratively alongside OpenAI teams on active projects.
+
+The first cohort of the six-month program begins in April 2022 and Residents will be compensated as fully salaried employees for the duration of the program.
+
+“There are many talented people who want to contribute to AI but cannot find an easy way to do so,” said Ilya Sutskever, OpenAI’s Chief Scientist. “The Residency aims to address that, by teaching participants the most important practical AI skills in a hands-on way as quickly as possible. We’ve welcomed incredible new talent to OpenAI through our Fellows and Scholars programs, who have made major research contributions and helped advance OpenAI’s goal of building beneficial AGI.”
+
+Over the last three years we’ve made more than 20 full-time hires through our mentorship programs, representing one in six members of our technical staff, and our new iteration will broaden the range of candidates we are considering.
+
+Excellent work and experience can come from both inside and outside of the traditional education and work settings. OpenAI has long been home to many self-taught researchers and engineers. If you have an unconventional educational background, we encourage you to apply. Our goal is for this program to be as inclusive and diverse as possible, and we will provide immigration and relocation support to high-potential talent globally.
+
+“We’re going to need the best, most diverse talent and innovative minds out there to achieve our mission,” said Sam Altman, OpenAI’s CEO. “This type of thinker might be at a university, they might be fresh out of high school, working at a cutting-edge tech company or building something on their own. This program is an excellent way for people who are curious, passionate, and skilled to sharpen their focus on AI and machine learning—and to help us invent the future.”"
+OpenAI_Blog,https://openai.com/blog/api-no-waitlist,,OpenAI’s API now available with no waitlist,"OpenAI is committed to the safe deployment of AI. Since the launch of our API, we’ve made deploying applications faster and more streamlined while adding new safety features. Our progress with safeguards makes it possible to remove the waitlist for GPT-3. Starting today, developers in supported countries can sign up and start experimenting with our API right away.
+
+Improvements to our API over the past year include the Instruct Series models that adhere better to human instructions, specialized endpoints for more truthful question-answering, and a free content filter to help developers mitigate abuse. Our work also allows us to review applications before they go live, monitor for misuse, support developers as their product scales, and better understand the effects of this technology.
+
+Other changes include an improved Playground, which makes it easy to prototype with our models, an example library with dozens of prompts to get developers started, and Codex, a new model that translates natural language into code.
+
+Tens of thousands of developers are already taking advantage of powerful AI models through our platform. We believe that by opening access to these models via an easy-to-use API, more developers will find creative ways to apply AI to a large number of useful applications and open problems.
+
+To ensure API-backed applications are built responsibly, we provide tools and help developers use best practices so they can bring their applications to production quickly and safely. As our systems evolve and we work to improve the capabilities of our safeguards, we expect to continue streamlining the process for developers, refining our usage guidelines, and allowing even more use cases over time.
+
+As another step in this direction, we are also updating our content guidelines to clarify what kind of content our API can be used to generate. Our policies have always prohibited the use of our API in ways that do not adhere to the principles described in our Charter, and content like hate speech remains prohibited.
+
+To help developers ensure their applications are used for their intended purpose, prevent potential misuse, and adhere to our content guidelines, we offer developers a free content filter. We are currently testing targeted filters for specific content categories with some customers.
+
+We are also prohibiting certain types of content on our API, like adult content, where our system is not currently able to reliably discern harmful from acceptable use. We are continually working to make our content filters more robust and we intend to allow acceptable use within some categories as our system improves.
+
+We’re excited to have the safeguards in place to open up GPT-3 for more developers. As our safeguards continue to improve, we will expand how the API can be used while further improving the experience for our users. Sign up today and try it out.
+
+"
+OpenAI_Blog,https://openai.com/blog/helen-toner-joins,,Helen Toner joins OpenAI’s board of directors,"Today, we’re excited to announce the appointment of Helen Toner to our board of directors. As the Director of Strategy at Georgetown’s Center for Security and Emerging Technology (CSET), Helen has deep expertise in AI policy and global AI strategy research. This appointment advances our dedication to the safe and responsible deployment of technology as a part of our mission to ensure general-purpose AI benefits all of humanity.
+
+""I greatly value Helen’s deep thinking around the long-term risks and effects of AI,” added Greg Brockman, OpenAI’s chairman and Chief Technology Officer. “I’m looking forward to the impact she will have on our progress towards achieving our mission.”
+
+""Helen brings an understanding of the global AI landscape with an emphasis on safety, which is critical for our efforts and mission,” said Sam Altman, OpenAI’s CEO. “We are delighted to add her leadership to our board.”
+
+""OpenAI is a unique organization in the AI research space, and has produced some of the advances, publications, and products I’m most excited about,” said Helen Toner. “I strongly believe in the organization’s aim of building AI for the benefit of all, and am honored to have this opportunity to contribute to that mission.”
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-codex,,OpenAI Codex,"OpenAI Codex is a descendant of GPT-3; its training data contains both natural language and billions of lines of source code from publicly available sources, including code in public GitHub repositories. OpenAI Codex is most capable in Python, but it is also proficient in over a dozen languages including JavaScript, Go, Perl, PHP, Ruby, Swift and TypeScript, and even Shell. It has a memory of 14KB for Python code, compared to GPT-3 which has only 4KB—so it can take into account over 3x as much contextual information while performing any task.
+
+GPT-3’s main skill is generating natural language in response to a natural language prompt, meaning the only way it affects the world is through the mind of the reader. OpenAI Codex has much of the natural language understanding of GPT-3, but it produces working code—meaning you can issue commands in English to any piece of software with an API. OpenAI Codex empowers computers to better understand people’s intent, which can empower everyone to do more with computers.
+
+Once a programmer knows what to build, the act of writing code can be thought of as (1) breaking a problem down into simpler problems, and (2) mapping those simple problems to existing code (libraries, APIs, or functions) that already exist. The latter activity is probably the least fun part of programming (and the highest barrier to entry), and it’s where OpenAI Codex excels most.
+
+OpenAI Codex is a general-purpose programming model, meaning that it can be applied to essentially any programming task (though results may vary). We’ve successfully used it for transpilation, explaining code, and refactoring code. But we know we’ve only scratched the surface of what can be done.
+
+We’re now making OpenAI Codex available in private beta via our API, and we are aiming to scale up as quickly as we can safely. During the initial period, OpenAI Codex will be offered for free. OpenAI will continue building on the safety groundwork we laid with GPT-3—reviewing applications and incrementally scaling them up while working closely with developers to understand the effect of our technologies in the world.
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-scholars-2021-final-projects,,OpenAI Scholars 2021: Final projects,"Words to Bytes: Exploring Language Tokenizations
+
+I was drawn to the Scholar’s program because I’d seen some of what OpenAI’s models could do and I wanted to understand what it took to build and iterate such powerful models. Having the dedicated time to explore deep learning with great mentorship has been transformative in my ability to understand and contribute to the field! When I’m not working, I’m usually tinkering with gadgets or out seeking adrenaline with friends. My project explores the tradeoffs in using these other tokenization schemes and how these different tokenizations scale. I also consider an approach to learning a sequence’s segmentation instead of using a predefined one.
+
+Previous role : Software Engineer at Wahoo Fitness, Founder and CEO at Lorable, Data Engineer at Interkn
+
+Interesting learning : “ The Scholars program gave me the space to explore many different ideas in ML and deep learning, from “classical” stuff like CNNs and RNNs to understanding the tradeoffs of more recent transformer variants. Being able to have conversations with the researchers at OpenAI made me realize that the frontier of AI research is very accessible. I originally wanted to learn about the current state of the art, but being here for these past few months has let me understand that I can contribute meaningfully to advancing the state of deep learning and AI. Being at OpenAI has also caused me to think a lot about the implications of the models we create and ways to provide such models to the world while minimizing potential harm. ”"
+OpenAI_Blog,https://openai.com/blog/will-hurd-joins,,Will Hurd joins OpenAI’s board of directors,"OpenAI is committed to developing general-purpose artificial intelligence that benefits all humanity, and we believe that achieving our goal requires expertise in public policy as well as technology. So, we’re delighted to announce that Congressman Will Hurd has joined our board of directors. Will served three terms in the U.S. House of Representatives, has been a leading voice on technology policy, and coauthored bipartisan legislation outlining a national strategy for artificial intelligence.
+
+""Will brings a rare combination of expertise—he deeply understands both artificial intelligence as well as public policy, both of which are critical to a successful future for AI,” said Sam Altman, OpenAI’s CEO. “We are thrilled to add his experience and leadership to our board.”
+
+Greg Brockman, OpenAI’s chairman and Chief Technology Officer, added, “‘AI public policy expert’ isn’t exactly a common title, and Will is squarely one of the leading ones. We’re looking forward to Will applying his unique expertise to help us progress our mission to develop and deploy AI to benefit everyone.”
+
+""I’ve been blown away by the scientific advances made by the team at OpenAI, and I’ve been inspired by their commitment to developing AI responsibly,” said Will Hurd. “I’m excited to join this thoughtful, values-driven company at the forefront of artificial intelligence research and deployment.”
+
+"
+OpenAI_Blog,https://openai.com/blog/gpt-3-apps,,GPT-3 powers the next generation of apps,"Nine months since the launch of our first commercial product, the OpenAI API, more than 300 applications are now using GPT-3, and tens of thousands of developers around the globe are building on our platform. We currently generate an average of 4.5 billion words per day, and continue to scale production traffic.
+
+Given any text prompt like a phrase or a sentence, GPT-3 returns a text completion in natural language. Developers can “program” GPT-3 by showing it just a few examples or “prompts.” We’ve designed the API to be both simple for anyone to use but also flexible enough to make machine learning teams more productive.
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-licenses-gpt-3-technology-to-microsoft,,OpenAI licenses GPT-3 technology to Microsoft,"OpenAI released its first commercial product back in June: an API for developers to access advanced technologies for building new applications and services. The API features a powerful general purpose language model, GPT-3, and has received tens of thousands of applications to date.
+
+In addition to offering GPT-3 and future models via the OpenAI API, and as part of a multiyear partnership announced last year, OpenAI has agreed to license GPT-3 to Microsoft for their own products and services. The deal has no impact on continued access to the GPT-3 model through OpenAI’s API, and existing and future users of it will continue building applications with our API as usual.
+
+Unlike most AI systems which are designed for one use-case, OpenAI’s API today provides a general-purpose “text in, text out” interface, allowing users to try it on virtually any English language task. GPT-3 is the most powerful model behind the API today, with 175 billion parameters. There are several other models available via the API today, as well as other technologies and filters that allow developers to customize GPT-3 and other language models for their own use."
+OpenAI_Blog,https://openai.com/blog/openai-scholars-2020-final-projects,,OpenAI Scholars 2020: Final projects,"These projects investigated problems such as analyzing how GPT-2 represents grammar, measuring the interpretability of models trained on Coinrun, and predicting epileptic seizures using brain recordings. More information about the next class of Scholars and how to apply will be announced this fall.
+
+The OpenAI Scholars program provides stipends and mentorship to individuals from underrepresented groups to study deep learning and open-source a project.
+
+Our Scholars have demonstrated core technical skills across various expert domains and self-motivation—critical competencies for a self-directed program like this one. They each entered the field of machine learning as relative newcomers, and we hope their progress shows how accessible machine learning is."
+OpenAI_Blog,https://openai.com/blog/procgen-minerl-competitions,,Procgen and MineRL Competitions,"To further catalyze research in this direction, we are co-organizing the MineRL 2020 Competition which aims to foster the development of algorithms which can efficiently leverage human demonstrations to drastically reduce the number of samples needed to solve complex, hierarchical, and sparse environments. To that end, participants will compete to develop systems which can obtain a diamond in Minecraft from raw pixels using only 8,000,000 samples from the MineRL simulator and 4 days of training on a single GPU machine. Participants will be provided the MineRL-v0 dataset (website, paper), a large-scale collection of over 60 million frames of human demonstrations, enabling them to utilize expert trajectories to minimize their algorithm’s interactions with the Minecraft simulator.
+
+This competition is a follow-up to the MineRL 2019 Competition in which the top team’s agent was able to obtain an iron pickaxe (the penultimate goal of the competition) under this extremely limited compute and simulator-interaction budget. Put in perspective, state-of-the-art standard reinforcement learning systems require hundreds of millions of environment interactions on large multi-GPU systems to achieve the same goal. This year, we anticipate competitors will push the state-of-the-art even further.
+
+To guarantee that competitors develop truly sample efficient algorithms, the MineRL competition organizers train the top team’s final round models from scratch with strict constraints on the hardware, compute, and simulator-interaction available. The MineRL 2020 Competition also features a novel measure to avoid hand engineering features and overfitting solutions to the domain. More details on the competition structure can be found here."
+OpenAI_Blog,https://openai.com/blog/openai-api,,OpenAI API,"With GPT-2, one of our key concerns was malicious use of the model (e.g., for disinformation), which is difficult to prevent once a model is open sourced. For the API, we’re able to better prevent misuse by limiting access to approved customers and use cases. We have a mandatory production review process before proposed applications can go live. In production reviews, we evaluate applications across a few axes, asking questions like: Is this a currently supported use case?, How open-ended is the application?, How risky is the application?, How do you plan to address potential misuse?, and Who are the end users of your application?.
+
+We terminate API access for use cases that are found to cause (or are intended to cause) physical, emotional, or psychological harm to people, including but not limited to harassment, intentional deception, radicalization, astroturfing, or spam, as well as applications that have insufficient guardrails to limit misuse by end users. As we gain more experience operating the API in practice, we will continually refine the categories of use we are able to support, both to broaden the range of applications we can support, and to create finer-grained categories for those we have misuse concerns about.
+
+One key factor we consider in approving uses of the API is the extent to which an application exhibits open-ended versus constrained behavior with regard to the underlying generative capabilities of the system. Open-ended applications of the API (i.e., ones that enable frictionless generation of large amounts of customizable text via arbitrary prompts) are especially susceptible to misuse. Constraints that can make generative use cases safer include systems design that keeps a human in the loop, end user access restrictions, post-processing of outputs, content filtration, input/output length limitations, active monitoring, and topicality limitations.
+
+We are also continuing to conduct research into the potential misuses of models served by the API, including with third-party researchers via our academic access program. We’re starting with a very limited number of researchers at this time and already have some results from our academic partners at Middlebury Institute, University of Washington, and Allen Institute for AI. We have tens of thousands of applicants for this program already and are currently prioritizing applications focused on fairness and representation research."
+OpenAI_Blog,https://openai.com/blog/openai-pytorch,,OpenAI standardizes on PyTorch,"We are standardizing OpenAI’s deep learning framework on PyTorch. In the past, we implemented projects in many frameworks depending on their relative strengths. We’ve now chosen to standardize to make it easier for our team to create and share optimized implementations of our models.
+
+As part of this move, we’ve just released a PyTorch-enabled version of Spinning Up in Deep RL, an open-source educational resource produced by OpenAI that makes it easier to learn about deep reinforcement learning. We are also in the process of writing PyTorch bindings for our highly-optimized blocksparse kernels, and will open-source those bindings in upcoming months.
+
+The main reason we’ve chosen PyTorch is to increase our research productivity at scale on GPUs. It is very easy to try and execute new research ideas in PyTorch; for example, switching to PyTorch decreased our iteration time on research ideas in generative modeling from weeks to days. We’re also excited to be joining a rapidly-growing developer community, including organizations like Facebook and Microsoft, in pushing scale and performance on GPUs.
+
+Going forward we’ll primarily use PyTorch as our deep learning framework but sometimes use other ones when there’s a specific technical reason to do so. Many of our teams have already made the switch, and we look forward to contributing to the PyTorch community in upcoming months."
+OpenAI_Blog,https://openai.com/blog/openai-scholars-2020,,OpenAI Scholars 2020: Applications open,"We’re open to all experience levels and backgrounds that meet the below criteria—it’s a common myth that you need a PhD to work in AI (many OpenAI employees don’t have one).
+
+We look for people who are comfortable writing software (2+ years in software engineering), but no previous machine learning experience is required. This is a remote program open to anyone already with US work authorization located in US timezones. We ask all Scholars to document their experiences studying deep learning to hopefully inspire others to join the field too.
+
+You are eligible to apply if:
+
+You are a member of an underrepresented group in science and engineering. Our goal is for this program to be as inclusive as possible. if you feel you belong to a group not listed here that is underrepresented in science and engineering, please apply and mention it in your application.
+
+You have 2+ years experience in software engineering (no machine learning experience required)
+
+You already have US work authorization and are located in the United States for the duration of the program.
+
+You are comfortable programming in Python (other languages are helpful, but you’ll spend the program writing in Python).
+
+We’ll use these criteria for selection:
+
+Technical skills. The stronger your technical background, the more time you’ll spend focusing on the deep learning itself.
+
+The stronger your technical background, the more time you’ll spend focusing on the deep learning itself. Self-motivation. We’re looking for people who are experienced in being self-directed on large and challenging projects, and who will be successful at independent work.
+
+We’re looking for people who are experienced in being self-directed on large and challenging projects, and who will be successful at independent work. Leadership abilities. We want to hear from people who are interested in community building and who will work to inspire others (in the program and externally) to endeavor to learn deep learning as well.
+
+Applications will be evaluated on a rolling basis.
+
+Questions? Email scholars@openai.com"
+OpenAI_Blog,https://openai.com/blog/learning-day,,Learning Day,"In November 2018, I realized that I’d been stagnating in a number of areas because I was always overwhelmed with urgent tasks. These areas were becoming increasingly important for me to know. For example, I kept wanting to evaluate whether my team should switch deep learning frameworks, but I kept being interrupted after an hour or two of coding—which resulted in no forward progress. I kept hearing about research in other domains like causality or energy-based models which might be applicable to robotics, but I didn’t know anything about these fields—and reading about them for half an hour at a time wasn’t helpful.
+
+I knew the best way to solve this problem would be to carve out a day a week for learning. But if this was what I needed to be more productive, it seemed likely that this would also be what my team needed. So I tried doing this for the whole team as an experiment.
+
+I figured that we’d take a short-term productivity hit but see gains in one to two years. But within a month, I started to see better communication between researchers and engineers, with everyone starting to use jargon from each others’ specialty correctly (e.g. discounted reward, MAML, self-attention, container, SRAM, StatefulSet, Raft). Within half a year, I started to see researchers talking about restructuring our codebase using domain-driven design, and engineers picking up research tasks.
+
+Though we encouraged self-study before, it never seemed to work. That’s different now—for example, one team member went from knowing nothing about machine learning to making computer vision contributions within three months. One very strong engineer studied RL for half a year, and now is producing outputs comparable to what I’d expect from an RL PhD."
+OpenAI_Blog,https://openai.com/blog/microsoft-invests-in-and-partners-with-openai,,Microsoft invests in and partners with OpenAI to support us building beneficial AGI,"OpenAI is producing a sequence of increasingly powerful AI technologies, which requires a lot of capital for computational power. The most obvious way to cover costs is to build a product, but that would mean changing our focus. Instead, we intend to license some of our pre-AGI technologies, with Microsoft becoming our preferred partner for commercializing them.
+
+We believe that the creation of beneficial AGI will be the most important technological development in human history, with the potential to shape the trajectory of humanity. We have a hard technical path in front of us, requiring a unified software engineering and AI research effort of massive computational scale, but technical success alone is not enough. To accomplish our mission of ensuring that AGI (whether built by us or not) benefits all of humanity, we’ll need to ensure that AGI is deployed safely and securely; that society is well-prepared for its implications; and that its economic upside is widely shared. If we achieve this mission, we will have actualized Microsoft and OpenAI’s shared value of empowering everyone.
+
+"
+OpenAI_Blog,https://openai.com/blog/symposium-2019,,OpenAI Robotics Symposium 2019,"We were extremely pleased with the outcome of the event—this was an experimental format and our expectations were definitely exceeded. The talks during the day led to interesting discussions within our team and resulted in some new ideas (e.g., self-supervision) and perspectives (e.g., traditional robotics vs deep learning robotics). After chatting with the participants and speakers, it was clear everyone felt they benefited from this event and left with a shared understanding of the diversity in the different approaches to solving the same problems. Given this feedback, we intend to repeat this format in the future, possibly as an annual symposium. We’ll share details about upcoming events at a later date.
+
+If you would like to help us do research on robots that learn, please get in touch! We’re hiring."
+OpenAI_Blog,https://openai.com/blog/openai-scholars-2019-final-projects,,OpenAI Scholars 2019: Final projects,"Using Intrinsic Motivation to Solve Robotic Tasks with Sparse Rewards
+
+Previous role : PhD student in Cell and Molecular Biology at the University of Chicago
+
+Interesting learning : “ Before joining the Scholars program I had already undertaken a plan to self-study robotics. The OpenAI Scholars program gave me the opportunity to greatly enhance my self-study with a curriculum focused exclusively on Deep Reinforcement Learning. After spending 8 weeks reading papers and implementing core Deep RL algorithms, I was able to apply what I learned to solving a suite of challenging robotics problems. ”"
+OpenAI_Blog,https://openai.com/blog/openai-fellows-fall-2018,,OpenAI Fellows Fall 2018: Final projects,"Previous role : Pianist
+
+Interesting learning : “ The Fellows program provided a great balance of freedom and support. I enjoyed spending the first two months reading papers and learning to implement them, and I really appreciated having a mentor who helped me pick the best papers or ideas to pursue. I was also able to work on my own and experiment with different ideas, but Alec and others on the team were always very generous with their time when I was stuck or needed advice. At the start of 2019, we were asked to think “What do I need to do to make my work this coming year the best work of my life?” For me, a big part of the answer is to work at OpenAI, as part of such a uniquely talented and motivated team. ”
+
+Final project : I created MuseNet, a MIDI music model based on the same transformer architecture that powers GPT-2. MuseNet generates 2–4 minute compositions in many different musical styles. To do this, I collected hundreds of thousands of MIDI files from the web, experimented with different tokenization schemes, developed a way to condition samples based on a particular style or composer, and developed a co-composer tool to enable joint human/AI compositions."
+OpenAI_Blog,https://openai.com/blog/openai-five-finals,,OpenAI Five Finals,"If you’d like to attend in person, please request an invite by Friday 3/29 at 9:00pm PT; invites will be sent by the end of Monday 4/1. Our venue has limited seating, so we’ll be selecting invitees based on their answers to the request form.
+
+If you can’t attend in person, please tune in on Twitch!"
+OpenAI_Blog,https://openai.com/blog/openai-scholars-2019-meet-our-scholars,,OpenAI Scholars 2019: Meet our Scholars,"Our scholars are applying these specializations to current AI research and documenting their progress as they continue to grow as machine learning practitioners.
+
+This is our second class of OpenAI Scholars. Their program began in February and will conclude with the completion of an open-source final project. Throughout the program, scholars share their progress with the research community through their blogs. Some applications our scholars are working towards are:"
+OpenAI_Blog,https://openai.com/blog/openai-lp,,OpenAI LP,"Our mission is to ensure that artificial general intelligence (AGI) benefits all of humanity, primarily by attempting to build safe AGI and share the benefits with the world.
+
+We’ve experienced firsthand that the most dramatic AI systems use the most computational power in addition to algorithmic innovations, and decided to scale much faster than we’d planned when starting OpenAI. We’ll need to invest billions of dollars in upcoming years into large-scale cloud compute, attracting and retaining talented people, and building AI supercomputers.
+
+We want to increase our ability to raise capital while still serving our mission, and no pre-existing legal structure we know of strikes the right balance. Our solution is to create OpenAI LP as a hybrid of a for-profit and nonprofit—which we are calling a “capped-profit” company.
+
+The fundamental idea of OpenAI LP is that investors and employees can get a capped return if we succeed at our mission, which allows us to raise investment capital and attract employees with startup-like equity. But any returns beyond that amount—and if we are successful, we expect to generate orders of magnitude more value than we’d owe to people who invest in or work at OpenAI LP—are owned by the original OpenAI Nonprofit entity.
+
+Going forward (in this post and elsewhere), “OpenAI” refers to OpenAI LP (which now employs most of our staff), and the original entity is referred to as “OpenAI Nonprofit.”"
+OpenAI_Blog,https://openai.com/blog/spinning-up-in-deep-rl-workshop-review,,Spinning Up in Deep RL: Workshop review,"One of the goals for education at OpenAI is to help people develop the skills needed to participate in research and development in AI—especially in deep RL, a core area of research at OpenAI. From our experience working with Scholars and Fellows, we’ve found that the key ingredients for skill development are:
+
+a flexible curriculum that includes core material and a review of research frontiers, mentorship and discussions with experts, and having the students work on projects that are at the right level to help them grow.
+
+The challenge for education at OpenAI is to figure out how to deliver these at scale. While sharing a curriculum at scale is relatively easy, it isn’t obvious how to scale up mentorship and guidance on projects. Our working theory is that workshops might help us do just that. Our first Spinning Up workshop has given us several positive signs that this is a useful direction, and we’re excited to share what we learned."
+OpenAI_Blog,https://openai.com/blog/openai-summer-fellows-2018,,OpenAI Fellows Summer 2018: Final projects,"Previous role : Theoretical Physics PhD, Postdoc at Harvard, Applied researcher and software engineering in a Quantum Computing startup
+
+Interesting learning : “ OpenAI Fellows allowed me to study in a structured fashion, what amazing insights go into advancing the field and the difficulty of disentangling the factors that led to the improvements. Thanks to my mentor and colleagues, I was able to quickly dive into state-of-the-art architectures of generative models and I was, at times, stunned to see how challenging it can be to even reproduce current research results. Consequently, I started to study easier datasets to build intuition and falsify/verify my expectations. The main learning, I take away from the fellowship, is that due to the complexity of the problems it is important to gain basic understanding about challenges an algorithm or approach faces -- as Feynman put it: ‘what I cannot create, I do not understand’. ”
+
+Final project : Generative models, i.e. models that learn the distribution of real-world datasets and allow the generation of new samples from this distribution, are becoming increasingly more powerful. During my project, I focused specifically on Normalizing Flow models, which approximate the data-distribution using a continuous deformation of a simpler distribution. A more visual analogue of this is a piece of play-dough that gets stretched, squeezed, bent or anything else, except that it cannot be glued to itself or torn apart. As a consequence of this properties, I was able to create and study artificial datasets that are intrinsically hard to approximate with these models. These can be used to benchmark future generations of generative models for their flexibility and expressivity."
+OpenAI_Blog,https://openai.com/blog/openai-scholars-2019,,OpenAI Scholars 2019: Applications open,"We’re open to all experience levels and backgrounds that meet the above criteria—it’s a common myth that you need a PhD to work in AI (many OpenAI employees don’t have one).
+
+We look for people who are comfortable writing software, but no previous machine learning experience is required. This is a remote program open to anyone with US work authorization located in US timezones. We ask all Scholars to document their experiences studying deep learning to hopefully inspire others to join the field too.
+
+You are eligible to apply if:
+
+You are a member of an underrepresented group in science and engineering.
+
+You have US work authorization and are located in the United States for the duration of the program; We give preference to applicants who can be physically present during the program.
+
+You understand this article on calculus and this article on linear algebra. (It’s fine if you have to brush up on these skills).
+
+You are comfortable programming in Python (other languages are helpful, but you’ll spend the program writing in Python).
+
+We’ll use these criteria for selection:
+
+Technical skills . The stronger your technical background, the more time you’ll spend focusing on the deep learning itself.
+
+. The stronger your technical background, the more time you’ll spend focusing on the deep learning itself. Self-motivation . We’re looking for people who will work hard through those 3 months, and have demonstrated that they can push themselves to persevere through challenging work.
+
+. We’re looking for people who will work hard through those 3 months, and have demonstrated that they can push themselves to persevere through challenging work. Community building capabilities. We want to hear from people who will inspire others (in the program and externally) to endeavor to learn deep learning as well.
+
+Applications will be evaluated on a rolling basis.
+
+Questions? Email scholars@openai.com"
+OpenAI_Blog,https://openai.com/blog/openai-fellows-interns-2019,,OpenAI Fellows Winter 2019 & Interns Summer 2019,"Diverse backgrounds. Previous fellows have come from various backgrounds spanning across genetics, software engineering, physics, and theoretical computer science.
+
+Dedication. We will give priority to applicants that can join OpenAI full-time following the program.
+
+Passion for Research. We want to engage with researchers and scientists who are motivated to dive into AI research and have previous research project experience."
+OpenAI_Blog,https://openai.com/blog/openai-scholars-2018-final-projects,,OpenAI Scholars 2018: Final projects,"Interesting learning : “ Before the program, I had seen TensorFlow code in tutorials but I had not worked with it myself. During the program, I got to explore and familiarize myself with the code in the TF libraries and to modify the libraries to get them to work on new data. I’m more aware of the field now. It’s easier to read and understand papers. Before the program, reading deep learning papers took a long time because every few sentences I would encounter a term or concept I had never heard before. Now when I read a paper, I understand the terminology as well as why the authors might have made certain choices. I also learned how others in this industry build deep neural nets—common practices, prominent architectures and popular datasets, tools, and the like. Knowing this helps me know where to start on new projects. ”
+
+Final project : Exploring the use of semantic trees in LSTMs as a way to better represent the relationships between entities in a sentence."
+OpenAI_Blog,https://openai.com/blog/openai-scholars-2018-meet-our-scholars,,OpenAI Scholars 2018: Meet our Scholars,"Sophia is an accomplished ballerina. For more than 15 years, she performed in many European countries, including Russia, Switzerland, and France. After an injury she had to end her dancing career. She transitioned to journalism and worked as a reporter with BusinessWeek (Moscow office) covering tech and finance topics; one of her articles was named “Article of the Year” by the Russian National Award for Journalism. For the last several years, she has worked as a writer with AI startups in Silicon Valley and has completed ML projects. You can learn about her path from ballet to AI in her personal blog."
+OpenAI_Blog,https://openai.com/blog/openai-five-benchmark,,OpenAI Five Benchmark,"We’ve removed the most significant restrictions on OpenAI Five’s gameplay—namely, wards, Roshan, and mirror match of fixed heroes, and will soon benchmark our progress by playing 99.95th-percentile Dota players. The OpenAI Five Benchmark match will be held 12:30pm Pacific Time on August 5 in San Francisco. The human team will include Blitz, Cap, Fogged, and Merlini, some of whom are former professionals. The games will be streamed on our Twitch channel and casted by popular casters Purge and ODPixel.
+
+Last year our preliminary Dota system defeated the world’s top professionals at the 1v1 version of Dota; last month OpenAI Five started defeating amateur teams at the full game of Dota (with some restrictions). This event will show whether we have any hope of reaching the level of top professionals by The International at the end of August.
+
+We’ll kick off the OpenAI Five Benchmark with some warmup games against audience members; please let us know on the invite request form if you’d like to volunteer."
+OpenAI_Blog,https://openai.com/blog/openai-fellows,,OpenAI Fellows Fall 2018,"We designed this program for people who want to be an AI researcher, but do not have a formal background in the field.
+
+Each Fellow will be mentored by an OpenAI researcher and have the chance to work within one of our research teams on topics like multi-agent reinforcement learning, generative models, robotics, and others. Fellows will spend the first two months of the program working through a curriculum of key topics in AI, learning about research projects at OpenAI, and writing a research proposal based on their interests. Fellows will then work on the project laid out in their research proposal for the next 4 months with guidance from their mentor.
+
+The Fellows program is designed for people who want to transition into doing artificial intelligence research; our current cohort of fellows includes people with backgrounds in genetics, software engineering, physics, and theoretical computer science. Successful applicants will be able to demonstrate their interest in AI research via past projects or evidence of significant self-study. (If you’re in the middle of a degree program, please apply for an internship instead.)
+
+We will give priority to applicants that can join OpenAI full-time following the program. The Fellows program is compensated at the level of selective Bay Area software internships. We can accommodate up to six fellows in the September cohort and may close applications early, so don’t hestiate to submit your applications. To apply, visit the jobs page for further details. We will be reviewing applications on a rolling basis. We will notify applicants regarding their admissions status by July 31st, 2018. Please direct any questions you may have to fellows@openai.com."
+OpenAI_Blog,https://openai.com/blog/hackathon-follow-up,,Report from the OpenAI hackathon,"On March 3rd, we hosted our first hackathon with 100 members of the artificial intelligence community. We had over 500 RSVPs arrive within two days of announcing the event—if you didn’t make it this time, please RSVP again in the future!
+
+Thank you to Cirrascale for providing GPU machines during the hackathon."
+OpenAI_Blog,https://openai.com/blog/openai-scholars,,OpenAI Scholars,"Diversity is core to AI having a positive effect on the world—it’s necessary to ensure the advanced AI systems in the future are built to benefit everyone. While we hope that some of the scholars will join OpenAI (where we are actively working on internal diversity & inclusion initiatives), we want this program to improve diversity in the field at large.
+
+Once you’ve decided to join the field, there are many programs (such as our Fellowship or any number of residencies) which can help you develop your skills. But these require a longer commitment and some existing machine learning experience, and for many people with families or other obligations it’s not possible to simply pack up and come to the Bay Area."
+OpenAI_Blog,https://openai.com/blog/openai-hackathon,,OpenAI hackathon,"Come to OpenAI’s office in San Francisco’s Mission District for talks and a hackathon on Saturday, March 3rd. (RSVPs are now closed. We have limited space and will curate the invite list—we’ll send email confirmations within the next few days.) Schedule of the day:
+
+8:30a: Doors open, coffee and pastries served.
+
+9-11a: Talks by Sam Altman, Dario Amodei, Josh Achiam, and Alec Radford.
+
+11a-7p: Hackathon! Lunch will be provided. Come with a project you’d like to hack on, figure one out with a group of others you meet here, or just hang out and eat the food. If you’re looking for inspiration, maybe try out one of our Requests for Research—but all projects, not just machine learning ones, are welcome!
+
+Please see our Code of Conduct and hackathon terms. There are no judges, prizes, or contests—just the space and time for you to work on a project!"
+OpenAI_Blog,https://openai.com/blog/openai-supporters,,OpenAI supporters,"We’re excited to welcome the following new donors to OpenAI: Jed McCaleb, Gabe Newell, Michael Seibel, Jaan Tallinn, and Ashton Eaton and Brianne Theisen-Eaton. Reid Hoffman is significantly increasing his contribution. Pieter Abbeel (having completed his sabbatical with us), Julia Galef, and Maran Nelson are becoming advisors to OpenAI. Additionally, Elon Musk will depart the OpenAI Board but will continue to donate and advise the organization. As Tesla continues to become more focused on AI, this will eliminate a potential future conflict for Elon.
+
+We’re broadening our base of funders to prepare for the next phase of OpenAI, which will involve ramping up our investments in our people and the compute resources necessary to make consequential breakthroughs in artificial intelligence. OpenAI was founded a little over two years ago and since that time we’ve paired our research efforts with applied work to push the limits of what AI systems are capable of via our work in robotics and Dota. That’s going to continue, and in the coming months you can also expect us to articulate the principles with which we’ll be approaching the next phase of OpenAI, and the policy areas in which we wish to see changes to ensure AI benefits all of humanity.
+
+The Board is now Greg Brockman, Ilya Sutskever, Holden Karnofsky, and Sam Altman. We will add another director soon, and plan over time to further expand the Board. If you’re interested in working with us on this mission, consider joining OpenAI."
+OpenAI_Blog,https://openai.com/blog/distill,,Distill,"Distill is a website and set of associated tools that make it easier for people to explain machine learning concepts using modern web technologies. For example, people have already used the platform to explore the subtle settings of the t-SNE algorithm, to demystify the checkerboard artifacts in synthetic images, and peek under the hood of recurrent neural networks that generate handwriting.
+
+Andrej will serve on the steering committee for the publication, and Greg is helping fund the Distill Prize for Clarity in Machine Learning, which recognizes outstanding work on communicating ideas in machine learning and related topics (published in any venue!)
+
+"
+OpenAI_Blog,https://openai.com/blog/openai-and-microsoft,,OpenAI and Microsoft,"We’re working with Microsoft to start running most of our large-scale experiments on Azure. This will make Azure the primary cloud platform that OpenAI is using for deep learning and AI, and will let us conduct more research and share the results with the world.
+
+One of the most important factors for accelerating our progress is accessing more and faster computers; this is particularly true for emerging AI technologies like reinforcement learning and generative models. Azure has impressed us by building hardware configurations optimized for deep learning—they offer K80 GPUs with InfiniBand interconnects at scale. We’re also excited by their roadmap, which should soon bring Pascal GPUs onto their cloud.
+
+In the coming months we will use thousands to tens of thousands of these machines to increase both the number of experiments we run and the size of the models we train.
+
+We’ll share the results of this partnership with everyone: along with publishing our research results, we’ll continue releasing open-source software making it easier for people to run large-scale AI workloads on the cloud. We’ll also be giving feedback to the Microsoft team so that Azure’s capabilities keep pace with our understanding of AI.
+
+It’s great to work with another organization that believes in the importance of democratizing access to AI. We’re looking forward to accelerating the AI community through this partnership."
+OpenAI_Blog,https://openai.com/blog/report-from-the-self-organizing-conference,,Report from the self-organizing conference,"Our first group learning experiment! Last week we hosted over a hundred and fifty AI practitioners in our offices for our first self-organizing conference on machine learning. The goal was to accelerate AI research by bringing a diverse group of people together and making it easy for them to educate each other and generate new ideas. To achieve this we sought to build an entire event around the chance hallway conversations, serendipitous lunches and inspiring encounters that people have at traditional conferences."
+OpenAI_Blog,https://openai.com/blog/machine-learning-unconference,,Machine Learning Unconference,"The latest information about the Unconference is now available at the Unconference wiki, which will be periodically updated with more information for attendees.
+
+Machine learning is moving incredibly quickly. To keep up, many practitioners spend several weeks a year at conferences. However, conference presentations are all on work submitted months prior, meaning that people are already intimately familiar with the content (and it’s often already been surpassed).
+
+We’d like to try instead hosting an event focused on the most valuable part of any conference: the people. Please join us for our first Machine Learning Unconference, an experimental gathering driven by its participants rather than an organizing committee.
+
+The unconference will be a free event at the OpenAI office in San Francisco on Friday and Saturday, October 7-8, 2016. We welcome participants from around the globe. As of August 22, we have finished accepting applications for the unconference."
+OpenAI_Blog,https://openai.com/blog/special-projects,,Special projects,"Impactful scientific work requires working on the right problems—problems which are not just interesting, but whose solutions matter. In this post, we list several problem areas likely to be important both for advancing AI and for its long-run impact on society.
+
+We see these problems as having either very broad implications, or addressing important emerging consequences of AI development. If you are a strong machine learning expert and wish to start an effort on one of these problems at OpenAI, please submit an application."
+OpenAI_Blog,https://openai.com/blog/openai-technical-goals,,OpenAI technical goals,"We aim to train an agent capable enough to solve any game in our initial metric. Games are virtual mini-worlds that are very diverse, and learning to play games quickly and well will require significant advances in generative models and reinforcement learning. (We are inspired by the pioneering work of DeepMind, who have produced impressive results in this area in the past few years.)
+
+Our projects and fundamental research all have shared cores, so progress on any is likely to benefit the others. Each captures a different aspect of goal-solving, and was chosen for its potential to significantly move our metric.
+
+We’re just getting started on these projects, and the details may change as we gain additional data. We also expect to add new projects over time."
+OpenAI_Blog,https://openai.com/blog/welcome-pieter-and-shivon,,"Welcome, Pieter and Shivon!","We have two more team updates.
+
+Pieter Abbeel . Pieter is a professor at UC Berkeley specializing in making robots learn. He’s been giving us advice since before OpenAI was born, and now he’s taking a leave from Berkeley to work with us full-time. Pieter and his lab members have been responsible for some of the most striking advances in robot learning and deep reinforcement learning (RL) in recent years. Together, we will explore ways to combine unsupervised learning with RL, which we believe could address fundamental limitations in today’s RL algorithms.
+
+. Pieter is a professor at UC Berkeley specializing in making robots learn. He’s been giving us advice since before OpenAI was born, and now he’s taking a leave from Berkeley to work with us full-time. Pieter and his lab members have been responsible for some of the most striking advances in robot learning and deep reinforcement learning (RL) in recent years. Together, we will explore ways to combine unsupervised learning with RL, which we believe could address fundamental limitations in today’s RL algorithms. Shivon Zilis. Shivon is a partner at Bloomberg Beta focusing on machine intelligence. She has an extremely broad view of how the space is evolving (and has written extensively on the landscape). We’ve been going to her for advice for the past few months, and now she’s becoming an official advisor to OpenAI.
+
+We could not be more excited to work with both. Welcome Pieter and Shivon!
+
+
+
+"
+OpenAI_Blog,https://openai.com/blog/team-plus-plus,,Team++,"As a closing note, we get a lot of questions about what we’re working on, how we work, and what we’re trying to achieve. We’re not being intentionally mysterious; we’ve just been busy launching the organization (and finding awesome people to help us do so!).
+
+We’re currently focused on unsupervised learning and reinforcement learning. We should have interesting results to share over the next month or two. A bunch of us will be around ICLR, where we’ll likely hold an event of some form. I’ll also host a Quora Session in May or June to answer any questions for people we don’t meet in Puerto Rico.
+
+"
+OpenAI_Blog,https://openai.com/blog/introducing-openai,,Introducing OpenAI,"Artificial intelligence has always been a surprising field. In the early days, people thought that solving certain tasks (such as chess) would lead us to discover human-level intelligence algorithms. However, the solution to each task turned out to be much less general than people were hoping (such as doing a search over a huge number of moves).
+
+The past few years have held another flavor of surprise. An AI technique explored for decades, deep learning, started achieving state-of-the-art results in a wide variety of problem domains. In deep learning, rather than hand-code a new algorithm for each problem, you design architectures that can twist themselves into a wide range of algorithms based on the data you feed them.
+
+This approach has yielded outstanding results on pattern recognition problems, such as recognizing objects in images, machine translation, and speech recognition. But we’ve also started to see what it might be like for computers to be creative, to dream, and to experience the world."

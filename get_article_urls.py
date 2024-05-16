@@ -6,8 +6,9 @@ from get_article_urls_helper import scrapeLinks
 def scrapeOpenAIBlogLinks():
     base = "https://openai.com/blog?page="
     totalPageNum = 7
-    groupingClass = "lg:w-3-cols xs:w-6-cols mt-spacing-6 md:w-4-cols"
-    return scrapeLinks(base, totalPageNum, groupingClass)
+    groupingClass = "ui-list"
+    postLinkClass = "ui-link group relative cursor-pointer"
+    return scrapeLinks(base, totalPageNum, groupingClass,postLinkClass, useDriver= True)
 
 def scrapeOpenAIResearchLinks():
     base = "https://openai.com/research?page="
@@ -15,7 +16,7 @@ def scrapeOpenAIResearchLinks():
     groupingClass = "cols-container relative"
     postLinkClass = "ui-link group f-ui-1 inline-block relative ui-link--inherit relative"
     researchLinkClass = "ui-link group f-ui-1 inline-block relative ui-link--inherit ml-auto shrink-0 relative self-start"
-    return scrapeLinks(base, totalPageNum, groupingClass, postLinkClass, researchLinkClass= researchLinkClass, hasReseachLink= True)
+    return scrapeLinks(base, totalPageNum, groupingClass, postLinkClass, researchLinkClass= researchLinkClass, hasReseachLink= True, useDriver= True)
 
 def scrapeAnthropicBlogLinks():
     base = "https://claudeai.uk/ai-blog/page/"
@@ -95,8 +96,8 @@ def printLinksToFile(allLinks, type):
         
 if __name__ == "__main__":
     # createLinksFolder()
-    # printLinksToFile(scrapeOpenAIBlogLinks(),type = "OpenAI_Blog")
-    # printLinksToFile(scrapeOpenAIResearchLinks(),type = "OpenAI_Research")
+    #printLinksToFile(scrapeOpenAIBlogLinks(),type = "OpenAI_Blog")
+    printLinksToFile(scrapeOpenAIResearchLinks(),type = "OpenAI_Research")
     # printLinksToFile(scrapeAnthropicBlogLinks(),type = "Anthropic_Blog")
     # printLinksToFile(scrapeAnthropicNewsLinks(),type = "Anthropic_News")
     # printLinksToFile(scrapeMicrosoftNewsLinks(),type = "Micrisoft_News")
@@ -105,4 +106,4 @@ if __name__ == "__main__":
     # printLinksToFile(scrapeGoogleGemini(),type = "Google_Gemini")
     # printLinksToFile(scrapeGoogleResearchLinks(),type = "Google_Research")
     # printLinksToFile(scrapeTheVergeLinks(),type = "The_Verge_AI")
-    printLinksToFile(scrapeMozillaBlogLinks(),type = "Mozilla_Blog")
+    # printLinksToFile(scrapeMozillaBlogLinks(),type = "Mozilla_Blog")
