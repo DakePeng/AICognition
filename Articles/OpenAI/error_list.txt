@@ -1,3 +1,0 @@
-Error on: https://distill.pub/2021/multimodal-neurons/
-Error on: https://openaipublic.blob.core.windows.net/neuron-explainer/paper/index.html
-Error on: https://distill.pub/2019/safety-needs-social-scientists

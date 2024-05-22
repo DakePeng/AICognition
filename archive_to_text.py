@@ -1,5 +1,37 @@
-from arxiv2text import arxiv_to_text
 import re
+import requests
+import os
+import PyPDF2
+import shutil
+
+def extract_text_from_arxiv_pdf(pdf_path, output_txt_path):
+    # Open the PDF file
+    with open(pdf_path, "rb") as file:
+        reader = PyPDF2.PdfReader(file)
+        text = ""
+
+        # Extract text from each page
+        for page_num in range(len(reader.pages)):
+            page = reader.pages[page_num]
+            text += page.extract_text()
+
+    # Save the extracted text to a file
+    with open(output_txt_path, "w") as text_file:
+        text_file.write(text)
+
+# Function to download PDF from URL
+def download_pdf(url, output_dir):
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(os.path.join(output_dir, os.path.basename(url)), 'wb') as f:
+                f.write(response.content)
+                print(f"Downloaded {url}")
+        else:
+            print(f"Failed to download {url}. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"Error downloading {url}: {e}")
+
 
 def getArchiveLinks(filePath):
     # Open the text file
@@ -31,23 +63,39 @@ def archiveLinkAbsToPdf(url):
         new_url = "https://arxiv.org/pdf/" + match.group(1)
         return new_url
     return url
+
+def delete_directory(directory):
+    try:
+        shutil.rmtree(directory)
+    except Exception as e:
+        print(f'Failed to delete and recreate {directory}. Reason: {e}')
         
 if __name__ == "__main__":
-    # list = getArchiveLinks("./Links/OpenAI_Research.txt")
-    newlist = [
-        "http://arxiv.org/abs/2110.14168",
-        "http://arxiv.org/abs/1908.08016",
-        "http://arxiv.org/abs/1907.04534",
-        "http://arxiv.org/abs/1903.08689",
-        "http://arxiv.org/abs/1903.00784",
-        "https://distill.pub/2021/multimodal-neurons/",
-        "https://openaipublic.blob.core.windows.net/neuron-explainer/paper/index.html",
-        "https://distill.pub/2019/safety-needs-social-scientists"
-    ]
     
-    for link in newlist:
-        url = archiveLinkAbsToPdf(link)
-        try:
-            arxiv_to_text(url, "./Articles/OpenAI") 
-        except:
-            print("Error on: " + url)
+    # list = getArchiveLinks("./Links/OpenAI_Research.txt")
+    
+    # # Output directory to save PDFs
+    pdf_dir = "./Articles/OpenAI/pdf"
+
+    # Create output directory if it doesn't exist
+    if not os.path.exists(pdf_dir):
+        os.makedirs(pdf_dir)
+
+    # Download each PDF
+    for link in list:
+        pdfUrl = archiveLinkAbsToPdf(link)
+        download_pdf(pdfUrl, pdf_dir)
+    
+    text_dir = "./Articles/OpenAI/txt"
+    if not os.path.exists(text_dir):
+        os.makedirs(text_dir)
+        
+    # Iterate over all the files in the directory
+    for filename in os.listdir(pdf_dir):
+        file_path = os.path.join(pdf_dir, filename)
+        
+        # Check if it is a file
+        if os.path.isfile(file_path):
+            extract_text_from_arxiv_pdf(file_path, text_dir + "/" + filename + ".txt")
+
+    delete_directory(pdf_dir)    
